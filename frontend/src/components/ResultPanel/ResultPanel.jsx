@@ -111,7 +111,6 @@ export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
             <header className="analysis-result-header">
               <div>
                 <h2 id="analysis-title">{body.name}</h2>
-                <p className="appearance-summary">{createAppearanceSummary(body, state.analysis)}</p>
               </div>
               <span className={`method-badge ${state.analysis.validation.fallbackUsed ? 'method-fallback' : ''}`}>
                 {state.analysis.validation.fallbackUsed ? 'Deterministic fallback' : 'Validated ML prediction'}
@@ -121,6 +120,7 @@ export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
               <LightDiagram analysis={state.analysis} />
               <ScientificValues body={body} bodies={bodies} analysis={state.analysis} />
             </div>
+            <p className="appearance-summary">{createAppearanceSummary(body, state.analysis)}</p>
             {state.analysis.astronomy && (
               <p className="analysis-timestamp">
                 Frozen analysis time: {new Date(state.analysis.astronomy.simulatedTime).toLocaleString()}
