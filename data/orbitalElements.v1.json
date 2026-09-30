@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "coordinate_convention": "coplanar x-z plane; x points toward periapsis; angles advance from +x toward +z",
+  "sources": {
+    "jpl_planets": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+    "jpl_satellites": "https://ssd.jpl.nasa.gov/sats/elem/",
+    "jpl_sbdb_api": "https://ssd-api.jpl.nasa.gov/doc/sbdb.html"
+  },
+  "bodies": {
+    "mercury": { "period_days": 87.9691, "epoch_jd": 2451545.0, "mean_anomaly_deg": 174.79252722, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+    "venus": { "period_days": 224.701, "epoch_jd": 2451545.0, "mean_anomaly_deg": 50.37663232, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+    "earth": { "period_days": 365.256, "epoch_jd": 2451545.0, "mean_anomaly_deg": 357.52688973, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+    "mars": { "period_days": 686.98, "epoch_jd": 2451545.0, "mean_anomaly_deg": 19.39019754, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+    "jupiter": { "period_days": 4332.589, "epoch_jd": 2451545.0, "mean_anomaly_deg": 19.66796068, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+    "saturn": { "period_days": 10759.22, "epoch_jd": 2451545.0, "mean_anomaly_deg": 317.35536592, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+    "uranus": { "period_days": 30688.5, "epoch_jd": 2451545.0, "mean_anomaly_deg": 142.28382821, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+    "neptune": { "period_days": 60182.0, "epoch_jd": 2451545.0, "mean_anomaly_deg": 259.91520804, "phase_status": "jpl_approximate_planet", "source": "jpl_planets" },
+
+    "ceres": { "period_days": 1679.853119758983, "epoch_jd": 2461200.5, "mean_anomaly_deg": 274.4193463761342, "phase_status": "jpl_osculating_small_body", "source": "jpl_sbdb_api" },
+    "pluto": { "period_days": 90981.71647718345, "epoch_jd": 2457588.5, "mean_anomaly_deg": 38.68366347318184, "phase_status": "jpl_osculating_small_body", "source": "jpl_sbdb_api" },
+    "eris": { "period_days": 204516.6629430732, "epoch_jd": 2461200.5, "mean_anomaly_deg": 211.774434275007, "phase_status": "jpl_osculating_small_body", "source": "jpl_sbdb_api" },
+    "haumea": { "period_days": 103208.1173403618, "epoch_jd": 2461200.5, "mean_anomaly_deg": 223.2104118812299, "phase_status": "jpl_osculating_small_body", "source": "jpl_sbdb_api" },
+    "makemake": { "period_days": 112364.8068762869, "epoch_jd": 2461200.5, "mean_anomaly_deg": 169.9379962048232, "phase_status": "jpl_osculating_small_body", "source": "jpl_sbdb_api" },
+
+    "moon": { "period_days": 27.322, "epoch_jd": 2451545.0, "mean_anomaly_deg": 135.27, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "phobos": { "period_days": 0.3187, "epoch_jd": 2451545.0, "mean_anomaly_deg": 189.7, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "deimos": { "period_days": 1.2625, "epoch_jd": 2451545.0, "mean_anomaly_deg": 205.0, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "io": { "period_days": 1.762732, "epoch_jd": 2451545.0, "mean_anomaly_deg": 330.9, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "europa": { "period_days": 3.525463, "epoch_jd": 2451545.0, "mean_anomaly_deg": 345.4, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "ganymede": { "period_days": 7.155588, "epoch_jd": 2451545.0, "mean_anomaly_deg": 324.8, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "callisto": { "period_days": 16.69044, "epoch_jd": 2451545.0, "mean_anomaly_deg": 87.4, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "titan": { "period_days": 15.945448, "epoch_jd": 2451545.0, "mean_anomaly_deg": 11.7, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "rhea": { "period_days": 4.517503, "epoch_jd": 2451545.0, "mean_anomaly_deg": 31.5, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "iapetus": { "period_days": 79.331002, "epoch_jd": 2451545.0, "mean_anomaly_deg": 74.8, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "dione": { "period_days": 2.736916, "epoch_jd": 2451545.0, "mean_anomaly_deg": 212.0, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "titania": { "period_days": 8.705869, "epoch_jd": 2451545.0, "mean_anomaly_deg": 68.1, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "oberon": { "period_days": 13.463237, "epoch_jd": 2451545.0, "mean_anomaly_deg": 143.6, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "umbriel": { "period_days": 4.144177, "epoch_jd": 2451545.0, "mean_anomaly_deg": 253.0, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "ariel": { "period_days": 2.520379, "epoch_jd": 2451545.0, "mean_anomaly_deg": 193.5, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "triton": { "period_days": 5.876994, "epoch_jd": 2451545.0, "mean_anomaly_deg": 63.0, "direction": -1, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "proteus": { "period_days": 1.122315, "epoch_jd": 2451545.0, "mean_anomaly_deg": 276.8, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "nereid": { "period_days": 360.133039, "epoch_jd": 2458849.5, "mean_anomaly_deg": 318.5, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" },
+    "larissa": { "period_days": 0.554989, "epoch_jd": 2451545.0, "mean_anomaly_deg": 165.5, "phase_status": "jpl_satellite_mean_elements", "source": "jpl_satellites" }
+  }
+}

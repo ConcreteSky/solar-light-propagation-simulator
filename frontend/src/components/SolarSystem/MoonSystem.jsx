@@ -1,17 +1,21 @@
 import CelestialBody from '../CelestialBody/CelestialBody.jsx'
 import OrbitPath from '../Orbit/OrbitPath.jsx'
 import {
-  getEllipsePosition,
-  getStablePhase,
   getVisualBodyRadius,
   getVisualMoonOrbitRadius,
 } from '../../utils/sceneScale.js'
+import { getRenderedBodyPosition } from '../../utils/orbitalModel.js'
 
-export default function MoonSystem({ moons, parentRadius, selectedBodyId, onSelectBody }) {
+export default function MoonSystem({
+  moons,
+  parentRadius,
+  selectedBodyId,
+  onSelectBody,
+  simulationTimestampMs,
+}) {
   return moons.map((moon, index) => {
     const orbitRadius = getVisualMoonOrbitRadius(parentRadius, index)
-    const phase = getStablePhase(moon.id)
-    const position = getEllipsePosition(orbitRadius, moon.orbit.eccentricity, phase)
+    const position = getRenderedBodyPosition(moon, simulationTimestampMs, index, parentRadius)
 
     return (
       <group key={moon.id}>
@@ -28,4 +32,3 @@ export default function MoonSystem({ moons, parentRadius, selectedBodyId, onSele
     )
   })
 }
-

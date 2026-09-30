@@ -210,6 +210,81 @@ input { font: inherit; }
   letter-spacing: 0.02em;
 }
 
+.simulation-controls {
+  position: absolute;
+  z-index: 4;
+  left: 40px;
+  bottom: 28px;
+  width: min(650px, calc(100% - 80px));
+  padding: 13px 15px;
+  border: 1px solid rgb(137 159 197 / 24%);
+  border-radius: 4px;
+  background: rgb(7 12 26 / 82%);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 34%);
+  backdrop-filter: blur(14px);
+}
+
+.simulation-time,
+.simulation-actions,
+.simulation-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.simulation-time {
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #8292aa;
+  font-family: 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.63rem;
+}
+
+.simulation-time strong { color: #e2e9f4; font-weight: 600; }
+
+.simulation-actions { flex-wrap: wrap; }
+
+.simulation-actions button {
+  padding: 6px 9px;
+  border: 1px solid rgb(139 160 197 / 28%);
+  border-radius: 3px;
+  color: #b8c6da;
+  background: rgb(13 21 40 / 78%);
+  font-family: 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.simulation-actions button:hover,
+.simulation-actions button:focus-visible,
+.simulation-actions button.active {
+  border-color: rgb(255 204 105 / 62%);
+  color: #ffe6ad;
+  outline: none;
+}
+
+.simulation-date {
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #8292aa;
+  font-family: 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.59rem;
+}
+
+.simulation-date input {
+  min-width: 190px;
+  padding: 5px 7px;
+  border: 1px solid rgb(139 160 197 / 28%);
+  border-radius: 3px;
+  color: #e1e9f5;
+  color-scheme: dark;
+  background: #0b1325;
+  font-family: inherit;
+  font-size: 0.62rem;
+}
+
 .body-label-wrapper {
   pointer-events: auto !important;
   user-select: none;
@@ -438,12 +513,23 @@ input { font: inherit; }
   line-height: 1.6;
 }
 
+.analysis-timestamp {
+  margin: 18px 0 0;
+  color: #6f809a;
+  font-family: 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.64rem;
+}
+
 @media (max-width: 780px) {
   .app-header { top: 24px; left: 22px; }
   .app-header h1 { font-size: 2.2rem; }
   .map-section { min-height: 620px; }
-  .current-selection { top: auto; right: 22px; bottom: 62px; }
-  .map-disclaimer { right: 22px; bottom: 22px; max-width: calc(100% - 44px); text-align: right; }
+  .current-selection { top: 24px; right: 22px; }
+  .simulation-controls { left: 22px; bottom: 54px; width: calc(100% - 44px); }
+  .simulation-time { display: grid; }
+  .simulation-date { align-items: stretch; flex-direction: column; }
+  .simulation-date input { width: 100%; }
+  .map-disclaimer { right: 22px; bottom: 18px; max-width: calc(100% - 44px); text-align: right; }
   .instructions { display: none; }
   .analysis-section { min-height: 540px; padding: 54px 22px 68px; }
   .analysis-result-header { display: block; }

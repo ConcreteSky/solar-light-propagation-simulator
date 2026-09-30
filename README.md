@@ -12,7 +12,7 @@ The Sun is the only light source. The application requires no manual scientific 
 
 ## Features
 
-- Interactive React Three Fiber Solar System with stationary clickable destinations.
+- Interactive React Three Fiber Solar System with shared-clock Keplerian motion and clickable destinations.
 - Eight planets, five dwarf planets, and nineteen selected moons, with no more than four moons per planet.
 - Coplanar simplified elliptical orbits, thin orbit rings, compressed distances, exaggerated body sizes, Saturn rings, and an efficient asteroid belt.
 - Mouse/touch camera rotation, cursor-centered zoom, selection focus, labels, and highlighting.
@@ -20,7 +20,7 @@ The Sun is the only light source. The application requires no manual scientific 
 - Explainable atmospheric and airless deterministic physics baseline with energy conservation.
 - Saved HistGradientBoosting surrogate with preprocessing, output validation, and explicit deterministic fallback.
 - Dynamic atmospheric/airless SVG light-interaction diagram controlled by validated numerical results.
-- Average distance, reference light-travel time, reference irradiance, interaction percentages, and one short deterministic appearance sentence.
+- Timestamped physical distance, light-travel time, irradiance, apparent solar diameter, interaction percentages, and one short deterministic appearance sentence.
 - Reproducible synthetic dataset, real-body benchmarks, candidate-model comparison, and preserved evaluation output.
 
 ## Technology stack
@@ -36,9 +36,9 @@ The Sun is the only light source. The application requires no manual scientific 
 3D destination selection
         │ selectedBodyId
         ▼
-GET /api/predict/{destinationId}
+GET /api/predict/{destinationId}?at={simulatedUtcTimestamp}
         │
-        ├─ stored catalog + ASTM spectrum
+        ├─ physical orbital state + stored catalog + ASTM spectrum
         ├─ saved preprocessing/model pipeline
         ├─ range and energy validation
         └─ deterministic fallback when required
@@ -47,7 +47,7 @@ GET /api/predict/{destinationId}
 Result panel + one schematic SVG diagram
 ```
 
-`GET /api/analyze/{destinationId}` remains the deterministic scientific baseline. `GET /api/predict/{destinationId}` clearly identifies either `machine_learning` or `deterministic_fallback` and reports its comparison with the baseline.
+`GET /api/analyze/{destinationId}` remains the deterministic scientific baseline. `GET /api/predict/{destinationId}` clearly identifies either `machine_learning` or `deterministic_fallback` and reports its comparison with the baseline. Both endpoints accept an optional ISO-8601 `at` query parameter; omitting it preserves the reference-value response path for compatibility.
 
 ## Supported celestial objects
 
@@ -57,7 +57,7 @@ Result panel + one schematic SVG diagram
 
 ## Scientific methodology
 
-Stored reference irradiance is preferred and checked using the inverse-square relation. The atmosphere model uses pressure, density, and normalized supported gas fractions to form simplified aggregate scattering and absorption optical depths. Airless bodies use a disclosed generic surface partition because sourced wavelength-dependent albedo is not present in the catalog. Fractions are clamped, normalized, and required to conserve incident energy.
+Timestamped analysis derives heliocentric distance from the shared-clock Keplerian state and applies the inverse-square irradiance relation. Untimestamped analysis preserves the stored reference path. The atmosphere model uses pressure, density, and normalized supported gas fractions to form simplified aggregate scattering and absorption optical depths. Airless bodies use a disclosed generic surface partition because sourced wavelength-dependent albedo is not present in the catalog. Fractions are clamped, normalized, and required to conserve incident energy.
 
 This is an educational model, not full radiative transfer, ray tracing, Mie scattering, spectroscopy, or an observationally validated atmosphere simulator. Detailed equations and assumptions are documented in [PHYSICS_MODEL.md](docs/PHYSICS_MODEL.md).
 
@@ -126,8 +126,8 @@ Local interactive OpenAPI documentation is available at <http://127.0.0.1:8000/d
 | --- | --- |
 | `GET /api/health` | Service and catalog health |
 | `GET /api/bodies` | Complete stored destination catalog |
-| `GET /api/analyze/{destinationId}` | Deterministic baseline |
-| `GET /api/predict/{destinationId}` | Validated ML result or disclosed deterministic fallback |
+| `GET /api/analyze/{destinationId}[?at=ISO-8601]` | Deterministic baseline, optionally timestamped |
+| `GET /api/predict/{destinationId}[?at=ISO-8601]` | Validated ML result or disclosed deterministic fallback, optionally timestamped |
 
 Invalid destination IDs return HTTP 404. Missing model files, incomplete core inputs, non-finite output, and serious conservation failures use the deterministic fallback when safe.
 
@@ -149,7 +149,7 @@ Catalog values are based primarily on NASA, JPL, and the ASTM E-490 reference di
 
 ## Known limitations
 
-- Mean orbital distances and reference travel times are not instantaneous values.
+- The coplanar two-body orbital model is approximate and is not a precision ephemeris.
 - Aggregate atmosphere coefficients omit clouds, aerosols, dust, weather, seasons, and spectral absorption lines.
 - Airless interaction percentages use a documented generic surface assumption, not measured body-specific albedo.
 - Several giant planets, dwarf planets, and moons lack complete pressure, density, composition, or atmosphere-state inputs and therefore use disclosed fallback.
@@ -166,6 +166,7 @@ The deployment excludes the private research backup, virtual environment, depend
 ## Documentation
 
 - [Physics model](docs/PHYSICS_MODEL.md)
+- [Orbital model and simulation clock](docs/ORBITAL_MODEL.md)
 - [AI model](docs/AI_MODEL.md)
 - [AI evaluation](docs/AI_EVALUATION.md)
 - [Light diagram](docs/LIGHT_DIAGRAM.md)

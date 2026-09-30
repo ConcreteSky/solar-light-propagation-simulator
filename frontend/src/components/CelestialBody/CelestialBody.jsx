@@ -15,7 +15,13 @@ function TexturedSurface({ radius, textureUrl, bodyScale }) {
   return (
     <mesh scale={bodyScale}>
       <sphereGeometry args={[radius, 28, 18]} />
-      <meshStandardMaterial map={texture} color="#ffffff" roughness={0.85} />
+      <meshStandardMaterial
+        map={texture}
+        color="#ffffff"
+        roughness={0.78}
+        emissive="#10141d"
+        emissiveIntensity={0.1}
+      />
     </mesh>
   )
 }
@@ -28,7 +34,13 @@ function ColorSurface({ body, radius, bodyScale }) {
       {isSun ? (
         <meshBasicMaterial color={body.visual.baseColor} toneMapped={false} />
       ) : (
-        <meshStandardMaterial color={body.visual.baseColor} roughness={0.82} metalness={0.02} />
+        <meshStandardMaterial
+          color={body.visual.baseColor}
+          roughness={0.76}
+          metalness={0.01}
+          emissive={body.visual.baseColor}
+          emissiveIntensity={0.07}
+        />
       )}
     </mesh>
   )

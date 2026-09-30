@@ -59,19 +59,21 @@ function deterministicFallbackResponse(analysis, warning) {
     },
     baselineComparison: null,
     sourceIds: analysis.sourceIds,
+    astronomy: analysis.astronomy ?? null,
   }
 }
 
-export async function getLightResult(destinationId, { signal } = {}) {
+export async function getLightResult(destinationId, { signal, simulatedTime } = {}) {
+  const query = simulatedTime ? `?at=${encodeURIComponent(simulatedTime)}` : ''
   try {
-    const prediction = await requestJson(`/api/predict/${destinationId}`, signal)
+    const prediction = await requestJson(`/api/predict/${destinationId}${query}`, signal)
     if (prediction.validation?.valid) return prediction
     throw new Error('Prediction response failed validation.')
   } catch (predictionError) {
     if (predictionError.name === 'AbortError' || predictionError.status === 404) {
       throw predictionError
     }
-    const analysis = await requestJson(`/api/analyze/${destinationId}`, signal)
+    const analysis = await requestJson(`/api/analyze/${destinationId}${query}`, signal)
     if (!analysis.validation?.valid) {
       throw new Error('No validated light result is available.')
     }

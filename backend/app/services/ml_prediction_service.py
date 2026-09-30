@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from datetime import datetime
 from functools import lru_cache
 
 import joblib
@@ -105,8 +106,10 @@ def validate_prediction(raw: np.ndarray) -> ValidatedPrediction:
     )
 
 
-def _fallback_response(destination_id: str, reason: str) -> LightPrediction:
-    baseline = analyze_destination(destination_id)
+def _fallback_response(
+    destination_id: str, reason: str, simulated_time: datetime | None = None
+) -> LightPrediction:
+    baseline = analyze_destination(destination_id, simulated_time)
     return LightPrediction(
         destination=baseline.destination,
         name=baseline.name,
@@ -130,14 +133,21 @@ def _fallback_response(destination_id: str, reason: str) -> LightPrediction:
             relativeBrightnessAbsoluteError=0.0,
         ),
         sourceIds=baseline.sourceIds,
+        astronomy=baseline.astronomy,
     )
 
 
-def predict_destination(destination_id: str) -> LightPrediction:
+def predict_destination(
+    destination_id: str, simulated_time: datetime | None = None
+) -> LightPrediction:
     # Resolve the ID first so an unsupported destination remains a clean 404.
     body = get_body(destination_id)
-    baseline = analyze_destination(body.id)
-    solar = resolve_solar_input(body, get_body_index())
+    baseline = analyze_destination(body.id, simulated_time)
+    solar = resolve_solar_input(
+        body,
+        get_body_index(),
+        baseline.astronomy.distanceFromSunKm if baseline.astronomy else None,
+    )
     warnings: list[str] = []
 
     try:
@@ -157,9 +167,9 @@ def predict_destination(destination_id: str) -> LightPrediction:
         raw = predict_numeric(bundle, frame)[0]
         prediction = validate_prediction(raw)
     except MissingModelFeatureError as error:
-        return _fallback_response(body.id, f"ML fallback: {error}")
+        return _fallback_response(body.id, f"ML fallback: {error}", simulated_time)
     except (FileNotFoundError, OSError, ValueError, ModelPredictionError) as error:
-        return _fallback_response(body.id, f"ML fallback: {error}")
+        return _fallback_response(body.id, f"ML fallback: {error}", simulated_time)
 
     composition = body.atmosphere.composition.model_dump()
     if body.atmosphere.hasAtmosphere:
@@ -225,4 +235,5 @@ def predict_destination(destination_id: str) -> LightPrediction:
             ),
         ),
         sourceIds=baseline.sourceIds,
+        astronomy=baseline.astronomy,
     )

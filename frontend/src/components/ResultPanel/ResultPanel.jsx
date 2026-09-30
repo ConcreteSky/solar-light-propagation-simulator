@@ -13,11 +13,21 @@ import {
 function ScientificValues({ body, bodies, analysis }) {
   const atmospheric = analysis.hasAtmosphere === true
   const results = analysis.results
-  const distance = getAverageSolarDistanceKm(body, bodies)
-  const values = [
+  const astronomy = analysis.astronomy
+  const distance = astronomy?.distanceFromSunKm ?? getAverageSolarDistanceKm(body, bodies)
+  const astronomicalValues = astronomy ? [
+    ['Approx. current Sun distance', formatDistance(distance)],
+    ['Approx. orbital position', `${astronomy.orbitalAngleDeg.toFixed(2)}° from periapsis`],
+    ['Current light-travel time', formatTravelTime(astronomy.lightTravelTimeSeconds)],
+    ['Current solar irradiance', formatIrradiance(astronomy.solarIrradianceWm2)],
+    ['Apparent solar diameter', `${astronomy.apparentSolarAngularDiameterDeg.toFixed(4)}°`],
+  ] : [
     ['Average Sun distance', formatDistance(distance)],
     ['Reference light-travel time', formatTravelTime(body.light_reference?.light_travel_time_seconds)],
     ['Reference solar irradiance', formatIrradiance(body.light_reference?.solar_irradiance_w_m2)],
+  ]
+  const values = [
+    ...astronomicalValues,
     [atmospheric ? 'Transmitted' : 'Reaches surface', formatPercent(results.transmitted)],
     [atmospheric ? 'Scattered' : 'Reflected / scattered', formatPercent(results.scattered)],
     ['Absorbed', formatPercent(results.absorbed)],
@@ -35,7 +45,7 @@ function ScientificValues({ body, bodies, analysis }) {
   )
 }
 
-export default function ResultPanel({ body, bodies }) {
+export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
   const [state, setState] = useState({ status: 'idle', analysis: null, error: null })
   const requestSequence = useRef(0)
 
@@ -48,7 +58,12 @@ export default function ResultPanel({ body, bodies }) {
 
     const controller = new AbortController()
     setState({ status: 'loading', analysis: null, error: null })
-    getLightResult(body.id, { signal: controller.signal })
+    getLightResult(body.id, {
+      signal: controller.signal,
+      simulatedTime: Number.isFinite(simulationTimestampMs)
+        ? new Date(simulationTimestampMs).toISOString()
+        : undefined,
+    })
       .then((analysis) => {
         if (sequence === requestSequence.current) {
           setState({ status: 'success', analysis, error: null })
@@ -61,7 +76,7 @@ export default function ResultPanel({ body, bodies }) {
       })
 
     return () => controller.abort()
-  }, [body])
+  }, [body, simulationTimestampMs])
 
   return (
     <section id="light-analysis" className="analysis-section" aria-labelledby="analysis-title">
@@ -106,6 +121,12 @@ export default function ResultPanel({ body, bodies }) {
               <LightDiagram analysis={state.analysis} />
               <ScientificValues body={body} bodies={bodies} analysis={state.analysis} />
             </div>
+            {state.analysis.astronomy && (
+              <p className="analysis-timestamp">
+                Frozen analysis time: {new Date(state.analysis.astronomy.simulatedTime).toLocaleString()}
+                {' · '}Approximate two-body solution
+              </p>
+            )}
             {state.analysis.validation.warnings?.length > 0 && (
               <p className="analysis-note" data-testid="analysis-warning">
                 Data note: {state.analysis.validation.warnings[0]}

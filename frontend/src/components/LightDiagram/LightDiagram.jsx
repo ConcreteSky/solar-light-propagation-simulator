@@ -19,8 +19,11 @@ function visibility(value) {
   return 0.18 + Math.sqrt(value) * 0.82
 }
 
-function IncomingRays({ brightness }) {
-  const opacity = 0.45 + Math.max(0, Math.min(1, brightness ?? 0)) * 0.5
+function IncomingRays({ irradiance }) {
+  const normalized = Number.isFinite(irradiance)
+    ? Math.max(0, Math.min(1, Math.log10(1 + irradiance) / Math.log10(1367.1)))
+    : 0.55
+  const opacity = 0.3 + normalized * 0.65
   return [126, 174, 222].map((y) => (
     <line
       key={y}
@@ -31,6 +34,7 @@ function IncomingRays({ brightness }) {
       y2={y}
       markerEnd="url(#arrow-incoming)"
       opacity={opacity}
+      strokeWidth={1.5 + normalized * 3.5}
     />
   ))
 }
@@ -151,7 +155,7 @@ export default function LightDiagram({ analysis }) {
         </defs>
         <rect x="0" y="0" width="720" height="350" rx="8" className="diagram-background" />
         <text x="52" y="99" className="diagram-label diagram-label-strong">Incoming sunlight</text>
-        <IncomingRays brightness={results.relativeBrightness} />
+        <IncomingRays irradiance={analysis.astronomy?.solarIrradianceWm2 ?? analysis.inputs?.solarIrradianceWm2} />
         {atmospheric ? (
           <AtmosphericDiagram results={results} resultColor={resultColor} />
         ) : (

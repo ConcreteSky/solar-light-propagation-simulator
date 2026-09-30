@@ -82,14 +82,23 @@ def derive_irradiance(distance_from_sun_km: float) -> float:
 
 
 def resolve_solar_input(
-    body: CelestialBody, body_index: dict[str, CelestialBody]
+    body: CelestialBody,
+    body_index: dict[str, CelestialBody],
+    distance_override_km: float | None = None,
 ) -> SolarInput:
-    distance = heliocentric_distance_km(body, body_index)
+    distance = (
+        distance_override_km
+        if distance_override_km is not None
+        else heliocentric_distance_km(body, body_index)
+    )
     derived = derive_irradiance(distance)
     stored = body.light_reference.solar_irradiance_w_m2
     warnings: list[str] = []
 
-    if stored is not None and math.isfinite(stored) and stored >= 0:
+    if distance_override_km is not None:
+        irradiance = derived
+        source = "inverse_square"
+    elif stored is not None and math.isfinite(stored) and stored >= 0:
         irradiance = stored
         source = "stored_reference"
         if stored > 0 and abs(stored - derived) / stored > 0.1:

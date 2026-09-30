@@ -2,7 +2,7 @@ from typing import Literal
 
 from pydantic import BaseModel
 
-from .light_analysis import AnalysisResults
+from .light_analysis import AnalysisResults, AstronomicalState
 
 
 class PredictionValidation(BaseModel):
@@ -32,3 +32,4 @@ class LightPrediction(BaseModel):
     validation: PredictionValidation
     baselineComparison: BaselineComparison
     sourceIds: list[str]
+    astronomy: AstronomicalState | None = None

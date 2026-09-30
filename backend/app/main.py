@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 import os
+from datetime import datetime
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,7 +24,7 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(
     title="Solar Light Propagation Simulator API",
-    version="0.3.0",
+    version="0.4.0",
     description="Deterministic solar-light analysis and local ML surrogate API.",
     lifespan=lifespan,
 )
@@ -56,9 +57,12 @@ def bodies() -> list[CelestialBody]:
 
 
 @app.get("/api/analyze/{destination_id}", response_model=LightAnalysis)
-def analyze(destination_id: str) -> LightAnalysis:
+def analyze(
+    destination_id: str,
+    at: datetime | None = None,
+) -> LightAnalysis:
     try:
-        return analyze_destination(destination_id)
+        return analyze_destination(destination_id, at)
     except KeyError as error:
         raise HTTPException(
             status_code=404,
@@ -67,9 +71,12 @@ def analyze(destination_id: str) -> LightAnalysis:
 
 
 @app.get("/api/predict/{destination_id}", response_model=LightPrediction)
-def predict(destination_id: str) -> LightPrediction:
+def predict(
+    destination_id: str,
+    at: datetime | None = None,
+) -> LightPrediction:
     try:
-        return predict_destination(destination_id)
+        return predict_destination(destination_id, at)
     except KeyError as error:
         raise HTTPException(
             status_code=404,

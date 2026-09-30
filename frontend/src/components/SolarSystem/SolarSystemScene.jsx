@@ -5,17 +5,18 @@ import CelestialBody from '../CelestialBody/CelestialBody.jsx'
 import OrbitPath from '../Orbit/OrbitPath.jsx'
 import { sun } from '../../data/catalog.js'
 import {
-  getEllipsePosition,
-  getStablePhase,
   getVisualBodyRadius,
-  getVisualMoonOrbitRadius,
   getVisualOrbitRadius,
 } from '../../utils/sceneScale.js'
+import {
+  getRenderedBodyPosition,
+  getRenderedHeliocentricPosition,
+} from '../../utils/orbitalModel.js'
 import MoonSystem from './MoonSystem.jsx'
 import StarField from './StarField.jsx'
 import CameraControls from './CameraControls.jsx'
 
-function SolarSystem({ bodies, selectedBodyId, onSelectBody }) {
+function SolarSystem({ bodies, selectedBodyId, onSelectBody, simulationTimestampMs }) {
   const primaryBodies = useMemo(() => bodies.filter((body) => body.type !== 'moon'), [bodies])
   const moonsByParent = useMemo(() => {
     const groups = new Map()
@@ -32,8 +33,9 @@ function SolarSystem({ bodies, selectedBodyId, onSelectBody }) {
     <>
       <color attach="background" args={['#030610']} />
       <fog attach="fog" args={['#030610', 175, 330]} />
-      <ambientLight intensity={0.2} color="#7890bd" />
-      <pointLight position={[0, 4, 0]} intensity={1250} distance={175} decay={1.75} color="#ffd18a" />
+      <ambientLight intensity={0.46} color="#7890bd" />
+      <hemisphereLight args={['#a9c8ff', '#14182a', 0.45]} />
+      <pointLight position={[0, 0, 0]} intensity={3.4} decay={0} color="#ffd18a" />
       <StarField />
 
       <CelestialBody
@@ -49,7 +51,7 @@ function SolarSystem({ bodies, selectedBodyId, onSelectBody }) {
 
       {primaryBodies.map((body) => {
         const orbitRadius = getVisualOrbitRadius(body.orbit.semimajor_axis_km)
-        const position = getEllipsePosition(orbitRadius, body.orbit.eccentricity, getStablePhase(body.id))
+        const position = getRenderedBodyPosition(body, simulationTimestampMs)
         const bodyRadius = getVisualBodyRadius(body)
         const moons = moonsByParent.get(body.id) ?? []
 
@@ -71,6 +73,7 @@ function SolarSystem({ bodies, selectedBodyId, onSelectBody }) {
                   parentRadius={bodyRadius}
                   selectedBodyId={selectedBodyId}
                   onSelectBody={onSelectBody}
+                  simulationTimestampMs={simulationTimestampMs}
                 />
               </group>
             )}
@@ -81,49 +84,38 @@ function SolarSystem({ bodies, selectedBodyId, onSelectBody }) {
   )
 }
 
-export default function SolarSystemScene({ bodies, selectedBodyId, onSelectBody, resetViewSignal }) {
+export default function SolarSystemScene({
+  bodies,
+  selectedBodyId,
+  onSelectBody,
+  resetViewSignal,
+  simulationTimestampMs,
+  focusTimestampMs,
+}) {
   const focusPosition = useMemo(() => {
     if (!selectedBodyId || selectedBodyId === 'sun') return [0, 0, 0]
 
     const body = bodies.find((candidate) => candidate.id === selectedBodyId)
     if (!body) return [0, 0, 0]
 
-    if (body.type !== 'moon') {
-      return getEllipsePosition(
-        getVisualOrbitRadius(body.orbit.semimajor_axis_km),
-        body.orbit.eccentricity,
-        getStablePhase(body.id),
-      )
-    }
-
-    const parent = bodies.find((candidate) => candidate.id === body.parent)
-    if (!parent) return [0, 0, 0]
-
-    const parentPosition = getEllipsePosition(
-      getVisualOrbitRadius(parent.orbit.semimajor_axis_km),
-      parent.orbit.eccentricity,
-      getStablePhase(parent.id),
-    )
-    const siblings = bodies.filter((candidate) => candidate.type === 'moon' && candidate.parent === body.parent)
-    const moonIndex = siblings.findIndex((candidate) => candidate.id === body.id)
-    const moonPosition = getEllipsePosition(
-      getVisualMoonOrbitRadius(getVisualBodyRadius(parent), moonIndex),
-      body.orbit.eccentricity,
-      getStablePhase(body.id),
-    )
-
-    return parentPosition.map((coordinate, index) => coordinate + moonPosition[index])
-  }, [bodies, selectedBodyId])
+    return getRenderedHeliocentricPosition(body, bodies, focusTimestampMs)
+  }, [bodies, selectedBodyId, focusTimestampMs])
 
   return (
     <Canvas
       camera={{ position: [0, 270, 120], fov: 45, near: 0.1, far: 600 }}
       dpr={[1, 1.5]}
       gl={{ antialias: true, powerPreference: 'high-performance' }}
+      onCreated={({ gl }) => { gl.toneMappingExposure = 1.12 }}
       onPointerMissed={() => onSelectBody(null)}
     >
       <Suspense fallback={null}>
-        <SolarSystem bodies={bodies} selectedBodyId={selectedBodyId} onSelectBody={onSelectBody} />
+        <SolarSystem
+          bodies={bodies}
+          selectedBodyId={selectedBodyId}
+          onSelectBody={onSelectBody}
+          simulationTimestampMs={simulationTimestampMs}
+        />
       </Suspense>
       <CameraControls resetSignal={resetViewSignal} focusPosition={focusPosition} />
     </Canvas>

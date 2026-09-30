@@ -7,7 +7,7 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 60,
-      "includeFiles": "{backend/app/**,backend/models/light_model.joblib,backend/models/light_model_metadata.json,data/celestialBodies.json,data/solarSpectrum.csv}",
+      "includeFiles": "{backend/app/**,backend/models/light_model.joblib,backend/models/light_model_metadata.json,data/celestialBodies.json,data/orbitalElements.v1.json,data/solarSpectrum.csv}",
       "excludeFiles": "{research_backup/**,frontend/**,backend/.venv/**,backend/tests/**,backend/training/**,data/training/**,data/benchmark/**,data/evaluation/**,docs/**,**/__pycache__/**,**/*.pyc}"
     }
   },

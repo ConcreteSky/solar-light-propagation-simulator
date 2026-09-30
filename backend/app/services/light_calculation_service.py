@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from datetime import datetime
 
 from ..schemas.celestial_body import AtmosphericComposition
 from ..schemas.light_analysis import (
     AnalysisInputs,
     AnalysisResults,
     AnalysisValidation,
+    AstronomicalState,
     LightAnalysis,
 )
 from .atmospheric_model import AtmosphericResult, calculate_atmosphere
@@ -19,6 +21,7 @@ from .solar_input_service import (
 )
 from .surface_model import calculate_airless_surface
 from .validation import clamp01, conserve_fractions, fractions_are_valid
+from .orbital_service import calculate_orbital_state
 
 
 @dataclass(frozen=True)
@@ -158,10 +161,21 @@ def calculate_light_behavior(inputs: PhysicsInput) -> PhysicsOutput:
     )
 
 
-def analyze_destination(destination_id: str) -> LightAnalysis:
+def analyze_destination(
+    destination_id: str, simulated_time: datetime | None = None
+) -> LightAnalysis:
     body = get_body(destination_id)
     body_index = get_body_index()
-    solar = resolve_solar_input(body, body_index)
+    orbital = (
+        calculate_orbital_state(body, body_index, simulated_time)
+        if simulated_time is not None
+        else None
+    )
+    solar = resolve_solar_input(
+        body,
+        body_index,
+        orbital.distance_from_sun_km if orbital else None,
+    )
     composition = body.atmosphere.composition.model_dump()
     output = calculate_light_behavior(
         PhysicsInput(
@@ -177,6 +191,23 @@ def analyze_destination(destination_id: str) -> LightAnalysis:
     fractions = (output.transmitted, output.scattered, output.absorbed)
     valid = fractions_are_valid(fractions) and 0 <= output.relative_brightness <= 1
     source_ids = list(dict.fromkeys([*body.source_ids, "nlr-e490"]))
+
+    astronomy = None
+    if orbital:
+        astronomy = AstronomicalState(
+            simulatedTime=orbital.simulated_time.isoformat().replace("+00:00", "Z"),
+            distanceFromSunKm=round(orbital.distance_from_sun_km, 3),
+            orbitalAngleDeg=round(orbital.orbital_angle_deg, 6),
+            lightTravelTimeSeconds=round(orbital.light_travel_time_seconds, 6),
+            solarIrradianceWm2=round(solar.irradiance_w_m2, 9),
+            apparentSolarAngularDiameterDeg=round(
+                orbital.apparent_solar_angular_diameter_deg, 9
+            ),
+            orbitalPeriodDays=orbital.period_days,
+            referenceEpochJd=orbital.reference_epoch_jd,
+            phaseStatus=orbital.phase_status,
+            approximate=True,
+        )
 
     return LightAnalysis(
         destination=body.id,
@@ -212,4 +243,5 @@ def analyze_destination(destination_id: str) -> LightAnalysis:
             warnings=warnings,
         ),
         sourceIds=source_ids,
+        astronomy=astronomy,
     )

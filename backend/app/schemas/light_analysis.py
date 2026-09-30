@@ -46,6 +46,19 @@ class AnalysisValidation(BaseModel):
     warnings: list[str]
 
 
+class AstronomicalState(BaseModel):
+    simulatedTime: str
+    distanceFromSunKm: float = Field(gt=0)
+    orbitalAngleDeg: float = Field(ge=0, lt=360)
+    lightTravelTimeSeconds: float = Field(gt=0)
+    solarIrradianceWm2: float = Field(ge=0)
+    apparentSolarAngularDiameterDeg: float = Field(gt=0)
+    orbitalPeriodDays: float = Field(gt=0)
+    referenceEpochJd: float
+    phaseStatus: str
+    approximate: bool = True
+
+
 class LightAnalysis(BaseModel):
     destination: str
     name: str
@@ -56,3 +69,4 @@ class LightAnalysis(BaseModel):
     results: AnalysisResults
     validation: AnalysisValidation
     sourceIds: list[str]
+    astronomy: AstronomicalState | None = None
