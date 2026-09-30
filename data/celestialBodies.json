@@ -1,0 +1,300 @@
+{
+  "schema_version": "1.0.0",
+  "access_date": "2026-09-30",
+  "notes": [
+    "Fractions are volume mixing ratios where published; null means not reliably quantified by the cited source.",
+    "Moon orbits are parent-centered. Planet and dwarf-planet orbits are heliocentric.",
+    "Moon light references use the parent planet's heliocentric mean-distance reference.",
+    "Display colors and textures are illustrative and never scientific inputs."
+  ],
+  "bodies": [
+    {
+      "id": "mercury", "name": "Mercury", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 2439.5, "diameter_km": 4879.0, "mass_kg": 3.301e23, "surface_gravity_ms2": 3.7 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 57900000, "eccentricity": 0.2056, "periapsis_km": 46000000, "apoapsis_km": 69800000 },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 9116.4, "light_travel_time_seconds": 193.1, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#8c8a84", "texture": "textures/moon-craters.svg", "material": "rocky-gray" },
+      "source_ids": ["nasa-mercury", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "venus", "name": "Venus", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 6052.0, "diameter_km": 12104.0, "mass_kg": 4.8673e24, "surface_gravity_ms2": 8.87 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 108200000, "eccentricity": 0.0068, "periapsis_km": 107500000, "apoapsis_km": 108900000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": 9200000, "density_kg_m3": 65.0, "composition": { "CO2": 0.965, "N2": 0.035, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 2611.0, "light_travel_time_seconds": 360.9, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#e6c985", "texture": null, "material": "cloudy-cream" },
+      "source_ids": ["nasa-venus", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "earth", "name": "Earth", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 6371.0, "diameter_km": 12742.0, "mass_kg": 5.9722e24, "surface_gravity_ms2": 9.82 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 149600000, "eccentricity": 0.0167, "periapsis_km": 147100000, "apoapsis_km": 152100000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": 101400, "density_kg_m3": 1.217, "composition": { "CO2": 0.00042, "N2": 0.7808, "O2": 0.2095, "CH4": 0.00000194, "H2": 0.00000055, "He": 0.00000524 } },
+      "light_reference": { "solar_irradiance_w_m2": 1366.1, "light_travel_time_seconds": 499.0, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#2f78c4", "texture": "textures/earth-simple.svg", "material": "ocean-land-cloud" },
+      "source_ids": ["nasa-earth", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "mars", "name": "Mars", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 3389.5, "diameter_km": 6779.0, "mass_kg": 6.4169e23, "surface_gravity_ms2": 3.73 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 227900000, "eccentricity": 0.0935, "periapsis_km": 206700000, "apoapsis_km": 249300000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": 636, "density_kg_m3": 0.020, "composition": { "CO2": 0.9532, "N2": 0.027, "O2": 0.0013, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 588.6, "light_travel_time_seconds": 760.2, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#b94e2c", "texture": null, "material": "rocky-red" },
+      "source_ids": ["nasa-mars", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "jupiter", "name": "Jupiter", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 69911.0, "diameter_km": 139822.0, "mass_kg": 1.89813e27, "surface_gravity_ms2": 24.79 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 778600000, "eccentricity": 0.0489, "periapsis_km": 740500000, "apoapsis_km": 816600000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": 0.003, "H2": 0.898, "He": 0.102 } },
+      "light_reference": { "solar_irradiance_w_m2": 50.5, "light_travel_time_seconds": 2597.1, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#caa77b", "texture": "textures/jupiter-bands.svg", "material": "banded-gas" },
+      "source_ids": ["nasa-jupiter", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "saturn", "name": "Saturn", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 58232.0, "diameter_km": 116464.0, "mass_kg": 5.6832e26, "surface_gravity_ms2": 10.44 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 1433500000, "eccentricity": 0.0565, "periapsis_km": 1352600000, "apoapsis_km": 1514500000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": 0.0045, "H2": 0.963, "He": 0.0325 } },
+      "light_reference": { "solar_irradiance_w_m2": 15.04, "light_travel_time_seconds": 4781.6, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#d8c28e", "texture": null, "material": "ringed-gas" },
+      "source_ids": ["nasa-saturn", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "uranus", "name": "Uranus", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 25362.0, "diameter_km": 50724.0, "mass_kg": 8.6811e25, "surface_gravity_ms2": 8.87 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 2872500000, "eccentricity": 0.0457, "periapsis_km": 2741300000, "apoapsis_km": 3003600000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": 0.023, "H2": 0.825, "He": 0.152 } },
+      "light_reference": { "solar_irradiance_w_m2": 3.72, "light_travel_time_seconds": 9581.6, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#8bd5dc", "texture": null, "material": "ice-giant" },
+      "source_ids": ["nasa-uranus", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "neptune", "name": "Neptune", "type": "planet", "parent": "sun",
+      "physical": { "radius_km": 24622.0, "diameter_km": 49244.0, "mass_kg": 1.02409e26, "surface_gravity_ms2": 11.15 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 4495100000, "eccentricity": 0.0113, "periapsis_km": 4444500000, "apoapsis_km": 4545700000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": 0.015, "H2": 0.80, "He": 0.19 } },
+      "light_reference": { "solar_irradiance_w_m2": 1.510, "light_travel_time_seconds": 14994.0, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#3155b7", "texture": null, "material": "ice-giant" },
+      "source_ids": ["nasa-neptune", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "ceres", "name": "Ceres", "type": "dwarf_planet", "parent": "sun",
+      "physical": { "radius_km": 469.7, "diameter_km": 939.4, "mass_kg": 9.3835e20, "surface_gravity_ms2": 0.27 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 413690250, "eccentricity": 0.0758, "periapsis_km": 382620000, "apoapsis_km": 445960000 },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 178.7, "light_travel_time_seconds": 1380.0, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#837d73", "texture": "textures/moon-craters.svg", "material": "dwarf-muted" },
+      "source_ids": ["nasa-ceres", "jpl-small-bodies", "derived-light-reference"]
+    },
+    {
+      "id": "pluto", "name": "Pluto", "type": "dwarf_planet", "parent": "sun",
+      "physical": { "radius_km": 1188.3, "diameter_km": 2376.6, "mass_kg": 1.303e22, "surface_gravity_ms2": 0.62 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 5906380000, "eccentricity": 0.2488, "periapsis_km": 4436820000, "apoapsis_km": 7375930000 },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 0.878, "light_travel_time_seconds": 19701.6, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#a89278", "texture": null, "material": "dwarf-muted" },
+      "source_ids": ["nasa-pluto", "nasa-planet-table", "nlr-e490"]
+    },
+    {
+      "id": "eris", "name": "Eris", "type": "dwarf_planet", "parent": "sun",
+      "physical": { "radius_km": 1163.0, "diameter_km": 2326.0, "mass_kg": 1.6466e22, "surface_gravity_ms2": 0.82 },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 10166000000, "eccentricity": 0.4361, "periapsis_km": 5728000000, "apoapsis_km": 14604000000 },
+      "atmosphere": { "hasAtmosphere": null, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 0.296, "light_travel_time_seconds": 33910.1, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#aaa49b", "texture": null, "material": "dwarf-muted" },
+      "source_ids": ["nasa-eris", "jpl-small-bodies", "derived-light-reference"]
+    },
+    {
+      "id": "haumea", "name": "Haumea", "type": "dwarf_planet", "parent": "sun",
+      "physical": { "radius_km": null, "diameter_km": 1740.0, "mass_kg": 4.006e21, "surface_gravity_ms2": null },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 6452000000, "eccentricity": 0.1913, "periapsis_km": 5218000000, "apoapsis_km": 7686000000 },
+      "atmosphere": { "hasAtmosphere": null, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 0.734, "light_travel_time_seconds": 21521.6, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#a7a29a", "texture": null, "material": "dwarf-muted" },
+      "source_ids": ["nasa-haumea", "jpl-small-bodies", "derived-light-reference"]
+    },
+    {
+      "id": "makemake", "name": "Makemake", "type": "dwarf_planet", "parent": "sun",
+      "physical": { "radius_km": 715.0, "diameter_km": 1430.0, "mass_kg": null, "surface_gravity_ms2": null },
+      "orbit": { "reference": "sun", "semimajor_axis_km": 6796000000, "eccentricity": 0.1613, "periapsis_km": 5700000000, "apoapsis_km": 7892000000 },
+      "atmosphere": { "hasAtmosphere": null, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 0.662, "light_travel_time_seconds": 22669.0, "distance_basis": "body_semimajor_axis" },
+      "visual": { "baseColor": "#9d806c", "texture": null, "material": "dwarf-muted" },
+      "source_ids": ["nasa-makemake", "jpl-small-bodies", "derived-light-reference"]
+    },
+    {
+      "id": "moon", "name": "Moon", "type": "moon", "parent": "earth",
+      "physical": { "radius_km": 1737.4, "diameter_km": 3474.8, "mass_kg": 7.346e22, "surface_gravity_ms2": 1.62 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 384400, "eccentricity": 0.0549, "periapsis_km": 363300, "apoapsis_km": 405500 },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 1366.1, "light_travel_time_seconds": 499.0, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#85817b", "texture": "textures/moon-craters.svg", "material": "rocky-gray" },
+      "source_ids": ["nasa-moon", "nlr-e490"]
+    },
+    {
+      "id": "phobos", "name": "Phobos", "type": "moon", "parent": "mars",
+      "physical": { "radius_km": 11.08, "diameter_km": 22.16, "mass_kg": 1.0659e16, "surface_gravity_ms2": 0.0057 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 9376, "eccentricity": 0.0151, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 588.6, "light_travel_time_seconds": 760.2, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#62584d", "texture": "textures/moon-craters.svg", "material": "rocky-dark" },
+      "source_ids": ["nasa-mars-moons", "jpl-satellite-elements"]
+    },
+    {
+      "id": "deimos", "name": "Deimos", "type": "moon", "parent": "mars",
+      "physical": { "radius_km": 6.2, "diameter_km": 12.4, "mass_kg": 1.4762e15, "surface_gravity_ms2": 0.003 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 23458, "eccentricity": 0.0002, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 588.6, "light_travel_time_seconds": 760.2, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#777069", "texture": "textures/moon-craters.svg", "material": "rocky-gray" },
+      "source_ids": ["nasa-mars-moons", "jpl-satellite-elements"]
+    },
+    {
+      "id": "io", "name": "Io", "type": "moon", "parent": "jupiter",
+      "physical": { "radius_km": 1821.6, "diameter_km": 3643.2, "mass_kg": 8.9319e22, "surface_gravity_ms2": 1.796 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 421800, "eccentricity": 0.0041, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": null, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 50.5, "light_travel_time_seconds": 2597.1, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#d9bd4a", "texture": null, "material": "moon-yellow" },
+      "source_ids": ["nasa-jovian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "europa", "name": "Europa", "type": "moon", "parent": "jupiter",
+      "physical": { "radius_km": 1560.8, "diameter_km": 3121.6, "mass_kg": 4.7998e22, "surface_gravity_ms2": 1.314 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 671100, "eccentricity": 0.0094, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": null, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 50.5, "light_travel_time_seconds": 2597.1, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#d8cfb7", "texture": null, "material": "moon-ice" },
+      "source_ids": ["nasa-jovian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "ganymede", "name": "Ganymede", "type": "moon", "parent": "jupiter",
+      "physical": { "radius_km": 2631.2, "diameter_km": 5262.4, "mass_kg": 1.4819e23, "surface_gravity_ms2": 1.428 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 1070400, "eccentricity": 0.0013, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": null, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 50.5, "light_travel_time_seconds": 2597.1, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#9b8972", "texture": "textures/moon-craters.svg", "material": "moon-tan" },
+      "source_ids": ["nasa-jovian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "callisto", "name": "Callisto", "type": "moon", "parent": "jupiter",
+      "physical": { "radius_km": 2410.3, "diameter_km": 4820.6, "mass_kg": 1.0759e23, "surface_gravity_ms2": 1.235 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 1882700, "eccentricity": 0.0074, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": null, "surface_pressure_pa": null, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 50.5, "light_travel_time_seconds": 2597.1, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#574e46", "texture": "textures/moon-craters.svg", "material": "moon-dark" },
+      "source_ids": ["nasa-jovian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "titan", "name": "Titan", "type": "moon", "parent": "saturn",
+      "physical": { "radius_km": 2574.73, "diameter_km": 5149.46, "mass_kg": 1.3452e23, "surface_gravity_ms2": 1.352 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 1221870, "eccentricity": 0.0288, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": 146700, "density_kg_m3": 5.3, "composition": { "CO2": null, "N2": 0.984, "O2": null, "CH4": 0.014, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 15.04, "light_travel_time_seconds": 4781.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#c98b45", "texture": null, "material": "hazy-orange" },
+      "source_ids": ["nasa-saturnian-satellites", "nasa-titan", "jpl-satellite-elements"]
+    },
+    {
+      "id": "rhea", "name": "Rhea", "type": "moon", "parent": "saturn",
+      "physical": { "radius_km": 763.8, "diameter_km": 1527.6, "mass_kg": 2.3065e21, "surface_gravity_ms2": 0.264 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 527108, "eccentricity": 0.0010, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 15.04, "light_travel_time_seconds": 4781.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#aaa9a5", "texture": "textures/moon-craters.svg", "material": "moon-ice" },
+      "source_ids": ["nasa-saturnian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "iapetus", "name": "Iapetus", "type": "moon", "parent": "saturn",
+      "physical": { "radius_km": 734.5, "diameter_km": 1469.0, "mass_kg": 1.8056e21, "surface_gravity_ms2": 0.223 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 3560820, "eccentricity": 0.0283, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 15.04, "light_travel_time_seconds": 4781.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#77716a", "texture": "textures/moon-craters.svg", "material": "moon-two-tone" },
+      "source_ids": ["nasa-saturnian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "dione", "name": "Dione", "type": "moon", "parent": "saturn",
+      "physical": { "radius_km": 561.4, "diameter_km": 1122.8, "mass_kg": 1.0955e21, "surface_gravity_ms2": 0.232 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 377396, "eccentricity": 0.0022, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 15.04, "light_travel_time_seconds": 4781.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#b7b6b2", "texture": "textures/moon-craters.svg", "material": "moon-ice" },
+      "source_ids": ["nasa-saturnian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "titania", "name": "Titania", "type": "moon", "parent": "uranus",
+      "physical": { "radius_km": 788.9, "diameter_km": 1577.8, "mass_kg": 3.527e21, "surface_gravity_ms2": 0.367 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 435910, "eccentricity": 0.0011, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 3.72, "light_travel_time_seconds": 9581.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#918b83", "texture": "textures/moon-craters.svg", "material": "moon-muted" },
+      "source_ids": ["nasa-uranian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "oberon", "name": "Oberon", "type": "moon", "parent": "uranus",
+      "physical": { "radius_km": 761.4, "diameter_km": 1522.8, "mass_kg": 3.014e21, "surface_gravity_ms2": 0.346 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 583520, "eccentricity": 0.0014, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 3.72, "light_travel_time_seconds": 9581.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#77736f", "texture": "textures/moon-craters.svg", "material": "moon-muted" },
+      "source_ids": ["nasa-uranian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "umbriel", "name": "Umbriel", "type": "moon", "parent": "uranus",
+      "physical": { "radius_km": 584.7, "diameter_km": 1169.4, "mass_kg": 1.275e21, "surface_gravity_ms2": 0.234 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 266000, "eccentricity": 0.0039, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 3.72, "light_travel_time_seconds": 9581.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#5f5d5b", "texture": "textures/moon-craters.svg", "material": "moon-dark" },
+      "source_ids": ["nasa-uranian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "ariel", "name": "Ariel", "type": "moon", "parent": "uranus",
+      "physical": { "radius_km": 578.9, "diameter_km": 1157.8, "mass_kg": 1.353e21, "surface_gravity_ms2": 0.269 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 190900, "eccentricity": 0.0012, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 3.72, "light_travel_time_seconds": 9581.6, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#a8aaa8", "texture": "textures/moon-craters.svg", "material": "moon-ice" },
+      "source_ids": ["nasa-uranian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "triton", "name": "Triton", "type": "moon", "parent": "neptune",
+      "physical": { "radius_km": 1353.4, "diameter_km": 2706.8, "mass_kg": 2.14e22, "surface_gravity_ms2": 0.779 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 354759, "eccentricity": 0.000016, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": true, "surface_pressure_pa": 1.4, "density_kg_m3": null, "composition": { "CO2": null, "N2": null, "O2": null, "CH4": null, "H2": null, "He": null } },
+      "light_reference": { "solar_irradiance_w_m2": 1.510, "light_travel_time_seconds": 14994.0, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#b7aaa3", "texture": null, "material": "moon-ice" },
+      "source_ids": ["nasa-neptunian-satellites", "nasa-triton", "jpl-satellite-elements"]
+    },
+    {
+      "id": "proteus", "name": "Proteus", "type": "moon", "parent": "neptune",
+      "physical": { "radius_km": 210.0, "diameter_km": 420.0, "mass_kg": 4.4e19, "surface_gravity_ms2": 0.07 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 117646, "eccentricity": 0.0005, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 1.510, "light_travel_time_seconds": 14994.0, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#6c6965", "texture": "textures/moon-craters.svg", "material": "moon-dark" },
+      "source_ids": ["nasa-neptunian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "nereid", "name": "Nereid", "type": "moon", "parent": "neptune",
+      "physical": { "radius_km": 170.0, "diameter_km": 340.0, "mass_kg": 3.1e19, "surface_gravity_ms2": 0.07 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 5513818, "eccentricity": 0.7507, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 1.510, "light_travel_time_seconds": 14994.0, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#85817d", "texture": "textures/moon-craters.svg", "material": "moon-muted" },
+      "source_ids": ["nasa-neptunian-satellites", "jpl-satellite-elements"]
+    },
+    {
+      "id": "larissa", "name": "Larissa", "type": "moon", "parent": "neptune",
+      "physical": { "radius_km": 97.0, "diameter_km": 194.0, "mass_kg": 4.2e18, "surface_gravity_ms2": 0.034 },
+      "orbit": { "reference": "parent", "semimajor_axis_km": 73548, "eccentricity": 0.0014, "periapsis_km": null, "apoapsis_km": null },
+      "atmosphere": { "hasAtmosphere": false, "surface_pressure_pa": 0, "density_kg_m3": 0, "composition": { "CO2": 0, "N2": 0, "O2": 0, "CH4": 0, "H2": 0, "He": 0 } },
+      "light_reference": { "solar_irradiance_w_m2": 1.510, "light_travel_time_seconds": 14994.0, "distance_basis": "parent_semimajor_axis" },
+      "visual": { "baseColor": "#77736f", "texture": "textures/moon-craters.svg", "material": "moon-muted" },
+      "source_ids": ["nasa-neptunian-satellites", "jpl-satellite-elements"]
+    }
+  ]
+}

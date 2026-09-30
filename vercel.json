@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm --prefix frontend ci",
+  "buildCommand": "npm --prefix frontend run build",
+  "outputDirectory": "frontend/dist",
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60,
+      "includeFiles": "{backend/app/**,backend/models/light_model.joblib,backend/models/light_model_metadata.json,data/celestialBodies.json,data/solarSpectrum.csv}",
+      "excludeFiles": "{research_backup/**,frontend/**,backend/.venv/**,backend/tests/**,backend/training/**,data/training/**,data/benchmark/**,data/evaluation/**,docs/**,**/__pycache__/**,**/*.pyc}"
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

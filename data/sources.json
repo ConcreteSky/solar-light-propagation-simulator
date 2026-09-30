@@ -1,0 +1,32 @@
+{
+  "access_date": "2026-09-30",
+  "sources": [
+    { "id": "nasa-planet-table", "organization": "NASA NSSDCA", "title": "Planetary Fact Sheet - Metric Units", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", "properties": ["planet mass", "diameter", "gravity", "mean distance", "perihelion", "aphelion", "eccentricity"] },
+    { "id": "nasa-mercury", "organization": "NASA NSSDCA", "title": "Mercury Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html", "properties": ["physical", "orbit", "atmosphere"] },
+    { "id": "nasa-venus", "organization": "NASA NSSDCA", "title": "Venus Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html", "properties": ["physical", "orbit", "surface pressure", "surface density", "composition"] },
+    { "id": "nasa-earth", "organization": "NASA NSSDCA", "title": "Earth Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "properties": ["physical", "orbit", "surface pressure", "surface density", "composition"] },
+    { "id": "nasa-moon", "organization": "NASA NSSDCA", "title": "Moon Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html", "properties": ["physical", "parent-centered orbit", "solar irradiance"] },
+    { "id": "nasa-mars", "organization": "NASA NSSDCA", "title": "Mars Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html", "properties": ["physical", "orbit", "surface pressure", "surface density", "composition"] },
+    { "id": "nasa-jupiter", "organization": "NASA NSSDCA", "title": "Jupiter Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html", "properties": ["physical", "orbit", "composition"] },
+    { "id": "nasa-saturn", "organization": "NASA NSSDCA", "title": "Saturn Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturnfact.html", "properties": ["physical", "orbit", "composition"] },
+    { "id": "nasa-uranus", "organization": "NASA NSSDCA", "title": "Uranus Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html", "properties": ["physical", "orbit", "composition"] },
+    { "id": "nasa-neptune", "organization": "NASA NSSDCA", "title": "Neptune Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html", "properties": ["physical", "orbit", "composition"] },
+    { "id": "nasa-pluto", "organization": "NASA NSSDCA / NASA Science", "title": "Pluto Fact Sheet and Pluto Facts", "url": "https://science.nasa.gov/dwarf-planets/pluto/facts/", "properties": ["physical", "orbit", "atmosphere", "light travel time"] },
+    { "id": "nasa-ceres", "organization": "NASA Science", "title": "Ceres", "url": "https://science.nasa.gov/mission/dawn/science/ceres/", "properties": ["diameter", "classification"] },
+    { "id": "nasa-eris", "organization": "NASA Science", "title": "Eris Facts", "url": "https://science.nasa.gov/dwarf-planets/eris/facts/", "properties": ["diameter", "mass", "distance"] },
+    { "id": "nasa-haumea", "organization": "NASA Science", "title": "Haumea Facts", "url": "https://science.nasa.gov/dwarf-planets/haumea/facts/", "properties": ["estimated dimensions", "distance"] },
+    { "id": "nasa-makemake", "organization": "NASA Science", "title": "Makemake Facts", "url": "https://science.nasa.gov/dwarf-planets/makemake/facts/", "properties": ["estimated diameter", "distance"] },
+    { "id": "nasa-mars-moons", "organization": "NASA Science", "title": "Mars Moons", "url": "https://science.nasa.gov/mars/moons/", "properties": ["moon dimensions", "physical overview"] },
+    { "id": "nasa-jovian-satellites", "organization": "NASA NSSDCA", "title": "Jovian Satellite Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/joviansatfact.html", "properties": ["moon radius", "mass", "gravity", "orbit"] },
+    { "id": "nasa-saturnian-satellites", "organization": "NASA NSSDCA", "title": "Saturnian Satellite Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturniansatfact.html", "properties": ["moon radius", "mass", "gravity", "orbit"] },
+    { "id": "nasa-uranian-satellites", "organization": "NASA NSSDCA", "title": "Uranian Satellite Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/uraniansatfact.html", "properties": ["moon radius", "mass", "gravity", "orbit"] },
+    { "id": "nasa-neptunian-satellites", "organization": "NASA NSSDCA", "title": "Neptunian Satellite Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptuniansatfact.html", "properties": ["moon radius", "mass", "gravity", "orbit"] },
+    { "id": "nasa-titan", "organization": "NASA Science", "title": "Titan Facts", "url": "https://science.nasa.gov/saturn/moons/titan/facts/", "properties": ["atmospheric pressure", "density", "composition"] },
+    { "id": "nasa-triton", "organization": "NASA Science", "title": "Triton Facts", "url": "https://science.nasa.gov/neptune/moons/triton/", "properties": ["atmosphere", "surface pressure"] },
+    { "id": "jpl-satellite-elements", "organization": "NASA/JPL Solar System Dynamics", "title": "Planetary Satellite Mean Elements", "url": "https://ssd.jpl.nasa.gov/sats/elem/", "properties": ["parent-centered semimajor axis", "eccentricity"] },
+    { "id": "jpl-small-bodies", "organization": "NASA/JPL Solar System Dynamics", "title": "JPL Horizons / Small-Body Database", "url": "https://ssd.jpl.nasa.gov/horizons/", "properties": ["dwarf-planet semimajor axis", "eccentricity", "perihelion", "aphelion"] },
+    { "id": "nlr-e490", "organization": "National Laboratory of the Rockies (formerly NREL)", "title": "2000 ASTM Standard Extraterrestrial Spectrum Reference E-490-00", "url": "https://www.nlr.gov/grid/solar-resource/spectra-astm-e490", "properties": ["air-mass-zero spectral irradiance", "planet mean irradiance"] },
+    { "id": "derived-light-reference", "organization": "Project calculation from cited constants", "title": "Inverse-square and light-time reference", "url": null, "properties": ["dwarf-planet reference irradiance", "light travel time"], "method": "Uses cached heliocentric semimajor axis, 1366.1 W/m^2 at 1 AU for the E-490 reference, and c = 299792.458 km/s." }
+  ]
+}
+

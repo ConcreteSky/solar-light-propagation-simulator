@@ -1,0 +1,10 @@
+research_backup/
+frontend/node_modules/
+frontend/dist/
+backend/.venv/
+backend/training/generated/
+**/__pycache__/
+*.pyc
+.git/
+.env
+.env.*

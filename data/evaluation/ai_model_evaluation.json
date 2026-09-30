@@ -1,0 +1,996 @@
+{
+  "model_version": "1.0.0",
+  "random_seed": 741,
+  "dataset_path": "data\\training\\light_training_data.csv",
+  "dataset_audit": {
+    "samples": 10000,
+    "columns": 20,
+    "split_counts": {
+      "train": 8000,
+      "validation": 1000,
+      "test": 1000
+    },
+    "missing_values": 0,
+    "nonfinite_values": 0,
+    "duplicate_records": 0,
+    "duplicate_feature_records": 0,
+    "maximum_energy_conservation_error": 2.220446049250313e-16,
+    "maximum_atmospheric_composition_error": 2.2000001820288162e-10,
+    "feature_distributions": {
+      "distance_from_sun_km": {
+        "min": 44880124.11,
+        "mean": 1954577154.1022692,
+        "std": 2566166457.169417,
+        "max": 10462909060.0
+      },
+      "incoming_solar_irradiance_w_m2": {
+        "min": 0.2792726553,
+        "mean": 1358.8710564414216,
+        "std": 2833.5275846524996,
+        "max": 15178.37285
+      },
+      "surface_pressure_pa": {
+        "min": 0.0,
+        "mean": 350824.80140329717,
+        "std": 1229943.339102327,
+        "max": 9996037.861
+      },
+      "atmospheric_density_kg_m3": {
+        "min": 0.0,
+        "mean": 2.9743874295093624,
+        "std": 11.737000016903426,
+        "max": 100.0
+      },
+      "co2_fraction": {
+        "min": 0.0,
+        "mean": 0.19550593052238532,
+        "std": 0.31367646068736527,
+        "max": 0.9998063725
+      },
+      "n2_fraction": {
+        "min": 0.0,
+        "mean": 0.2340245321120372,
+        "std": 0.32570829999163625,
+        "max": 0.9995139419
+      },
+      "o2_fraction": {
+        "min": 0.0,
+        "mean": 0.05585198325598426,
+        "std": 0.1091351987147901,
+        "max": 0.7305288955
+      },
+      "ch4_fraction": {
+        "min": 0.0,
+        "mean": 0.04268222381911052,
+        "std": 0.08439980561549171,
+        "max": 0.8294904575
+      },
+      "h2_fraction": {
+        "min": 0.0,
+        "mean": 0.13304646154207753,
+        "std": 0.2662730829571143,
+        "max": 0.9744809186
+      },
+      "he_fraction": {
+        "min": 0.0,
+        "mean": 0.05438886874845412,
+        "std": 0.10380958598507534,
+        "max": 0.7867640338
+      }
+    },
+    "target_distributions": {
+      "transmitted_light_fraction": {
+        "min": 0.250401,
+        "mean": 0.8662440944999998,
+        "std": 0.1535268925194203,
+        "max": 1.0
+      },
+      "scattered_light_fraction": {
+        "min": 0.0,
+        "mean": 0.09543810479999999,
+        "std": 0.10676152974208972,
+        "max": 0.536766
+      },
+      "absorbed_light_fraction": {
+        "min": 0.0,
+        "mean": 0.038317800699999995,
+        "std": 0.04942379102360415,
+        "max": 0.322613
+      },
+      "relative_brightness": {
+        "min": 0.000425,
+        "mean": 0.34796011400000004,
+        "std": 0.3811946047474663,
+        "max": 1.0
+      }
+    }
+  },
+  "split_policy": "Predefined deterministic 80/10/10 train/validation/test split from generator version 1.0.0; the test split was not used for model selection.",
+  "candidate_validation_results": {
+    "linear_regression": {
+      "validation_metrics": {
+        "per_target": {
+          "transmitted_light_fraction": {
+            "mae": 0.02695399008422352,
+            "mae_percentage_points": 2.6953990084223522,
+            "rmse": 0.05006848750984776,
+            "r2": 0.8977527567549524
+          },
+          "scattered_light_fraction": {
+            "mae": 0.022710999377094546,
+            "mae_percentage_points": 2.2710999377094545,
+            "rmse": 0.040288108217119735,
+            "r2": 0.8644644888731455
+          },
+          "absorbed_light_fraction": {
+            "mae": 0.006884205517851167,
+            "mae_percentage_points": 0.6884205517851167,
+            "rmse": 0.013027732564390075,
+            "r2": 0.9312211357631285
+          },
+          "relative_brightness": {
+            "mae": 0.07862532484698678,
+            "mae_percentage_points": 7.862532484698678,
+            "rmse": 0.0950685133440509,
+            "r2": 0.9377841843605297
+          }
+        },
+        "mean_mae": 0.033793629956539006,
+        "mean_rmse": 0.049613210408852124
+      },
+      "physical_consistency": {
+        "rows": 1000,
+        "minor_correction_count": 428,
+        "minor_correction_rate": 0.428,
+        "serious_violation_count": 28,
+        "serious_violation_rate": 0.028,
+        "negative_fraction_rows": 226,
+        "over_one_rows": 180,
+        "maximum_energy_sum_error": 7.771561172376096e-16,
+        "mean_energy_sum_error": 1.4843681839238343e-16
+      },
+      "fit_seconds": 0.035495700081810355,
+      "inference_ms_per_sample": 0.002624299842864275,
+      "serialized_size_bytes": 4834
+    },
+    "random_forest": {
+      "validation_metrics": {
+        "per_target": {
+          "transmitted_light_fraction": {
+            "mae": 0.0058702437506802825,
+            "mae_percentage_points": 0.5870243750680283,
+            "rmse": 0.01389484731895799,
+            "r2": 0.9921253688402911
+          },
+          "scattered_light_fraction": {
+            "mae": 0.0053322311048241994,
+            "mae_percentage_points": 0.53322311048242,
+            "rmse": 0.012328809683608062,
+            "r2": 0.9873076615293322
+          },
+          "absorbed_light_fraction": {
+            "mae": 0.0024571168814222365,
+            "mae_percentage_points": 0.24571168814222366,
+            "rmse": 0.007071403141676784,
+            "r2": 0.9797358437829663
+          },
+          "relative_brightness": {
+            "mae": 0.003434040574134504,
+            "mae_percentage_points": 0.3434040574134504,
+            "rmse": 0.008566303706614736,
+            "r2": 0.9994948570116067
+          }
+        },
+        "mean_mae": 0.004273408077765306,
+        "mean_rmse": 0.010465340962714393
+      },
+      "physical_consistency": {
+        "rows": 1000,
+        "minor_correction_count": 0,
+        "minor_correction_rate": 0.0,
+        "serious_violation_count": 0,
+        "serious_violation_rate": 0.0,
+        "negative_fraction_rows": 0,
+        "over_one_rows": 0,
+        "maximum_energy_sum_error": 2.9976021664879227e-15,
+        "mean_energy_sum_error": 8.137934770502398e-16
+      },
+      "fit_seconds": 0.6264355001039803,
+      "inference_ms_per_sample": 0.02862729993648827,
+      "serialized_size_bytes": 59306651
+    },
+    "hist_gradient_boosting": {
+      "validation_metrics": {
+        "per_target": {
+          "transmitted_light_fraction": {
+            "mae": 0.0019561538522539696,
+            "mae_percentage_points": 0.19561538522539695,
+            "rmse": 0.004320828440302171,
+            "r2": 0.9992385231428136
+          },
+          "scattered_light_fraction": {
+            "mae": 0.0016194651931749281,
+            "mae_percentage_points": 0.16194651931749282,
+            "rmse": 0.0033557887580133584,
+            "r2": 0.9990596520598117
+          },
+          "absorbed_light_fraction": {
+            "mae": 0.00072062900984762,
+            "mae_percentage_points": 0.072062900984762,
+            "rmse": 0.0020530766017868114,
+            "r2": 0.9982918435800939
+          },
+          "relative_brightness": {
+            "mae": 0.0022794283845911493,
+            "mae_percentage_points": 0.22794283845911492,
+            "rmse": 0.004799071597558711,
+            "r2": 0.9998414589053936
+          }
+        },
+        "mean_mae": 0.0016439191099669168,
+        "mean_rmse": 0.0036321913494152627
+      },
+      "physical_consistency": {
+        "rows": 1000,
+        "minor_correction_count": 999,
+        "minor_correction_rate": 0.999,
+        "serious_violation_count": 0,
+        "serious_violation_rate": 0.0,
+        "negative_fraction_rows": 72,
+        "over_one_rows": 27,
+        "maximum_energy_sum_error": 0.03687579288343912,
+        "mean_energy_sum_error": 0.0015608763359791996
+      },
+      "fit_seconds": 1.0488787000067532,
+      "inference_ms_per_sample": 0.01509879995137453,
+      "serialized_size_bytes": 2678493
+    }
+  },
+  "selection": {
+    "selected_model": "hist_gradient_boosting",
+    "rule": "Lowest validation mean MAE; if candidates are within 2%, choose the smaller serialized model.",
+    "validation_rows_used_for_selection": 1000,
+    "final_refit_rows": 9000
+  },
+  "selected_model_test_results": {
+    "samples": 1000,
+    "metrics_on_raw_predictions": {
+      "per_target": {
+        "transmitted_light_fraction": {
+          "mae": 0.0018764505900954588,
+          "mae_percentage_points": 0.1876450590095459,
+          "rmse": 0.004789317770521355,
+          "r2": 0.998970486220706
+        },
+        "scattered_light_fraction": {
+          "mae": 0.0014495626941804579,
+          "mae_percentage_points": 0.1449562694180458,
+          "rmse": 0.0033430285592721217,
+          "r2": 0.9989801295644907
+        },
+        "absorbed_light_fraction": {
+          "mae": 0.000600504506072804,
+          "mae_percentage_points": 0.0600504506072804,
+          "rmse": 0.0015688879850175787,
+          "r2": 0.9988874072137317
+        },
+        "relative_brightness": {
+          "mae": 0.0018551423061217958,
+          "mae_percentage_points": 0.1855142306121796,
+          "rmse": 0.003995873788223191,
+          "r2": 0.9998929352773912
+        }
+      },
+      "mean_mae": 0.0014454150241176291,
+      "mean_rmse": 0.003424277025758562
+    },
+    "physical_consistency": {
+      "rows": 1000,
+      "minor_correction_count": 999,
+      "minor_correction_rate": 0.999,
+      "serious_violation_count": 0,
+      "serious_violation_rate": 0.0,
+      "negative_fraction_rows": 35,
+      "over_one_rows": 21,
+      "maximum_energy_sum_error": 0.02801763001447366,
+      "mean_energy_sum_error": 0.0014115601490347833
+    },
+    "grouped_generalization": {
+      "inner_system_le_0_75_au": {
+        "samples": 181,
+        "per_target": {
+          "transmitted_light_fraction": {
+            "mae": 0.0015572996801028439,
+            "mae_percentage_points": 0.15572996801028438,
+            "rmse": 0.0038750715131456418,
+            "r2": 0.9994950103022058
+          },
+          "scattered_light_fraction": {
+            "mae": 0.001293551803147094,
+            "mae_percentage_points": 0.12935518031470938,
+            "rmse": 0.0031380428121594267,
+            "r2": 0.9993368765873565
+          },
+          "absorbed_light_fraction": {
+            "mae": 0.000513564983977836,
+            "mae_percentage_points": 0.051356498397783605,
+            "rmse": 0.001239407399053515,
+            "r2": 0.9994606655437103
+          },
+          "relative_brightness": {
+            "mae": 0.001547065985137586,
+            "mae_percentage_points": 0.1547065985137586,
+            "rmse": 0.003130676078582312,
+            "r2": 0.9992208602071045
+          }
+        },
+        "mean_mae": 0.0012278706130913401,
+        "mean_rmse": 0.002845799450735224,
+        "physical_consistency": {
+          "rows": 181,
+          "minor_correction_count": 181,
+          "minor_correction_rate": 1.0,
+          "serious_violation_count": 0,
+          "serious_violation_rate": 0.0,
+          "negative_fraction_rows": 8,
+          "over_one_rows": 11,
+          "maximum_energy_sum_error": 0.02656518288782006,
+          "mean_energy_sum_error": 0.0013348086113886839
+        }
+      },
+      "outer_system_gt_8_au": {
+        "samples": 398,
+        "per_target": {
+          "transmitted_light_fraction": {
+            "mae": 0.002030704889517477,
+            "mae_percentage_points": 0.2030704889517477,
+            "rmse": 0.004562124679226857,
+            "r2": 0.9990522075261907
+          },
+          "scattered_light_fraction": {
+            "mae": 0.0014354548223654028,
+            "mae_percentage_points": 0.1435454822365403,
+            "rmse": 0.003123481079409609,
+            "r2": 0.9990751496488822
+          },
+          "absorbed_light_fraction": {
+            "mae": 0.0007339749464080464,
+            "mae_percentage_points": 0.07339749464080464,
+            "rmse": 0.002015764626956336,
+            "r2": 0.9982393746596587
+          },
+          "relative_brightness": {
+            "mae": 0.00038683535146155423,
+            "mae_percentage_points": 0.038683535146155426,
+            "rmse": 0.0006746120691464813,
+            "r2": 0.9975423809763058
+          }
+        },
+        "mean_mae": 0.0011467425024381203,
+        "mean_rmse": 0.002593995613684821,
+        "physical_consistency": {
+          "rows": 398,
+          "minor_correction_count": 397,
+          "minor_correction_rate": 0.9974874371859297,
+          "serious_violation_count": 0,
+          "serious_violation_rate": 0.0,
+          "negative_fraction_rows": 12,
+          "over_one_rows": 2,
+          "maximum_energy_sum_error": 0.025610644424428175,
+          "mean_energy_sum_error": 0.0014587156605874168
+        }
+      },
+      "dense_atmosphere_gt_200k_pa": {
+        "samples": 129,
+        "per_target": {
+          "transmitted_light_fraction": {
+            "mae": 0.008279789177849141,
+            "mae_percentage_points": 0.8279789177849141,
+            "rmse": 0.012159413602893096,
+            "r2": 0.9922482699833266
+          },
+          "scattered_light_fraction": {
+            "mae": 0.005535661691561817,
+            "mae_percentage_points": 0.5535661691561817,
+            "rmse": 0.007929057270013204,
+            "r2": 0.9922652444734563
+          },
+          "absorbed_light_fraction": {
+            "mae": 0.002863495396916216,
+            "mae_percentage_points": 0.2863495396916216,
+            "rmse": 0.003998745499687628,
+            "r2": 0.995236328746801
+          },
+          "relative_brightness": {
+            "mae": 0.004659003272094409,
+            "mae_percentage_points": 0.46590032720944086,
+            "rmse": 0.008227087524757542,
+            "r2": 0.9991714876253449
+          }
+        },
+        "mean_mae": 0.005334487384605396,
+        "mean_rmse": 0.008078575974337868,
+        "physical_consistency": {
+          "rows": 129,
+          "minor_correction_count": 129,
+          "minor_correction_rate": 1.0,
+          "serious_violation_count": 0,
+          "serious_violation_rate": 0.0,
+          "negative_fraction_rows": 0,
+          "over_one_rows": 0,
+          "maximum_energy_sum_error": 0.02801763001447366,
+          "mean_energy_sum_error": 0.006185506981481942
+        }
+      },
+      "airless": {
+        "samples": 285,
+        "per_target": {
+          "transmitted_light_fraction": {
+            "mae": 3.278401459417025e-05,
+            "mae_percentage_points": 0.003278401459417025,
+            "rmse": 3.32347926698225e-05,
+            "r2": null
+          },
+          "scattered_light_fraction": {
+            "mae": 3.17158220995567e-05,
+            "mae_percentage_points": 0.00317158220995567,
+            "rmse": 3.171582209955671e-05,
+            "r2": null
+          },
+          "absorbed_light_fraction": {
+            "mae": 1.4390431588477255e-05,
+            "mae_percentage_points": 0.0014390431588477254,
+            "rmse": 2.041982773634787e-05,
+            "r2": null
+          },
+          "relative_brightness": {
+            "mae": 0.0008705598926145164,
+            "mae_percentage_points": 0.08705598926145164,
+            "rmse": 0.0017436050154747773,
+            "r2": 0.9999784784087603
+          }
+        },
+        "mean_mae": 0.00023736254022418014,
+        "mean_rmse": 0.0004572438644951261,
+        "physical_consistency": {
+          "rows": 285,
+          "minor_correction_count": 285,
+          "minor_correction_rate": 1.0,
+          "serious_violation_count": 0,
+          "serious_violation_rate": 0.0,
+          "negative_fraction_rows": 0,
+          "over_one_rows": 0,
+          "maximum_energy_sum_error": 0.00014994305670223973,
+          "mean_energy_sum_error": 1.401315284457272e-05
+        }
+      }
+    },
+    "batch_inference_ms_per_sample": 0.014766199979931116,
+    "single_inference_median_ms": 9.026899933815002,
+    "model_size_bytes": 2679028
+  },
+  "real_body_evaluation": {
+    "comparison": "machine learning versus deterministic educational physics",
+    "evaluated_bodies": 19,
+    "excluded_bodies": [
+      {
+        "destination": "jupiter",
+        "reason": "Missing required model features: surface_pressure_pa, atmospheric_density_kg_m3"
+      },
+      {
+        "destination": "saturn",
+        "reason": "Missing required model features: surface_pressure_pa, atmospheric_density_kg_m3"
+      },
+      {
+        "destination": "uranus",
+        "reason": "Missing required model features: surface_pressure_pa, atmospheric_density_kg_m3"
+      },
+      {
+        "destination": "neptune",
+        "reason": "Missing required model features: surface_pressure_pa, atmospheric_density_kg_m3"
+      },
+      {
+        "destination": "pluto",
+        "reason": "Atmospheric composition is unavailable."
+      },
+      {
+        "destination": "eris",
+        "reason": "Atmosphere state is unknown."
+      },
+      {
+        "destination": "haumea",
+        "reason": "Atmosphere state is unknown."
+      },
+      {
+        "destination": "makemake",
+        "reason": "Atmosphere state is unknown."
+      },
+      {
+        "destination": "io",
+        "reason": "Atmosphere state is unknown."
+      },
+      {
+        "destination": "europa",
+        "reason": "Atmosphere state is unknown."
+      },
+      {
+        "destination": "ganymede",
+        "reason": "Atmosphere state is unknown."
+      },
+      {
+        "destination": "callisto",
+        "reason": "Atmosphere state is unknown."
+      },
+      {
+        "destination": "triton",
+        "reason": "Atmospheric composition is unavailable."
+      }
+    ],
+    "metrics_on_raw_predictions": {
+      "per_target": {
+        "transmitted_light_fraction": {
+          "mae": 0.00031109625856395873,
+          "mae_percentage_points": 0.031109625856395873,
+          "rmse": 0.0007756371130309158,
+          "r2": 0.9999447371349478
+        },
+        "scattered_light_fraction": {
+          "mae": 0.0004909278246347012,
+          "mae_percentage_points": 0.04909278246347012,
+          "rmse": 0.001687831244344524,
+          "r2": 0.9993317404584975
+        },
+        "absorbed_light_fraction": {
+          "mae": 0.00016388538964487816,
+          "mae_percentage_points": 0.016388538964487817,
+          "rmse": 0.00045328912848400865,
+          "r2": 0.9998886626346756
+        },
+        "relative_brightness": {
+          "mae": 0.0017416044045063521,
+          "mae_percentage_points": 0.17416044045063522,
+          "rmse": 0.00295377455231219,
+          "r2": 0.9999312199808285
+        }
+      },
+      "mean_mae": 0.0006768784693374725,
+      "mean_rmse": 0.0014676330095429097
+    },
+    "physical_consistency": {
+      "rows": 19,
+      "minor_correction_count": 19,
+      "minor_correction_rate": 1.0,
+      "serious_violation_count": 0,
+      "serious_violation_rate": 0.0,
+      "negative_fraction_rows": 0,
+      "over_one_rows": 0,
+      "maximum_energy_sum_error": 0.003454077270213962,
+      "mean_energy_sum_error": 0.0004853453619407577
+    },
+    "per_body": [
+      {
+        "destination": "mercury",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.099969,
+          "absorbed_light_fraction": 0.049988,
+          "relative_brightness": 0.90003
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.9
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.100000000000325e-05,
+          "absorbed_light_fraction": 1.2000000000005062e-05,
+          "relative_brightness": 2.999999999997449e-05
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "venus",
+        "prediction": {
+          "transmitted_light_fraction": 0.434231,
+          "scattered_light_fraction": 0.33562,
+          "absorbed_light_fraction": 0.230149,
+          "relative_brightness": 0.603543
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.433673,
+          "scattered_light_fraction": 0.335745,
+          "absorbed_light_fraction": 0.230582,
+          "relative_brightness": 0.601545
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 0.0005580000000000029,
+          "scattered_light_fraction": 0.00012500000000004174,
+          "absorbed_light_fraction": 0.0004330000000000167,
+          "relative_brightness": 0.0019980000000000553
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "earth",
+        "prediction": {
+          "transmitted_light_fraction": 0.834966,
+          "scattered_light_fraction": 0.140227,
+          "absorbed_light_fraction": 0.024807,
+          "relative_brightness": 0.896735
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.834967,
+          "scattered_light_fraction": 0.140087,
+          "absorbed_light_fraction": 0.024946,
+          "relative_brightness": 0.905011
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 1.0000000000287557e-06,
+          "scattered_light_fraction": 0.00014000000000000123,
+          "absorbed_light_fraction": 0.00013900000000000023,
+          "relative_brightness": 0.008276000000000061
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "mars",
+        "prediction": {
+          "transmitted_light_fraction": 0.997789,
+          "scattered_light_fraction": 0.001502,
+          "absorbed_light_fraction": 0.000709,
+          "relative_brightness": 0.681495
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.997818,
+          "scattered_light_fraction": 0.00169,
+          "absorbed_light_fraction": 0.000492,
+          "relative_brightness": 0.6873
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 2.8999999999945736e-05,
+          "scattered_light_fraction": 0.00018800000000000002,
+          "absorbed_light_fraction": 0.00021699999999999996,
+          "relative_brightness": 0.00580500000000006
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "ceres",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.30371
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.304125
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0004149999999999987
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "moon",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.099969,
+          "absorbed_light_fraction": 0.049988,
+          "relative_brightness": 0.893982
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.9
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.100000000000325e-05,
+          "absorbed_light_fraction": 1.2000000000005062e-05,
+          "relative_brightness": 0.006017999999999968
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "phobos",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.099969,
+          "absorbed_light_fraction": 0.049988,
+          "relative_brightness": 0.622482
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.619398
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.100000000000325e-05,
+          "absorbed_light_fraction": 1.2000000000005062e-05,
+          "relative_brightness": 0.0030839999999999756
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "deimos",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.099969,
+          "absorbed_light_fraction": 0.049988,
+          "relative_brightness": 0.622482
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.619398
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.100000000000325e-05,
+          "absorbed_light_fraction": 1.2000000000005062e-05,
+          "relative_brightness": 0.0030839999999999756
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "titan",
+        "prediction": {
+          "transmitted_light_fraction": 0.70922,
+          "scattered_light_fraction": 0.232929,
+          "absorbed_light_fraction": 0.057851,
+          "relative_brightness": 0.035618
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.704683,
+          "scattered_light_fraction": 0.239412,
+          "absorbed_light_fraction": 0.055905,
+          "relative_brightness": 0.033826
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 0.004537000000000013,
+          "scattered_light_fraction": 0.0064830000000000165,
+          "absorbed_light_fraction": 0.0019459999999999963,
+          "relative_brightness": 0.001791999999999995
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "rhea",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.037329
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.036928
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0004009999999999986
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "iapetus",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.037329
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.036928
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0004009999999999986
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "dione",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.037329
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.036928
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0004009999999999986
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "titania",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.00981
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.009464
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0003459999999999991
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "oberon",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.00981
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.009464
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0003459999999999991
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "umbriel",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.00981
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.009464
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0003459999999999991
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "ariel",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.00981
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.009464
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0003459999999999991
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "proteus",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.003869
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.003869
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "nereid",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.003869
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.003869
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0
+        },
+        "minor_correction_applied": true
+      },
+      {
+        "destination": "larissa",
+        "prediction": {
+          "transmitted_light_fraction": 0.850043,
+          "scattered_light_fraction": 0.09997,
+          "absorbed_light_fraction": 0.049987,
+          "relative_brightness": 0.003869
+        },
+        "deterministic": {
+          "transmitted_light_fraction": 0.85,
+          "scattered_light_fraction": 0.1,
+          "absorbed_light_fraction": 0.05,
+          "relative_brightness": 0.003869
+        },
+        "absolute_errors": {
+          "transmitted_light_fraction": 4.300000000001525e-05,
+          "scattered_light_fraction": 3.0000000000002247e-05,
+          "absorbed_light_fraction": 1.3000000000006062e-05,
+          "relative_brightness": 0.0
+        },
+        "minor_correction_applied": true
+      }
+    ],
+    "independent_observation_comparison": {
+      "status": "not_performed",
+      "reason": "The local source catalog has no independent measurements matching the model's aggregate transmitted/scattered/absorbed convention. No observational accuracy claim is made."
+    }
+  },
+  "scientific_scope": "The model approximates synthetic labels from the deterministic educational physics engine; these results do not establish observational accuracy."
+}

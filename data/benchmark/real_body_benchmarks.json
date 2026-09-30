@@ -1,0 +1,1560 @@
+{
+  "schemaVersion": "1.0.0",
+  "physicsModelVersion": "1.0.0",
+  "description": "Deterministic educational baseline; real bodies are validation cases, not synthetic training rows.",
+  "benchmarkCount": 32,
+  "benchmarks": [
+    {
+      "destination": "mercury",
+      "name": "Mercury",
+      "bodyType": "planet",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 57900000.0,
+        "solarIrradianceWm2": 9116.4,
+        "derivedSolarIrradianceWm2": 9119.608359,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.9,
+        "dominantColor": "white",
+        "apparentSizeCategory": "large"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-mercury",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "venus",
+      "name": "Venus",
+      "bodyType": "planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 108200000.0,
+        "solarIrradianceWm2": 2611.0,
+        "derivedSolarIrradianceWm2": 2611.432435,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 9200000.0,
+        "atmosphericDensityKgM3": 65.0,
+        "composition": {
+          "CO2": 0.965,
+          "N2": 0.035,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.433673,
+        "scattered": 0.335745,
+        "absorbed": 0.230582,
+        "relativeBrightness": 0.601545,
+        "dominantColor": "pale yellow",
+        "apparentSizeCategory": "large"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": []
+      },
+      "sourceIds": [
+        "nasa-venus",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "earth",
+      "name": "Earth",
+      "bodyType": "planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 149600000.0,
+        "solarIrradianceWm2": 1366.1,
+        "derivedSolarIrradianceWm2": 1366.061112,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 101400.0,
+        "atmosphericDensityKgM3": 1.217,
+        "composition": {
+          "CO2": 0.00042,
+          "N2": 0.7808,
+          "O2": 0.2095,
+          "CH4": 1.94e-06,
+          "H2": 5.5e-07,
+          "He": 5.24e-06
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.834967,
+        "scattered": 0.140087,
+        "absorbed": 0.024946,
+        "relativeBrightness": 0.905011,
+        "dominantColor": "yellow",
+        "apparentSizeCategory": "medium"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": []
+      },
+      "sourceIds": [
+        "nasa-earth",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "mars",
+      "name": "Mars",
+      "bodyType": "planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 227900000.0,
+        "solarIrradianceWm2": 588.6,
+        "derivedSolarIrradianceWm2": 588.63308,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 636.0,
+        "atmosphericDensityKgM3": 0.02,
+        "composition": {
+          "CO2": 0.9532,
+          "N2": 0.027,
+          "O2": 0.0013,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.997818,
+        "scattered": 0.00169,
+        "absorbed": 0.000492,
+        "relativeBrightness": 0.6873,
+        "dominantColor": "white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": []
+      },
+      "sourceIds": [
+        "nasa-mars",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "jupiter",
+      "name": "Jupiter",
+      "bodyType": "planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 778600000.0,
+        "solarIrradianceWm2": 50.5,
+        "derivedSolarIrradianceWm2": 50.431806,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": 0.003,
+          "H2": 0.898,
+          "He": 0.102
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.965396,
+        "scattered": 0.031752,
+        "absorbed": 0.002852,
+        "relativeBrightness": 0.122396,
+        "dominantColor": "white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Surface pressure is missing from the scientific catalog.",
+          "Atmospheric density is missing from the scientific catalog.",
+          "A minimal composition-only optical column fallback was applied."
+        ]
+      },
+      "sourceIds": [
+        "nasa-jupiter",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "saturn",
+      "name": "Saturn",
+      "bodyType": "planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 1433500000.0,
+        "solarIrradianceWm2": 15.04,
+        "derivedSolarIrradianceWm2": 14.877773,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": 0.0045,
+          "H2": 0.963,
+          "He": 0.0325
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.9639,
+        "scattered": 0.033222,
+        "absorbed": 0.002878,
+        "relativeBrightness": 0.040232,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Surface pressure is missing from the scientific catalog.",
+          "Atmospheric density is missing from the scientific catalog.",
+          "A minimal composition-only optical column fallback was applied."
+        ]
+      },
+      "sourceIds": [
+        "nasa-saturn",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "uranus",
+      "name": "Uranus",
+      "bodyType": "planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 2872500000.0,
+        "solarIrradianceWm2": 3.72,
+        "derivedSolarIrradianceWm2": 3.705214,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": 0.023,
+          "H2": 0.825,
+          "He": 0.152
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.966674,
+        "scattered": 0.030251,
+        "absorbed": 0.003075,
+        "relativeBrightness": 0.010324,
+        "dominantColor": "pale blue",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Surface pressure is missing from the scientific catalog.",
+          "Atmospheric density is missing from the scientific catalog.",
+          "A minimal composition-only optical column fallback was applied."
+        ]
+      },
+      "sourceIds": [
+        "nasa-uranus",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "neptune",
+      "name": "Neptune",
+      "bodyType": "planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 4495100000.0,
+        "solarIrradianceWm2": 1.51,
+        "derivedSolarIrradianceWm2": 1.513055,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": 0.015,
+          "H2": 0.8,
+          "He": 0.19
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.967412,
+        "scattered": 0.02961,
+        "absorbed": 0.002978,
+        "relativeBrightness": 0.004223,
+        "dominantColor": "pale blue",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Surface pressure is missing from the scientific catalog.",
+          "Atmospheric density is missing from the scientific catalog.",
+          "A minimal composition-only optical column fallback was applied."
+        ]
+      },
+      "sourceIds": [
+        "nasa-neptune",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "ceres",
+      "name": "Ceres",
+      "bodyType": "dwarf_planet",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 413690250.0,
+        "solarIrradianceWm2": 178.7,
+        "derivedSolarIrradianceWm2": 178.64166,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.304125,
+        "dominantColor": "white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-ceres",
+        "jpl-small-bodies",
+        "derived-light-reference",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "pluto",
+      "name": "Pluto",
+      "bodyType": "dwarf_planet",
+      "hasAtmosphere": true,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 5906380000.0,
+        "solarIrradianceWm2": 0.878,
+        "derivedSolarIrradianceWm2": 0.876376,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.989036,
+        "scattered": 0.008292,
+        "absorbed": 0.002672,
+        "relativeBrightness": 0.002488,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Surface pressure is missing from the scientific catalog.",
+          "Atmospheric density is missing from the scientific catalog.",
+          "Atmospheric composition is unavailable; neutral coefficients were used.",
+          "A minimal composition-only optical column fallback was applied."
+        ]
+      },
+      "sourceIds": [
+        "nasa-pluto",
+        "nasa-planet-table",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "eris",
+      "name": "Eris",
+      "bodyType": "dwarf_planet",
+      "hasAtmosphere": null,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 10166000000.0,
+        "solarIrradianceWm2": 0.296,
+        "derivedSolarIrradianceWm2": 0.295824,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.000761,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmosphere state is unknown; the airless/tenuous fallback was used.",
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-eris",
+        "jpl-small-bodies",
+        "derived-light-reference",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "haumea",
+      "name": "Haumea",
+      "bodyType": "dwarf_planet",
+      "hasAtmosphere": null,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 6452000000.0,
+        "solarIrradianceWm2": 0.734,
+        "derivedSolarIrradianceWm2": 0.73442,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.001886,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmosphere state is unknown; the airless/tenuous fallback was used.",
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-haumea",
+        "jpl-small-bodies",
+        "derived-light-reference",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "makemake",
+      "name": "Makemake",
+      "bodyType": "dwarf_planet",
+      "hasAtmosphere": null,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 6796000000.0,
+        "solarIrradianceWm2": 0.662,
+        "derivedSolarIrradianceWm2": 0.661952,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.001701,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmosphere state is unknown; the airless/tenuous fallback was used.",
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-makemake",
+        "jpl-small-bodies",
+        "derived-light-reference",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "moon",
+      "name": "Moon",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 149600000.0,
+        "solarIrradianceWm2": 1366.1,
+        "derivedSolarIrradianceWm2": 1366.061112,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.9,
+        "dominantColor": "white",
+        "apparentSizeCategory": "medium"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-moon",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "phobos",
+      "name": "Phobos",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 227900000.0,
+        "solarIrradianceWm2": 588.6,
+        "derivedSolarIrradianceWm2": 588.63308,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.619398,
+        "dominantColor": "white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-mars-moons",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "deimos",
+      "name": "Deimos",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 227900000.0,
+        "solarIrradianceWm2": 588.6,
+        "derivedSolarIrradianceWm2": 588.63308,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.619398,
+        "dominantColor": "white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-mars-moons",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "io",
+      "name": "Io",
+      "bodyType": "moon",
+      "hasAtmosphere": null,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 778600000.0,
+        "solarIrradianceWm2": 50.5,
+        "derivedSolarIrradianceWm2": 50.431806,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.112259,
+        "dominantColor": "gray-white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmosphere state is unknown; the airless/tenuous fallback was used.",
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-jovian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "europa",
+      "name": "Europa",
+      "bodyType": "moon",
+      "hasAtmosphere": null,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 778600000.0,
+        "solarIrradianceWm2": 50.5,
+        "derivedSolarIrradianceWm2": 50.431806,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.112259,
+        "dominantColor": "gray-white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmosphere state is unknown; the airless/tenuous fallback was used.",
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-jovian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "ganymede",
+      "name": "Ganymede",
+      "bodyType": "moon",
+      "hasAtmosphere": null,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 778600000.0,
+        "solarIrradianceWm2": 50.5,
+        "derivedSolarIrradianceWm2": 50.431806,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.112259,
+        "dominantColor": "gray-white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmosphere state is unknown; the airless/tenuous fallback was used.",
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-jovian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "callisto",
+      "name": "Callisto",
+      "bodyType": "moon",
+      "hasAtmosphere": null,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 778600000.0,
+        "solarIrradianceWm2": 50.5,
+        "derivedSolarIrradianceWm2": 50.431806,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": null,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.112259,
+        "dominantColor": "gray-white",
+        "apparentSizeCategory": "small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmosphere state is unknown; the airless/tenuous fallback was used.",
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-jovian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "titan",
+      "name": "Titan",
+      "bodyType": "moon",
+      "hasAtmosphere": true,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 1433500000.0,
+        "solarIrradianceWm2": 15.04,
+        "derivedSolarIrradianceWm2": 14.877773,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 146700.0,
+        "atmosphericDensityKgM3": 5.3,
+        "composition": {
+          "CO2": null,
+          "N2": 0.984,
+          "O2": null,
+          "CH4": 0.014,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.704683,
+        "scattered": 0.239412,
+        "absorbed": 0.055905,
+        "relativeBrightness": 0.033826,
+        "dominantColor": "orange",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": []
+      },
+      "sourceIds": [
+        "nasa-saturnian-satellites",
+        "nasa-titan",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "rhea",
+      "name": "Rhea",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 1433500000.0,
+        "solarIrradianceWm2": 15.04,
+        "derivedSolarIrradianceWm2": 14.877773,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.036928,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-saturnian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "iapetus",
+      "name": "Iapetus",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 1433500000.0,
+        "solarIrradianceWm2": 15.04,
+        "derivedSolarIrradianceWm2": 14.877773,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.036928,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-saturnian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "dione",
+      "name": "Dione",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 1433500000.0,
+        "solarIrradianceWm2": 15.04,
+        "derivedSolarIrradianceWm2": 14.877773,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.036928,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-saturnian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "titania",
+      "name": "Titania",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 2872500000.0,
+        "solarIrradianceWm2": 3.72,
+        "derivedSolarIrradianceWm2": 3.705214,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.009464,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-uranian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "oberon",
+      "name": "Oberon",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 2872500000.0,
+        "solarIrradianceWm2": 3.72,
+        "derivedSolarIrradianceWm2": 3.705214,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.009464,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-uranian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "umbriel",
+      "name": "Umbriel",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 2872500000.0,
+        "solarIrradianceWm2": 3.72,
+        "derivedSolarIrradianceWm2": 3.705214,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.009464,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-uranian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "ariel",
+      "name": "Ariel",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 2872500000.0,
+        "solarIrradianceWm2": 3.72,
+        "derivedSolarIrradianceWm2": 3.705214,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.009464,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-uranian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "triton",
+      "name": "Triton",
+      "bodyType": "moon",
+      "hasAtmosphere": true,
+      "calculationStatus": "partial",
+      "inputs": {
+        "distanceFromSunKm": 4495100000.0,
+        "solarIrradianceWm2": 1.51,
+        "derivedSolarIrradianceWm2": 1.513055,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 1.4,
+        "atmosphericDensityKgM3": null,
+        "composition": {
+          "CO2": null,
+          "N2": null,
+          "O2": null,
+          "CH4": null,
+          "H2": null,
+          "He": null
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.999999,
+        "scattered": 1e-06,
+        "absorbed": 0.0,
+        "relativeBrightness": 0.004299,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "Atmospheric density is missing from the scientific catalog.",
+          "Atmospheric composition is unavailable; neutral coefficients were used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-neptunian-satellites",
+        "nasa-triton",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "proteus",
+      "name": "Proteus",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 4495100000.0,
+        "solarIrradianceWm2": 1.51,
+        "derivedSolarIrradianceWm2": 1.513055,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.003869,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-neptunian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "nereid",
+      "name": "Nereid",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 4495100000.0,
+        "solarIrradianceWm2": 1.51,
+        "derivedSolarIrradianceWm2": 1.513055,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.003869,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-neptunian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    },
+    {
+      "destination": "larissa",
+      "name": "Larissa",
+      "bodyType": "moon",
+      "hasAtmosphere": false,
+      "calculationStatus": "complete",
+      "inputs": {
+        "distanceFromSunKm": 4495100000.0,
+        "solarIrradianceWm2": 1.51,
+        "derivedSolarIrradianceWm2": 1.513055,
+        "irradianceSource": "stored_reference",
+        "surfacePressurePa": 0.0,
+        "atmosphericDensityKgM3": 0.0,
+        "composition": {
+          "CO2": 0.0,
+          "N2": 0.0,
+          "O2": 0.0,
+          "CH4": 0.0,
+          "H2": 0.0,
+          "He": 0.0
+        },
+        "solarSpectrumVisibleFraction": 0.700153,
+        "solarSpectrumRangeNm": [
+          300.5,
+          1000.0
+        ]
+      },
+      "results": {
+        "transmitted": 0.85,
+        "scattered": 0.1,
+        "absorbed": 0.05,
+        "relativeBrightness": 0.003869,
+        "dominantColor": "dim white",
+        "apparentSizeCategory": "very small"
+      },
+      "validation": {
+        "energySum": 1.0,
+        "valid": true,
+        "warnings": [
+          "No scientific surface albedo is stored; the generic airless surface partition was used."
+        ]
+      },
+      "sourceIds": [
+        "nasa-neptunian-satellites",
+        "jpl-satellite-elements",
+        "nlr-e490"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.1.0",
+  "generator_version": "1.0.0",
+  "purpose": "Contract for deterministic synthetic light-model samples; real catalog bodies remain separate benchmarks.",
+  "default_sample_count": 10000,
+  "default_random_seed": 741,
+  "inputs": [
+    { "name": "distance_from_sun_km", "unit": "km", "type": "float", "minimum": 44879361.21, "maximum": 10471850949 },
+    { "name": "incoming_solar_irradiance_w_m2", "unit": "W/m^2", "type": "float", "minimum": 0 },
+    { "name": "has_atmosphere", "unit": null, "type": "boolean" },
+    { "name": "surface_pressure_pa", "unit": "Pa", "type": "float", "minimum": 0, "maximum": 10000000 },
+    { "name": "atmospheric_density_kg_m3", "unit": "kg/m^3", "type": "float", "minimum": 0, "maximum": 100 },
+    { "name": "co2_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "n2_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "o2_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "ch4_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "h2_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "he_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 }
+  ],
+  "outputs": [
+    { "name": "transmitted_light_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "scattered_light_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "absorbed_light_fraction", "unit": "fraction", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "relative_brightness", "unit": "normalized", "type": "float", "minimum": 0, "maximum": 1 },
+    { "name": "dominant_color", "unit": null, "type": "category" },
+    {
+      "name": "dominant_color_code",
+      "unit": null,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8,
+      "category_mapping": {
+        "white": 0,
+        "yellow": 1,
+        "orange": 2,
+        "red": 3,
+        "blue": 4,
+        "pale blue": 5,
+        "pale yellow": 6,
+        "dim white": 7,
+        "gray-white": 8
+      }
+    }
+  ],
+  "invariants": [
+    "transmitted + scattered + absorbed equals 1 within 1e-6",
+    "airless samples use zero pressure, density, and gas fractions",
+    "atmospheric gas fractions sum to 1 within floating-point tolerance",
+    "generation is deterministic for the recorded seed and generator version",
+    "real Solar System bodies are benchmark rows, not duplicated training samples"
+  ]
+}
