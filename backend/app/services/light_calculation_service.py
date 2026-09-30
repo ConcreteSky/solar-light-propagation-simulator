@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from datetime import datetime
+from functools import lru_cache
 
 from ..schemas.celestial_body import AtmosphericComposition
 from ..schemas.light_analysis import (
@@ -29,6 +30,8 @@ from .spectral_color_service import (
     derive_transmitted_light_color,
 )
 from .validation import clamp01, conserve_fractions, fractions_are_valid
+
+PHYSICS_MODEL_VERSION = "1.0.0"
 
 
 @dataclass(frozen=True)
@@ -176,7 +179,7 @@ def calculate_light_behavior(inputs: PhysicsInput) -> PhysicsOutput:
     )
 
 
-def analyze_destination(
+def _analyze_destination_uncached(
     destination_id: str,
     simulated_time: datetime | None = None,
     scenario: AtmosphereScenario | None = None,
@@ -285,3 +288,56 @@ def analyze_destination(
         sourceIds=source_ids,
         astronomy=astronomy,
     )
+
+
+@lru_cache(maxsize=256)
+def _cached_real_analysis(
+    destination_id: str,
+    simulated_time: datetime | None,
+    physics_version: str,
+) -> LightAnalysis:
+    return _analyze_destination_uncached(destination_id, simulated_time)
+
+
+@lru_cache(maxsize=128)
+def _cached_scenario_analysis(
+    destination_id: str,
+    simulated_time: datetime | None,
+    scenario_json: str,
+    physics_version: str,
+) -> LightAnalysis:
+    scenario = AtmosphereScenario.model_validate_json(scenario_json)
+    return _analyze_destination_uncached(destination_id, simulated_time, scenario)
+
+
+def analyze_destination(
+    destination_id: str,
+    simulated_time: datetime | None = None,
+    scenario: AtmosphereScenario | None = None,
+) -> LightAnalysis:
+    """Return a version-keyed, bounded cached analysis treated as read-only."""
+    normalized_id = destination_id.strip().lower()
+    if scenario is None:
+        return _cached_real_analysis(
+            normalized_id,
+            simulated_time,
+            PHYSICS_MODEL_VERSION,
+        )
+    return _cached_scenario_analysis(
+        normalized_id,
+        simulated_time,
+        scenario.model_dump_json(),
+        PHYSICS_MODEL_VERSION,
+    )
+
+
+def clear_analysis_caches() -> None:
+    _cached_real_analysis.cache_clear()
+    _cached_scenario_analysis.cache_clear()
+
+
+def analysis_cache_info() -> dict[str, object]:
+    return {
+        "real": _cached_real_analysis.cache_info(),
+        "scenario": _cached_scenario_analysis.cache_info(),
+    }

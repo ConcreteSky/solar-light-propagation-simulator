@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import SolarSystemScene from './components/SolarSystem/SolarSystemScene.jsx'
 import ResultPanel from './components/ResultPanel/ResultPanel.jsx'
 import SimulationControls from './components/SimulationControls/SimulationControls.jsx'
@@ -18,26 +18,33 @@ export default function App() {
     [selectedBodyId],
   )
 
-  const selectBody = (bodyId) => {
+  const selectBody = useCallback((bodyId) => {
     setSelectedBodyId(bodyId)
     if (bodyId) {
       simulation.setPlaying(false)
-      setAnalysisTimestampMs(simulation.timestampMs)
+      setAnalysisTimestampMs(simulation.getTimestampMs())
     }
-  }
+  }, [simulation.getTimestampMs, simulation.setPlaying])
 
-  const togglePlaying = () => {
+  const togglePlaying = useCallback(() => {
     if (simulation.playing && selectedBodyId && selectedBodyId !== 'sun') {
-      setAnalysisTimestampMs(simulation.timestampMs)
+      setAnalysisTimestampMs(simulation.getTimestampMs())
     }
     simulation.setPlaying(!simulation.playing)
-  }
+  }, [selectedBodyId, simulation.getTimestampMs, simulation.playing, simulation.setPlaying])
 
-  const setSimulationDate = (timestampMs) => {
+  const setSimulationDate = useCallback((timestampMs) => {
     simulation.setPlaying(false)
     simulation.setTimestampMs(timestampMs)
     if (selectedBodyId && selectedBodyId !== 'sun') setAnalysisTimestampMs(timestampMs)
-  }
+  }, [selectedBodyId, simulation.setPlaying, simulation.setTimestampMs])
+
+  const resetSimulation = useCallback(() => {
+    simulation.reset()
+    if (selectedBodyId && selectedBodyId !== 'sun') {
+      setAnalysisTimestampMs(SESSION_START_MS)
+    }
+  }, [selectedBodyId, simulation.reset])
 
   return (
     <main className="app-shell" data-selected-body-id={selectedBodyId ?? ''}>
@@ -64,7 +71,7 @@ export default function App() {
             selectedBodyId={selectedBodyId}
             onSelectBody={selectBody}
             resetViewSignal={resetViewSignal}
-            simulationTimestampMs={simulation.timestampMs}
+            getSimulationTimestampMs={simulation.getTimestampMs}
             focusTimestampMs={analysisTimestampMs}
           />
         </div>
@@ -76,12 +83,7 @@ export default function App() {
           onTogglePlaying={togglePlaying}
           onSpeedChange={simulation.setSpeed}
           onDateChange={setSimulationDate}
-          onReset={() => {
-            simulation.reset()
-            if (selectedBodyId && selectedBodyId !== 'sun') {
-              setAnalysisTimestampMs(SESSION_START_MS)
-            }
-          }}
+          onReset={resetSimulation}
         />
 
         {selectedBody && (

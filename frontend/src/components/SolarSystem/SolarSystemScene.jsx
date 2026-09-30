@@ -1,5 +1,5 @@
-import { Canvas } from '@react-three/fiber'
-import { Suspense, useMemo } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { memo, Suspense, useCallback, useMemo, useRef } from 'react'
 import AsteroidBelt from '../AsteroidBelt/AsteroidBelt.jsx'
 import CelestialBody from '../CelestialBody/CelestialBody.jsx'
 import OrbitPath from '../Orbit/OrbitPath.jsx'
@@ -16,7 +16,56 @@ import MoonSystem from './MoonSystem.jsx'
 import StarField from './StarField.jsx'
 import CameraControls from './CameraControls.jsx'
 
-function SolarSystem({ bodies, selectedBodyId, onSelectBody, simulationTimestampMs }) {
+function OrbitingPrimary({
+  body,
+  moons,
+  selectedBodyId,
+  onSelectBody,
+  getSimulationTimestampMs,
+}) {
+  const groupRef = useRef()
+  const bodyRadius = useMemo(() => getVisualBodyRadius(body), [body])
+  const orbitRadius = useMemo(
+    () => getVisualOrbitRadius(body.orbit.semimajor_axis_km),
+    [body],
+  )
+  const initialPosition = useMemo(
+    () => getRenderedBodyPosition(body, getSimulationTimestampMs()),
+    [body, getSimulationTimestampMs],
+  )
+
+  useFrame(() => {
+    const position = getRenderedBodyPosition(body, getSimulationTimestampMs())
+    groupRef.current?.position.set(...position)
+  })
+
+  return (
+    <>
+      <OrbitPath radius={orbitRadius} eccentricity={body.orbit.eccentricity} />
+      <group ref={groupRef} position={initialPosition}>
+        <CelestialBody
+          body={body}
+          position={[0, 0, 0]}
+          radius={bodyRadius}
+          selected={selectedBodyId === body.id}
+          showLabel
+          onSelect={onSelectBody}
+        />
+        {moons.length > 0 && (
+          <MoonSystem
+            moons={moons}
+            parentRadius={bodyRadius}
+            selectedBodyId={selectedBodyId}
+            onSelectBody={onSelectBody}
+            getSimulationTimestampMs={getSimulationTimestampMs}
+          />
+        )}
+      </group>
+    </>
+  )
+}
+
+function SolarSystem({ bodies, selectedBodyId, onSelectBody, getSimulationTimestampMs }) {
   const primaryBodies = useMemo(() => bodies.filter((body) => body.type !== 'moon'), [bodies])
   const moonsByParent = useMemo(() => {
     const groups = new Map()
@@ -26,8 +75,14 @@ function SolarSystem({ bodies, selectedBodyId, onSelectBody, simulationTimestamp
     return groups
   }, [bodies])
 
-  const marsOrbit = getVisualOrbitRadius(bodies.find((body) => body.id === 'mars').orbit.semimajor_axis_km)
-  const jupiterOrbit = getVisualOrbitRadius(bodies.find((body) => body.id === 'jupiter').orbit.semimajor_axis_km)
+  const asteroidBeltRadii = useMemo(() => {
+    const mars = bodies.find((body) => body.id === 'mars')
+    const jupiter = bodies.find((body) => body.id === 'jupiter')
+    return {
+      inner: getVisualOrbitRadius(mars.orbit.semimajor_axis_km) + 4.5,
+      outer: getVisualOrbitRadius(jupiter.orbit.semimajor_axis_km) - 5,
+    }
+  }, [bodies])
 
   return (
     <>
@@ -47,49 +102,32 @@ function SolarSystem({ bodies, selectedBodyId, onSelectBody, simulationTimestamp
         onSelect={onSelectBody}
       />
 
-      <AsteroidBelt innerRadius={marsOrbit + 4.5} outerRadius={jupiterOrbit - 5} />
+      <AsteroidBelt innerRadius={asteroidBeltRadii.inner} outerRadius={asteroidBeltRadii.outer} />
 
       {primaryBodies.map((body) => {
-        const orbitRadius = getVisualOrbitRadius(body.orbit.semimajor_axis_km)
-        const position = getRenderedBodyPosition(body, simulationTimestampMs)
-        const bodyRadius = getVisualBodyRadius(body)
         const moons = moonsByParent.get(body.id) ?? []
 
         return (
-          <group key={body.id}>
-            <OrbitPath radius={orbitRadius} eccentricity={body.orbit.eccentricity} />
-            <CelestialBody
-              body={body}
-              position={position}
-              radius={bodyRadius}
-              selected={selectedBodyId === body.id}
-              showLabel
-              onSelect={onSelectBody}
-            />
-            {moons.length > 0 && (
-              <group position={position}>
-                <MoonSystem
-                  moons={moons}
-                  parentRadius={bodyRadius}
-                  selectedBodyId={selectedBodyId}
-                  onSelectBody={onSelectBody}
-                  simulationTimestampMs={simulationTimestampMs}
-                />
-              </group>
-            )}
-          </group>
+          <OrbitingPrimary
+            key={body.id}
+            body={body}
+            moons={moons}
+            selectedBodyId={selectedBodyId}
+            onSelectBody={onSelectBody}
+            getSimulationTimestampMs={getSimulationTimestampMs}
+          />
         )
       })}
     </>
   )
 }
 
-export default function SolarSystemScene({
+function SolarSystemScene({
   bodies,
   selectedBodyId,
   onSelectBody,
   resetViewSignal,
-  simulationTimestampMs,
+  getSimulationTimestampMs,
   focusTimestampMs,
 }) {
   const focusPosition = useMemo(() => {
@@ -100,6 +138,7 @@ export default function SolarSystemScene({
 
     return getRenderedHeliocentricPosition(body, bodies, focusTimestampMs)
   }, [bodies, selectedBodyId, focusTimestampMs])
+  const clearSelection = useCallback(() => onSelectBody(null), [onSelectBody])
 
   return (
     <Canvas
@@ -107,17 +146,19 @@ export default function SolarSystemScene({
       dpr={[1, 1.5]}
       gl={{ antialias: true, powerPreference: 'high-performance' }}
       onCreated={({ gl }) => { gl.toneMappingExposure = 1.12 }}
-      onPointerMissed={() => onSelectBody(null)}
+      onPointerMissed={clearSelection}
     >
       <Suspense fallback={null}>
         <SolarSystem
           bodies={bodies}
           selectedBodyId={selectedBodyId}
           onSelectBody={onSelectBody}
-          simulationTimestampMs={simulationTimestampMs}
+          getSimulationTimestampMs={getSimulationTimestampMs}
         />
       </Suspense>
       <CameraControls resetSignal={resetViewSignal} focusPosition={focusPosition} />
     </Canvas>
   )
 }
+
+export default memo(SolarSystemScene)

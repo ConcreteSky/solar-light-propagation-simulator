@@ -1,8 +1,12 @@
 import { Line } from '@react-three/drei'
+import { memo, useMemo } from 'react'
 import { createEllipsePoints } from '../../utils/sceneScale.js'
 
-export default function OrbitPath({ radius, eccentricity, moon = false }) {
-  const points = createEllipsePoints(radius, eccentricity, moon ? 72 : 180)
+function OrbitPath({ radius, eccentricity, moon = false }) {
+  const points = useMemo(
+    () => createEllipsePoints(radius, eccentricity, moon ? 72 : 180),
+    [eccentricity, moon, radius],
+  )
 
   return (
     <Line
@@ -16,3 +20,4 @@ export default function OrbitPath({ radius, eccentricity, moon = false }) {
   )
 }
 
+export default memo(OrbitPath)

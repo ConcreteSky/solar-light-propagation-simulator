@@ -1,5 +1,5 @@
 import { Html, useTexture } from '@react-three/drei'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { RepeatWrapping, SRGBColorSpace } from 'three'
 import { resolveTexture } from '../../data/textureRegistry.js'
 
@@ -61,7 +61,7 @@ function SaturnRings({ radius }) {
   )
 }
 
-export default function CelestialBody({
+function CelestialBody({
   body,
   position,
   radius,
@@ -138,3 +138,5 @@ export default function CelestialBody({
     </group>
   )
 }
+
+export default memo(CelestialBody)

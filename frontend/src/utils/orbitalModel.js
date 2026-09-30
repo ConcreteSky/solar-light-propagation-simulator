@@ -8,6 +8,22 @@ import {
 
 export const MILLISECONDS_PER_DAY = 86_400_000
 export const UNIX_EPOCH_JULIAN_DAY = 2_440_587.5
+const orbitalConstantsCache = new WeakMap()
+
+function getOrbitalConstants(body) {
+  const cached = orbitalConstantsCache.get(body)
+  if (cached) return cached
+  const element = orbitalElements[body.id]
+  if (!element || !Number.isFinite(body.orbit?.semimajor_axis_km)) return null
+  const constants = {
+    element,
+    eccentricity: Math.min(Math.max(body.orbit.eccentricity ?? 0, 0), 0.95),
+    meanAnomalyAtEpoch: element.mean_anomaly_deg * Math.PI / 180,
+    radiansPerDay: (element.direction ?? 1) * Math.PI * 2 / element.period_days,
+  }
+  orbitalConstantsCache.set(body, constants)
+  return constants
+}
 
 export function timestampToJulianDay(timestampMs) {
   return timestampMs / MILLISECONDS_PER_DAY + UNIX_EPOCH_JULIAN_DAY
@@ -27,15 +43,11 @@ export function solveKepler(meanAnomaly, eccentricity) {
 }
 
 export function getOrbitalSolution(body, timestampMs) {
-  const element = orbitalElements[body.id]
-  if (!element || !Number.isFinite(body.orbit?.semimajor_axis_km)) return null
+  const constants = getOrbitalConstants(body)
+  if (!constants) return null
+  const { eccentricity, element, meanAnomalyAtEpoch, radiansPerDay } = constants
   const elapsedDays = timestampToJulianDay(timestampMs) - element.epoch_jd
-  const direction = element.direction ?? 1
-  const meanAnomaly = (
-    element.mean_anomaly_deg * Math.PI / 180
-    + direction * Math.PI * 2 * elapsedDays / element.period_days
-  )
-  const eccentricity = Math.min(Math.max(body.orbit.eccentricity ?? 0, 0), 0.95)
+  const meanAnomaly = meanAnomalyAtEpoch + radiansPerDay * elapsedDays
   const eccentricAnomaly = solveKepler(meanAnomaly, eccentricity)
   return { eccentricAnomaly, eccentricity, element }
 }

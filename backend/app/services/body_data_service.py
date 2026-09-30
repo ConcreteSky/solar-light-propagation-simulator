@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from .catalog import load_catalog
 from ..schemas.celestial_body import CelestialBody
 
@@ -11,5 +13,6 @@ def get_body(destination_id: str) -> CelestialBody:
     raise KeyError(normalized_id)
 
 
+@lru_cache(maxsize=1)
 def get_body_index() -> dict[str, CelestialBody]:
     return {body.id: body for body in load_catalog()}

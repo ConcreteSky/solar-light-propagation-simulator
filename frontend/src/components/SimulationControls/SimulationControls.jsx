@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 const SPEEDS = ['slow', 'normal', 'fast']
 
 function toInputValue(timestampMs) {
@@ -6,7 +8,7 @@ function toInputValue(timestampMs) {
   return new Date(timestampMs - offsetMs).toISOString().slice(0, 16)
 }
 
-export default function SimulationControls({
+function SimulationControls({
   timestampMs,
   playing,
   speed,
@@ -52,3 +54,5 @@ export default function SimulationControls({
     </section>
   )
 }
+
+export default memo(SimulationControls)

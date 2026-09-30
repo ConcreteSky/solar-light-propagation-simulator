@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 const RESULT_COLORS = {
   white: '#f4f4ee', yellow: '#ffd66b', orange: '#f59a4a', red: '#ef6b5c', blue: '#74a7ff',
   'pale blue': '#a9dce8', 'pale yellow': '#f4e6a3', 'dim white': '#aeb8c5', 'gray-white': '#c4c8ca',
@@ -19,6 +21,12 @@ const DESTINATION_PALETTES = {
 
 const DEFAULT_PALETTE = { surface: '#9a8c78', shadow: '#24232a', atmosphere: '#a9dce8' }
 const NEUTRAL_LIGHT_COLOR = 'rgb(244 232 190)'
+const SCATTERED_RAYS = [
+  'M 550 240 Q 492 145 382 102',
+  'M 544 247 Q 468 201 366 184',
+  'M 544 253 Q 468 299 366 316',
+  'M 550 260 Q 492 355 382 398',
+]
 
 export function getValidatedRgbColor(color) {
   const rgb = color?.rgb
@@ -62,15 +70,9 @@ function IncomingBeam({ irradiance }) {
 function ScatteredFan({ fraction, color }) {
   const width = prominence(fraction, 1.3, 8.5)
   const opacity = visibility(fraction, 0.1)
-  const rays = [
-    'M 550 240 Q 492 145 382 102',
-    'M 544 247 Q 468 201 366 184',
-    'M 544 253 Q 468 299 366 316',
-    'M 550 260 Q 492 355 382 398',
-  ]
   return (
     <g data-testid="scattered-fan" data-fraction={clamp01(fraction).toFixed(3)}>
-      {rays.map((path) => (
+      {SCATTERED_RAYS.map((path) => (
         <path key={path} className="diagram-ray diagram-ray-scattered" d={path} markerEnd="url(#arrow-scatter)" stroke={color} strokeWidth={width} opacity={opacity} />
       ))}
     </g>
@@ -172,7 +174,7 @@ function getPrimaryResult(results, atmospheric) {
   ))
 }
 
-export default function LightDiagram({ analysis }) {
+function LightDiagram({ analysis }) {
   const atmospheric = analysis.hasAtmosphere === true
   const results = analysis.results
   const resultColor = RESULT_COLORS[results.dominantColor] ?? RESULT_COLORS.white
@@ -237,3 +239,5 @@ export default function LightDiagram({ analysis }) {
     </figure>
   )
 }
+
+export default memo(LightDiagram)

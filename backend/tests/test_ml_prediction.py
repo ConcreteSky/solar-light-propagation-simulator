@@ -11,7 +11,9 @@ from app.ml.model_contract import FEATURE_COLUMNS
 from app.services.catalog import load_catalog
 from app.services.ml_prediction_service import (
     ModelPredictionError,
+    clear_prediction_cache,
     load_model_bundle,
+    prediction_cache_info,
     predict_destination,
     predict_numeric,
     validate_prediction,
@@ -19,6 +21,9 @@ from app.services.ml_prediction_service import (
 
 
 class MachineLearningPredictionTests(unittest.TestCase):
+    def setUp(self) -> None:
+        clear_prediction_cache()
+
     def test_saved_model_loads_with_expected_contract(self) -> None:
         bundle = load_model_bundle()
         self.assertEqual(bundle["feature_columns"], FEATURE_COLUMNS)
@@ -97,6 +102,12 @@ class MachineLearningPredictionTests(unittest.TestCase):
         with self.assertRaises(HTTPException) as context:
             predict("not-a-body")
         self.assertEqual(context.exception.status_code, 404)
+
+    def test_identical_prediction_is_cached(self) -> None:
+        first = predict_destination("earth")
+        second = predict_destination("earth")
+        self.assertIs(first, second)
+        self.assertEqual(prediction_cache_info().hits, 1)
 
 
 if __name__ == "__main__":

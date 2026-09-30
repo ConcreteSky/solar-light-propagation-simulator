@@ -1,4 +1,9 @@
-import { getLightResult, getScenarioLightResult } from './api.js'
+import {
+  clearAnalysisCache,
+  getAnalysisCacheSize,
+  getLightResult,
+  getScenarioLightResult,
+} from './api.js'
 import { atmosphericPrediction } from '../test/fixtures.js'
 
 function response(body, status = 200) {
@@ -20,6 +25,8 @@ const deterministicAnalysis = {
 }
 
 describe('light API service', () => {
+  beforeEach(() => clearAnalysisCache())
+
   it('returns a validated prediction response', async () => {
     global.fetch = vi.fn().mockResolvedValue(response(atmosphericPrediction))
     await expect(getLightResult('mars')).resolves.toEqual(atmosphericPrediction)
@@ -54,5 +61,17 @@ describe('light API service', () => {
       '/api/analyze/mars/scenario',
       expect.objectContaining({ method: 'POST', body: JSON.stringify(scenario) }),
     )
+  })
+
+  it('reuses identical results and keeps the cache bounded', async () => {
+    global.fetch = vi.fn().mockResolvedValue(response(atmosphericPrediction))
+    await getLightResult('mars')
+    await getLightResult('mars')
+    expect(fetch).toHaveBeenCalledOnce()
+
+    for (let index = 0; index < 80; index += 1) {
+      await getLightResult(`destination-${index}`)
+    }
+    expect(getAnalysisCacheSize()).toBe(64)
   })
 })

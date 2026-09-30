@@ -24,7 +24,11 @@ from ..schemas.light_prediction import (
 )
 from .atmospheric_model import calculate_atmosphere
 from .body_data_service import get_body, get_body_index
-from .light_calculation_service import analyze_destination, classify_dominant_color
+from .light_calculation_service import (
+    PHYSICS_MODEL_VERSION,
+    analyze_destination,
+    classify_dominant_color,
+)
 from .spectral_color_service import derive_transmitted_light_color
 from .solar_input_service import resolve_solar_input
 from .validation import clamp01, conserve_fractions, fractions_are_valid
@@ -138,7 +142,7 @@ def _fallback_response(
     )
 
 
-def predict_destination(
+def _predict_destination_uncached(
     destination_id: str, simulated_time: datetime | None = None
 ) -> LightPrediction:
     # Resolve the ID first so an unsupported destination remains a clean 404.
@@ -247,3 +251,33 @@ def predict_destination(
         sourceIds=baseline.sourceIds,
         astronomy=baseline.astronomy,
     )
+
+
+@lru_cache(maxsize=256)
+def _cached_prediction(
+    destination_id: str,
+    simulated_time: datetime | None,
+    model_version: str,
+    physics_version: str,
+) -> LightPrediction:
+    return _predict_destination_uncached(destination_id, simulated_time)
+
+
+def predict_destination(
+    destination_id: str, simulated_time: datetime | None = None
+) -> LightPrediction:
+    """Return a version-keyed, bounded cached prediction treated as read-only."""
+    return _cached_prediction(
+        destination_id.strip().lower(),
+        simulated_time,
+        MODEL_VERSION,
+        PHYSICS_MODEL_VERSION,
+    )
+
+
+def clear_prediction_cache() -> None:
+    _cached_prediction.cache_clear()
+
+
+def prediction_cache_info():
+    return _cached_prediction.cache_info()

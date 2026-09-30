@@ -1,5 +1,6 @@
 import math
 import unittest
+from datetime import datetime, timedelta, timezone
 
 from fastapi import HTTPException
 
@@ -7,8 +8,10 @@ from app.main import analyze
 from app.services.catalog import load_catalog
 from app.services.light_calculation_service import (
     PhysicsInput,
+    analysis_cache_info,
     analyze_destination,
     calculate_light_behavior,
+    clear_analysis_caches,
 )
 from app.schemas.celestial_body import AtmosphericComposition
 from app.schemas.light_analysis import AtmosphereScenario, ModeledLightColor
@@ -16,6 +19,9 @@ from pydantic import ValidationError
 
 
 class LightCalculationTests(unittest.TestCase):
+    def setUp(self) -> None:
+        clear_analysis_caches()
+
     def test_atmospheric_examples_are_valid(self) -> None:
         for destination in ("mars", "venus", "titan"):
             with self.subTest(destination=destination):
@@ -90,6 +96,17 @@ class LightCalculationTests(unittest.TestCase):
             (earth.results.transmitted, earth.results.scattered, earth.results.absorbed),
             (0.834967, 0.140087, 0.024946),
         )
+
+    def test_identical_analysis_is_cached_and_cache_is_bounded(self) -> None:
+        first = analyze_destination("earth")
+        second = analyze_destination("earth")
+        self.assertIs(first, second)
+        self.assertEqual(analysis_cache_info()["real"].hits, 1)
+
+        start = datetime(2026, 1, 1, tzinfo=timezone.utc)
+        for index in range(300):
+            analyze_destination("mars", start + timedelta(minutes=index))
+        self.assertLessEqual(analysis_cache_info()["real"].currsize, 256)
 
     def test_invalid_destination_is_a_clean_404(self) -> None:
         with self.assertRaises(HTTPException) as context:
