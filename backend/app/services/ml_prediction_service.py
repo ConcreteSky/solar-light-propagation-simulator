@@ -16,7 +16,7 @@ from ..ml.model_contract import (
     MissingModelFeatureError,
     destination_feature_frame,
 )
-from ..schemas.light_analysis import AnalysisResults
+from ..schemas.light_analysis import AnalysisResults, ModeledLightColor
 from ..schemas.light_prediction import (
     BaselineComparison,
     LightPrediction,
@@ -25,6 +25,7 @@ from ..schemas.light_prediction import (
 from .atmospheric_model import calculate_atmosphere
 from .body_data_service import get_body, get_body_index
 from .light_calculation_service import analyze_destination, classify_dominant_color
+from .spectral_color_service import derive_transmitted_light_color
 from .solar_input_service import resolve_solar_input
 from .validation import clamp01, conserve_fractions, fractions_are_valid
 
@@ -194,12 +195,21 @@ def predict_destination(
         prediction.absorbed,
         prediction.relative_brightness,
     )
+    transmitted_color = derive_transmitted_light_color(color)
     results = AnalysisResults(
         transmitted=prediction.transmitted,
         scattered=prediction.scattered,
         absorbed=prediction.absorbed,
         relativeBrightness=prediction.relative_brightness,
         dominantColor=color,
+        scatteredLightColor=baseline.results.scatteredLightColor,
+        transmittedLightColor=ModeledLightColor(
+            label=transmitted_color.label,
+            rgb=transmitted_color.rgb,
+            spectralBand=transmitted_color.spectral_band,
+            confidence=transmitted_color.confidence,
+            basis=transmitted_color.basis,
+        ),
         apparentSizeCategory=baseline.results.apparentSizeCategory,
     )
     fractions = (results.transmitted, results.scattered, results.absorbed)

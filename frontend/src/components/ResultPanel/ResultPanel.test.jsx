@@ -1,10 +1,10 @@
-import { act, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { celestialBodies } from '../../data/catalog.js'
-import { getLightResult } from '../../services/api.js'
+import { getLightResult, getScenarioLightResult } from '../../services/api.js'
 import { atmosphericPrediction, fallbackPrediction, makePrediction } from '../../test/fixtures.js'
 import ResultPanel from './ResultPanel.jsx'
 
-vi.mock('../../services/api.js', () => ({ getLightResult: vi.fn() }))
+vi.mock('../../services/api.js', () => ({ getLightResult: vi.fn(), getScenarioLightResult: vi.fn() }))
 
 const mars = celestialBodies.find((body) => body.id === 'mars')
 const venus = celestialBodies.find((body) => body.id === 'venus')
@@ -20,6 +20,32 @@ describe('ResultPanel', () => {
     expect(screen.getByText('760.2 s')).toBeInTheDocument()
     expect(screen.getByText('588.6 W/m²')).toBeInTheDocument()
     expect(screen.getByText('70.0%')).toBeInTheDocument()
+    expect(screen.getByText('blue · modeled')).toBeInTheDocument()
+  })
+
+  it('recalculates Scenario Mode through the deterministic endpoint', async () => {
+    getLightResult.mockResolvedValue(atmosphericPrediction)
+    getScenarioLightResult.mockResolvedValue(makePrediction({
+      method: undefined,
+      results: {
+        ...atmosphericPrediction.results,
+        scatteredLightColor: {
+          label: 'cyan', rgb: [137, 205, 218], spectralBand: 'blue-green-visible',
+          confidence: 'supported', basis: 'methane-red-absorption',
+        },
+      },
+    }))
+    render(<ResultPanel body={mars} bodies={celestialBodies} />)
+    await screen.findByRole('heading', { name: 'Mars' })
+    screen.getByText('Scenario Mode').click()
+    fireEvent.change(screen.getByLabelText('CH4 fraction'), { target: { value: '0.02' } })
+    fireEvent.click(screen.getByText('Recalculate scenario'))
+    expect(await screen.findByText('Deterministic scenario')).toBeInTheDocument()
+    expect(getScenarioLightResult).toHaveBeenCalledWith(
+      'mars',
+      expect.objectContaining({ composition: expect.objectContaining({ CH4: expect.any(Number) }) }),
+      expect.any(Object),
+    )
   })
 
   it('labels backend deterministic fallback explicitly', async () => {

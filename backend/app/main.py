@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from .schemas.celestial_body import CelestialBody
-from .schemas.light_analysis import LightAnalysis
+from .schemas.light_analysis import AtmosphereScenario, LightAnalysis
 from .schemas.light_prediction import LightPrediction
 from .services.catalog import load_catalog
 from .services.light_calculation_service import analyze_destination
@@ -41,7 +41,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
     allow_credentials=False,
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -63,6 +63,21 @@ def analyze(
 ) -> LightAnalysis:
     try:
         return analyze_destination(destination_id, at)
+    except KeyError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Unknown destination ID: {destination_id}",
+        ) from error
+
+
+@app.post("/api/analyze/{destination_id}/scenario", response_model=LightAnalysis)
+def analyze_scenario(
+    destination_id: str,
+    scenario: AtmosphereScenario,
+    at: datetime | None = None,
+) -> LightAnalysis:
+    try:
+        return analyze_destination(destination_id, at, scenario)
     except KeyError as error:
         raise HTTPException(
             status_code=404,

@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from .celestial_body import AtmosphericComposition
 
@@ -17,6 +17,39 @@ ColorCategory = Literal[
     "gray-white",
 ]
 SizeCategory = Literal["large", "medium", "small", "very small"]
+
+
+class ModeledLightColor(BaseModel):
+    label: Literal[
+        "neutral",
+        "white",
+        "yellow",
+        "orange",
+        "red",
+        "blue",
+        "cyan",
+        "pale blue",
+        "pale yellow",
+        "dim white",
+        "gray-white",
+    ]
+    rgb: tuple[int, int, int]
+    spectralBand: Literal["short-visible", "blue-green-visible", "broad-visible"] | None
+    confidence: Literal["supported", "modeled", "fallback"]
+    basis: Literal[
+        "molecular-rayleigh-scattering",
+        "methane-red-absorption",
+        "nitrogen-methane-photochemical-haze",
+        "existing-dominant-light-classification",
+        "neutral-fallback",
+    ]
+
+    @field_validator("rgb")
+    @classmethod
+    def validate_rgb(cls, value: tuple[int, int, int]) -> tuple[int, int, int]:
+        if any(channel < 0 or channel > 255 for channel in value):
+            raise ValueError("RGB channels must be between 0 and 255.")
+        return value
 
 
 class AnalysisInputs(BaseModel):
@@ -37,7 +70,16 @@ class AnalysisResults(BaseModel):
     absorbed: float = Field(ge=0, le=1)
     relativeBrightness: float = Field(ge=0, le=1)
     dominantColor: ColorCategory
+    scatteredLightColor: ModeledLightColor
+    transmittedLightColor: ModeledLightColor
     apparentSizeCategory: SizeCategory
+
+
+class AtmosphereScenario(BaseModel):
+    hasAtmosphere: bool
+    surfacePressurePa: float | None = Field(default=None, ge=0)
+    atmosphericDensityKgM3: float | None = Field(default=None, ge=0)
+    composition: AtmosphericComposition
 
 
 class AnalysisValidation(BaseModel):

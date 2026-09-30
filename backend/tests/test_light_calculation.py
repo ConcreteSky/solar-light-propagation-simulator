@@ -10,6 +10,9 @@ from app.services.light_calculation_service import (
     analyze_destination,
     calculate_light_behavior,
 )
+from app.schemas.celestial_body import AtmosphericComposition
+from app.schemas.light_analysis import AtmosphereScenario, ModeledLightColor
+from pydantic import ValidationError
 
 
 class LightCalculationTests(unittest.TestCase):
@@ -28,6 +31,65 @@ class LightCalculationTests(unittest.TestCase):
         self.assertFalse(analysis.hasAtmosphere)
         self.assertEqual(analysis.results.transmitted, 0.85)
         self.assertIn("surface", " ".join(analysis.validation.warnings).lower())
+        self.assertEqual(analysis.results.scatteredLightColor.label, "neutral")
+        self.assertEqual(analysis.results.scatteredLightColor.confidence, "fallback")
+
+    def test_scattered_color_is_independent_of_surface_color(self) -> None:
+        earth = analyze_destination("earth")
+        mars = analyze_destination("mars")
+        self.assertEqual(earth.results.scatteredLightColor.label, "blue")
+        self.assertEqual(mars.results.scatteredLightColor.label, "blue")
+        self.assertNotEqual(earth.destination, mars.destination)
+
+    def test_supported_atmospheres_produce_distinct_scattered_colors(self) -> None:
+        earth = analyze_destination("earth")
+        uranus = analyze_destination("uranus")
+        titan = analyze_destination("titan")
+        self.assertEqual(earth.results.scatteredLightColor.label, "blue")
+        self.assertEqual(uranus.results.scatteredLightColor.label, "cyan")
+        self.assertEqual(titan.results.scatteredLightColor.label, "orange")
+
+    def test_unknown_composition_uses_neutral_scattered_color(self) -> None:
+        pluto = analyze_destination("pluto")
+        self.assertEqual(pluto.results.scatteredLightColor.label, "neutral")
+        self.assertEqual(pluto.results.scatteredLightColor.confidence, "fallback")
+
+    def test_scenario_composition_recalculates_scattered_color(self) -> None:
+        baseline = analyze_destination("earth")
+        scenario = AtmosphereScenario(
+            hasAtmosphere=True,
+            surfacePressurePa=101_325,
+            atmosphericDensityKgM3=1.2,
+            composition=AtmosphericComposition(
+                CO2=0,
+                N2=0,
+                O2=0,
+                CH4=0.02,
+                H2=0.85,
+                He=0.13,
+            ),
+        )
+        changed = analyze_destination("earth", scenario=scenario)
+        self.assertEqual(baseline.results.scatteredLightColor.label, "blue")
+        self.assertEqual(changed.results.scatteredLightColor.label, "cyan")
+
+    def test_invalid_rgb_channels_are_rejected_by_response_schema(self) -> None:
+        with self.assertRaises(ValidationError):
+            ModeledLightColor(
+                label="neutral",
+                rgb=(999, 0, 0),
+                spectralBand=None,
+                confidence="fallback",
+                basis="neutral-fallback",
+            )
+
+    def test_existing_spectrum_and_fraction_regression_is_unchanged(self) -> None:
+        earth = analyze_destination("earth")
+        self.assertEqual(earth.inputs.solarSpectrumVisibleFraction, 0.700153)
+        self.assertEqual(
+            (earth.results.transmitted, earth.results.scattered, earth.results.absorbed),
+            (0.834967, 0.140087, 0.024946),
+        )
 
     def test_invalid_destination_is_a_clean_404(self) -> None:
         with self.assertRaises(HTTPException) as context:

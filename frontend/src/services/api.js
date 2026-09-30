@@ -13,7 +13,7 @@ export async function getBodies() {
   return response.json()
 }
 
-async function requestJson(path, signal) {
+async function requestJson(path, signal, options = {}) {
   const requestController = new AbortController()
   let timedOut = false
   const forwardAbort = () => requestController.abort()
@@ -24,7 +24,11 @@ async function requestJson(path, signal) {
   }, REQUEST_TIMEOUT_MS)
 
   try {
-    const response = await fetch(`${API_ROOT}${path}`, { signal: requestController.signal })
+    const response = await fetch(`${API_ROOT}${path}`, {
+      ...options,
+      signal: requestController.signal,
+      headers: options.body ? { 'Content-Type': 'application/json', ...options.headers } : options.headers,
+    })
     if (!response.ok) {
       const error = new Error(`Request failed: ${response.status}`)
       error.status = response.status
@@ -38,6 +42,14 @@ async function requestJson(path, signal) {
     clearTimeout(timeout)
     signal?.removeEventListener('abort', forwardAbort)
   }
+}
+
+export async function getScenarioLightResult(destinationId, scenario, { signal, simulatedTime } = {}) {
+  const query = simulatedTime ? `?at=${encodeURIComponent(simulatedTime)}` : ''
+  return requestJson(`/api/analyze/${destinationId}/scenario${query}`, signal, {
+    method: 'POST',
+    body: JSON.stringify(scenario),
+  })
 }
 
 function deterministicFallbackResponse(analysis, warning) {

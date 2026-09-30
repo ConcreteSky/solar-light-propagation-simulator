@@ -103,6 +103,17 @@ Apparent Sun size uses heliocentric distance only:
 
 The classifier returns only `white`, `yellow`, `orange`, `red`, `blue`, `pale blue`, `pale yellow`, `dim white`, or `gray-white`. Reusable rules consider methane in H2/He or N2 atmospheres, dense CO2 columns, brightness, and the calculated scattering/absorption fractions. Strong composition-driven hues are classified before the low-brightness fallback, so distance does not erase a characteristic broad hue. The logic does not inspect destination IDs. The categories describe a broad educational appearance, not a rendered RGB color or full spectrum.
 
+### Scattered-light color
+
+`scatteredLightColor` is derived separately from destination surface color, transmitted-light color, and the existing dominant-light category. It is a conservative deterministic classification, not an ML target and not a full spectral or human-vision calculation.
+
+- An atmosphere with known gases uses a short-visible blue molecular-scattering class, consistent with Rayleigh scattering favoring shorter wavelengths.
+- H2/He atmospheres with at least 1% normalized methane use a blue-green/cyan class because methane absorbs red light.
+- N2 atmospheres with at least 0.5% normalized methane use an orange class representing the documented nitrogen-methane photochemical haze regime.
+- Airless, unknown-atmosphere, and unavailable-composition cases use a neutral pale-yellow fallback. They are not assigned an atmospheric hue.
+
+Thresholds intentionally create stable broad classes: small composition changes do not alter the rendered color. `rgb` is a display encoding for the class, while `spectralBand` is broad (`short-visible`, `blue-green-visible`, or `broad-visible`). Neither is an exact perceived-color claim. The references are NASA's explanation of [Rayleigh scattering](https://spaceplace.nasa.gov/blue-sky/en/), [methane-driven blue-green color on Uranus](https://science.nasa.gov/uranus/facts/), and [nitrogen-methane chemistry producing Titan's orange aerosol haze](https://www.nasa.gov/general/the-titan-haze-simulation-experiment-on-cosmic/).
+
 ## Synthetic generation
 
 `backend/training/generate_training_data.py` uses NumPy's seeded generator. Version 1.0.0 defaults to seed 741 and 10,000 rows:

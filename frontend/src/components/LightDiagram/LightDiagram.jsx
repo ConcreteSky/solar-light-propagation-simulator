@@ -18,6 +18,16 @@ const DESTINATION_PALETTES = {
 }
 
 const DEFAULT_PALETTE = { surface: '#9a8c78', shadow: '#24232a', atmosphere: '#a9dce8' }
+const NEUTRAL_LIGHT_COLOR = 'rgb(244 232 190)'
+
+export function getValidatedRgbColor(color) {
+  const rgb = color?.rgb
+  if (!Array.isArray(rgb) || rgb.length !== 3) return NEUTRAL_LIGHT_COLOR
+  if (!rgb.every((channel) => Number.isInteger(channel) && channel >= 0 && channel <= 255)) {
+    return NEUTRAL_LIGHT_COLOR
+  }
+  return `rgb(${rgb.join(' ')})`
+}
 
 function clamp01(value) {
   return Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0
@@ -49,7 +59,7 @@ function IncomingBeam({ irradiance }) {
   )
 }
 
-function ScatteredFan({ fraction }) {
+function ScatteredFan({ fraction, color }) {
   const width = prominence(fraction, 1.3, 8.5)
   const opacity = visibility(fraction, 0.1)
   const rays = [
@@ -61,7 +71,7 @@ function ScatteredFan({ fraction }) {
   return (
     <g data-testid="scattered-fan" data-fraction={clamp01(fraction).toFixed(3)}>
       {rays.map((path) => (
-        <path key={path} className="diagram-ray diagram-ray-scattered" d={path} markerEnd="url(#arrow-scatter)" strokeWidth={width} opacity={opacity} />
+        <path key={path} className="diagram-ray diagram-ray-scattered" d={path} markerEnd="url(#arrow-scatter)" stroke={color} strokeWidth={width} opacity={opacity} />
       ))}
     </g>
   )
@@ -104,11 +114,11 @@ function PlanetSurface({ palette, atmospheric }) {
   )
 }
 
-function AtmosphericDiagram({ results, palette }) {
+function AtmosphericDiagram({ results, palette, scatteredColor }) {
   return (
     <>
       <PlanetSurface palette={palette} atmospheric />
-      <ScatteredFan fraction={results.scattered} />
+      <ScatteredFan fraction={results.scattered} color={scatteredColor} />
       <path
         data-testid="transmitted-beam"
         data-fraction={clamp01(results.transmitted).toFixed(3)}
@@ -128,7 +138,7 @@ function AtmosphericDiagram({ results, palette }) {
   )
 }
 
-function AirlessDiagram({ results, palette }) {
+function AirlessDiagram({ results, palette, scatteredColor }) {
   return (
     <>
       <PlanetSurface palette={palette} atmospheric={false} />
@@ -140,7 +150,7 @@ function AirlessDiagram({ results, palette }) {
         strokeWidth={prominence(results.transmitted, 3, 15)}
         opacity={visibility(results.transmitted)}
       />
-      <g data-testid="reflected-ray"><ScatteredFan fraction={results.scattered} /></g>
+      <g data-testid="reflected-ray"><ScatteredFan fraction={results.scattered} color={scatteredColor} /></g>
       <AbsorptionRegion fraction={results.absorbed} atmospheric={false} />
       <text x="68" y="212" className="diagram-label diagram-label-strong">Incoming sunlight</text>
       <text x="594" y="62" className="diagram-label">Surface</text>
@@ -166,6 +176,8 @@ export default function LightDiagram({ analysis }) {
   const atmospheric = analysis.hasAtmosphere === true
   const results = analysis.results
   const resultColor = RESULT_COLORS[results.dominantColor] ?? RESULT_COLORS.white
+  const scatteredColor = getValidatedRgbColor(results.scatteredLightColor)
+  const transmittedColor = getValidatedRgbColor(results.transmittedLightColor)
   const palette = DESTINATION_PALETTES[analysis.destination] ?? DEFAULT_PALETTE
   const primaryResult = getPrimaryResult(results, atmospheric)
   const primaryPercent = (clamp01(primaryResult.value) * 100).toFixed(1)
@@ -175,7 +187,12 @@ export default function LightDiagram({ analysis }) {
     <figure
       className="light-diagram-wrap"
       data-destination={analysis.destination}
-      style={{ '--diagram-result-color': resultColor, '--diagram-atmosphere-color': palette.atmosphere }}
+      style={{
+        '--diagram-result-color': resultColor,
+        '--diagram-scatter-color': scatteredColor,
+        '--diagram-transmitted-color': transmittedColor,
+        '--diagram-atmosphere-color': palette.atmosphere,
+      }}
     >
       <svg
         className="light-diagram"
@@ -195,7 +212,7 @@ export default function LightDiagram({ analysis }) {
             <stop offset="0" stopColor="#fffdf0" stopOpacity="0.78" /><stop offset="0.55" stopColor="#ffe5a3" /><stop offset="1" stopColor="#ffd06b" />
           </linearGradient>
           <linearGradient id="result-light-gradient" gradientUnits="userSpaceOnUse" x1="544" y1="250" x2="742" y2="250">
-            <stop offset="0" stopColor="#fff4c9" /><stop offset="0.48" stopColor={resultColor} /><stop offset="1" stopColor={resultColor} stopOpacity={0.24 + clamp01(results.transmitted) * 0.6} />
+            <stop offset="0" stopColor="#fff4c9" /><stop offset="0.48" stopColor={transmittedColor} /><stop offset="1" stopColor={transmittedColor} stopOpacity={0.24 + clamp01(results.transmitted) * 0.6} />
           </linearGradient>
           <linearGradient id="absorption-gradient" gradientUnits="userSpaceOnUse" x1="554" y1="250" x2="626" y2="250">
             <stop offset="0" stopColor="#ff9a64" stopOpacity="0.72" /><stop offset="1" stopColor="#101522" stopOpacity="0" />
@@ -203,18 +220,20 @@ export default function LightDiagram({ analysis }) {
           <filter id="soft-beam-glow" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="10" /></filter>
           <filter id="soft-atmosphere-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="8" /></filter>
           <marker id="arrow-incoming" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="20" markerHeight="20" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill="#ffd77f" /></marker>
-          <marker id="arrow-result" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="18" markerHeight="18" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill={resultColor} /></marker>
-          <marker id="arrow-scatter" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill={resultColor} /></marker>
+          <marker id="arrow-result" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="18" markerHeight="18" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill={transmittedColor} /></marker>
+          <marker id="arrow-scatter" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill={scatteredColor} /></marker>
         </defs>
         <rect width="900" height="500" rx="12" fill="url(#diagram-background-gradient)" />
         <path className="diagram-grid-line" d="M 0 250 L 900 250" />
         <IncomingBeam irradiance={irradiance} />
-        {atmospheric ? <AtmosphericDiagram results={results} palette={palette} /> : <AirlessDiagram results={results} palette={palette} />}
+        {atmospheric
+          ? <AtmosphericDiagram results={results} palette={palette} scatteredColor={scatteredColor} />
+          : <AirlessDiagram results={results} palette={palette} scatteredColor={scatteredColor} />}
       </svg>
       <div className="diagram-primary-result" data-testid="primary-result">
         <span>Primary interaction</span><strong>{primaryPercent}% {primaryResult.label}</strong>
       </div>
-      <figcaption>Light-interaction diagram is schematic.</figcaption>
+      <figcaption>Light-interaction diagram is schematic. RGB colors show broad modeled classes, not exact human perception.</figcaption>
     </figure>
   )
 }

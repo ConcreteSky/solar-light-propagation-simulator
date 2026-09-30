@@ -19,6 +19,8 @@ No component recalculates atmospheric physics or ML predictions.
 - `hasAtmosphere`;
 - transmitted fraction;
 - scattered fraction;
+- structured `scatteredLightColor` from the deterministic spectral-color classifier;
+- structured `transmittedLightColor`, kept separate from both scattering and destination presentation color;
 - absorbed fraction;
 - relative brightness;
 - deterministic broad color category.
@@ -78,6 +80,11 @@ Every selection creates an `AbortController`. A monotonically increasing request
 
 - The diagram is schematic and not to spatial, angular, or intensity scale.
 - Ray paths do not model observer position, ray tracing, Mie scattering, or spectral lines.
+- Rendered RGB values are broad schematic encodings and are not claims of exact human visual perception.
+
+## Scenario Mode
+
+The result panel exposes pressure, density, atmosphere state, and the six catalog gas fractions. Applying a scenario sends those values to `POST /api/analyze/{destinationId}/scenario`; the deterministic atmosphere, energy partition, dominant-light, transmitted-light, and scattered-light calculations are all rerun. The classifier uses broad composition thresholds, so insignificant composition changes do not cause color flicker. Restoring the real atmosphere returns to the normal validated ML/deterministic-fallback request path.
 - The AI approximates the deterministic educational model, not independent observations.
 - Absorption is shown as a simple marker rather than a physical location or thermal process.
 - Missing core scientific inputs use the backend's disclosed fallback; the frontend does not synthesize replacements.

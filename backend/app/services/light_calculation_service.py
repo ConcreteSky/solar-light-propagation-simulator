@@ -9,19 +9,26 @@ from ..schemas.light_analysis import (
     AnalysisInputs,
     AnalysisResults,
     AnalysisValidation,
+    AtmosphereScenario,
     AstronomicalState,
     LightAnalysis,
+    ModeledLightColor,
 )
 from .atmospheric_model import AtmosphericResult, calculate_atmosphere
 from .body_data_service import get_body, get_body_index
+from .orbital_service import calculate_orbital_state
 from .solar_input_service import (
     ASTRONOMICAL_UNIT_KM,
     REFERENCE_IRRADIANCE_W_M2,
     resolve_solar_input,
 )
 from .surface_model import calculate_airless_surface
+from .spectral_color_service import (
+    ModeledLightColor as ColorResult,
+    derive_scattered_light_color,
+    derive_transmitted_light_color,
+)
 from .validation import clamp01, conserve_fractions, fractions_are_valid
-from .orbital_service import calculate_orbital_state
 
 
 @dataclass(frozen=True)
@@ -41,6 +48,8 @@ class PhysicsOutput:
     absorbed: float
     relative_brightness: float
     dominant_color: str
+    scattered_light_color: ColorResult
+    transmitted_light_color: ColorResult
     apparent_size_category: str
     warnings: tuple[str, ...]
     partial: bool
@@ -149,12 +158,18 @@ def calculate_light_behavior(inputs: PhysicsInput) -> PhysicsOutput:
         absorbed,
         brightness,
     )
+    scattered_color = derive_scattered_light_color(
+        modeled_has_atmosphere,
+        normalized_composition,
+    )
     return PhysicsOutput(
         transmitted=transmitted,
         scattered=scattered,
         absorbed=absorbed,
         relative_brightness=brightness,
         dominant_color=color,
+        scattered_light_color=scattered_color,
+        transmitted_light_color=derive_transmitted_light_color(color),
         apparent_size_category=_apparent_size(inputs.distance_from_sun_km),
         warnings=tuple(warnings),
         partial=partial,
@@ -162,7 +177,9 @@ def calculate_light_behavior(inputs: PhysicsInput) -> PhysicsOutput:
 
 
 def analyze_destination(
-    destination_id: str, simulated_time: datetime | None = None
+    destination_id: str,
+    simulated_time: datetime | None = None,
+    scenario: AtmosphereScenario | None = None,
 ) -> LightAnalysis:
     body = get_body(destination_id)
     body_index = get_body_index()
@@ -176,18 +193,27 @@ def analyze_destination(
         body_index,
         orbital.distance_from_sun_km if orbital else None,
     )
-    composition = body.atmosphere.composition.model_dump()
+    atmosphere = scenario or body.atmosphere
+    composition = atmosphere.composition.model_dump()
+    surface_pressure_pa = (
+        atmosphere.surfacePressurePa if scenario else atmosphere.surface_pressure_pa
+    )
+    atmospheric_density_kg_m3 = (
+        atmosphere.atmosphericDensityKgM3 if scenario else atmosphere.density_kg_m3
+    )
     output = calculate_light_behavior(
         PhysicsInput(
             distance_from_sun_km=solar.distance_from_sun_km,
             solar_irradiance_w_m2=solar.irradiance_w_m2,
-            has_atmosphere=body.atmosphere.hasAtmosphere,
-            surface_pressure_pa=body.atmosphere.surface_pressure_pa,
-            atmospheric_density_kg_m3=body.atmosphere.density_kg_m3,
+            has_atmosphere=atmosphere.hasAtmosphere,
+            surface_pressure_pa=surface_pressure_pa,
+            atmospheric_density_kg_m3=atmospheric_density_kg_m3,
             composition=composition,
         )
     )
     warnings = [*solar.warnings, *output.warnings]
+    if scenario:
+        warnings.insert(0, "Scenario Mode uses user-supplied atmospheric parameters.")
     fractions = (output.transmitted, output.scattered, output.absorbed)
     valid = fractions_are_valid(fractions) and 0 <= output.relative_brightness <= 1
     source_ids = list(dict.fromkeys([*body.source_ids, "nlr-e490"]))
@@ -213,15 +239,15 @@ def analyze_destination(
         destination=body.id,
         name=body.name,
         bodyType=body.type,
-        hasAtmosphere=body.atmosphere.hasAtmosphere,
+        hasAtmosphere=atmosphere.hasAtmosphere,
         calculationStatus="partial" if output.partial else "complete",
         inputs=AnalysisInputs(
             distanceFromSunKm=solar.distance_from_sun_km,
             solarIrradianceWm2=solar.irradiance_w_m2,
             derivedSolarIrradianceWm2=round(solar.derived_irradiance_w_m2, 6),
             irradianceSource=solar.irradiance_source,
-            surfacePressurePa=body.atmosphere.surface_pressure_pa,
-            atmosphericDensityKgM3=body.atmosphere.density_kg_m3,
+            surfacePressurePa=surface_pressure_pa,
+            atmosphericDensityKgM3=atmospheric_density_kg_m3,
             composition=AtmosphericComposition.model_validate(composition),
             solarSpectrumVisibleFraction=round(solar.spectrum.visible_fraction, 6),
             solarSpectrumRangeNm=[
@@ -235,6 +261,20 @@ def analyze_destination(
             absorbed=output.absorbed,
             relativeBrightness=output.relative_brightness,
             dominantColor=output.dominant_color,
+            scatteredLightColor=ModeledLightColor(
+                label=output.scattered_light_color.label,
+                rgb=output.scattered_light_color.rgb,
+                spectralBand=output.scattered_light_color.spectral_band,
+                confidence=output.scattered_light_color.confidence,
+                basis=output.scattered_light_color.basis,
+            ),
+            transmittedLightColor=ModeledLightColor(
+                label=output.transmitted_light_color.label,
+                rgb=output.transmitted_light_color.rgb,
+                spectralBand=output.transmitted_light_color.spectral_band,
+                confidence=output.transmitted_light_color.confidence,
+                basis=output.transmitted_light_color.basis,
+            ),
             apparentSizeCategory=output.apparent_size_category,
         ),
         validation=AnalysisValidation(

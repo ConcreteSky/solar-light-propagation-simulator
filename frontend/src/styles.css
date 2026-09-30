@@ -407,6 +407,33 @@ input { font: inherit; }
   align-items: start;
 }
 
+.scenario-controls {
+  margin: -12px 0 24px;
+  border: 1px solid rgb(134 157 196 / 20%);
+  border-radius: 5px;
+  background: rgb(10 16 30 / 58%);
+}
+
+.scenario-controls summary {
+  padding: 13px 16px;
+  color: #a9bdd8;
+  cursor: pointer;
+  font-family: 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.scenario-controls form { padding: 0 16px 16px; }
+.scenario-controls p { margin: 0 0 14px; color: #7f90a9; font-size: 0.76rem; }
+.scenario-checkbox { display: flex; gap: 8px; align-items: center; color: #b7c5d8; font-size: 0.76rem; }
+.scenario-fields { display: grid; grid-template-columns: repeat(4, minmax(110px, 1fr)); gap: 10px; margin-top: 14px; }
+.scenario-fields label { color: #7f90a9; font-size: 0.66rem; }
+.scenario-fields input { width: 100%; margin-top: 5px; padding: 8px; border: 1px solid rgb(134 157 196 / 24%); border-radius: 3px; color: #e0e8f4; background: #08101d; }
+.scenario-actions { display: flex; gap: 10px; margin-top: 14px; }
+.scenario-actions button { padding: 9px 12px; border: 1px solid rgb(120 206 174 / 34%); border-radius: 3px; color: #b9e8d4; background: rgb(20 71 56 / 22%); cursor: pointer; }
+.scenario-actions button:disabled { cursor: wait; opacity: 0.55; }
+
 .light-diagram-wrap {
   min-width: 0;
   margin: 0;
@@ -441,12 +468,11 @@ input { font: inherit; }
 
 .diagram-ray-transmitted {
   stroke: url('#result-light-gradient');
-  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--diagram-result-color) 52%, transparent));
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--diagram-transmitted-color) 52%, transparent));
 }
 
 .diagram-ray-scattered {
-  stroke: var(--diagram-result-color, #b8d8ee);
-  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--diagram-result-color) 38%, transparent));
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--diagram-scatter-color) 38%, transparent));
 }
 
 .diagram-ray-surface {
@@ -608,6 +634,7 @@ input { font: inherit; }
   .analysis-result-header { display: block; }
   .method-badge { display: inline-block; margin-top: 18px; }
   .analysis-grid { grid-template-columns: 1fr; }
+  .scenario-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .light-diagram { min-height: 0; }
 }
 

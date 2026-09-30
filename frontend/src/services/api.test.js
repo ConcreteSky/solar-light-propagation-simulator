@@ -1,4 +1,4 @@
-import { getLightResult } from './api.js'
+import { getLightResult, getScenarioLightResult } from './api.js'
 import { atmosphericPrediction } from '../test/fixtures.js'
 
 function response(body, status = 200) {
@@ -44,5 +44,15 @@ describe('light API service', () => {
     global.fetch = vi.fn().mockResolvedValue(response({}, 404))
     await expect(getLightResult('unknown')).rejects.toMatchObject({ status: 404 })
     expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('posts Scenario Mode inputs to the deterministic analysis endpoint', async () => {
+    global.fetch = vi.fn().mockResolvedValue(response(deterministicAnalysis))
+    const scenario = { hasAtmosphere: true, composition: {} }
+    await getScenarioLightResult('mars', scenario)
+    expect(fetch).toHaveBeenCalledWith(
+      '/api/analyze/mars/scenario',
+      expect.objectContaining({ method: 'POST', body: JSON.stringify(scenario) }),
+    )
   })
 })

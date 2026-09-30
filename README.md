@@ -127,6 +127,7 @@ Local interactive OpenAPI documentation is available at <http://127.0.0.1:8000/d
 | `GET /api/health` | Service and catalog health |
 | `GET /api/bodies` | Complete stored destination catalog |
 | `GET /api/analyze/{destinationId}[?at=ISO-8601]` | Deterministic baseline, optionally timestamped |
+| `POST /api/analyze/{destinationId}/scenario[?at=ISO-8601]` | Deterministic recalculation with user-supplied atmospheric pressure, density, and composition |
 | `GET /api/predict/{destinationId}[?at=ISO-8601]` | Validated ML result or disclosed deterministic fallback, optionally timestamped |
 
 Invalid destination IDs return HTTP 404. Missing model files, incomplete core inputs, non-finite output, and serious conservation failures use the deterministic fallback when safe.

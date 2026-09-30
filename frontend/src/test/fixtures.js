@@ -13,6 +13,14 @@ export function makePrediction(overrides = {}) {
       absorbed: 0.1,
       relativeBrightness: 0.43,
       dominantColor: 'yellow',
+      scatteredLightColor: {
+        label: 'blue', rgb: [132, 180, 242], spectralBand: 'short-visible',
+        confidence: 'modeled', basis: 'molecular-rayleigh-scattering',
+      },
+      transmittedLightColor: {
+        label: 'yellow', rgb: [255, 214, 107], spectralBand: 'broad-visible',
+        confidence: 'modeled', basis: 'existing-dominant-light-classification',
+      },
       apparentSizeCategory: 'small',
     },
     validation: {
@@ -41,6 +49,14 @@ export const airlessPrediction = makePrediction({
     absorbed: 0.05,
     relativeBrightness: 0.9,
     dominantColor: 'white',
+    scatteredLightColor: {
+      label: 'neutral', rgb: [244, 232, 190], spectralBand: 'broad-visible',
+      confidence: 'fallback', basis: 'neutral-fallback',
+    },
+    transmittedLightColor: {
+      label: 'white', rgb: [244, 244, 238], spectralBand: 'broad-visible',
+      confidence: 'modeled', basis: 'existing-dominant-light-classification',
+    },
     apparentSizeCategory: 'medium',
   },
 })
