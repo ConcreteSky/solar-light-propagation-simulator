@@ -85,13 +85,13 @@ export default function ResultPanel({ body, bodies }) {
             <p>Retrieving validated light results…</p>
           </div>
         )}
-        {state.status === 'error' && (
+        {body && body.id !== 'sun' && state.status === 'error' && (
           <div className="analysis-error" role="alert">
             <h2 id="analysis-title">Analysis unavailable</h2>
             <p>{state.error.status === 404 ? 'The selected destination was not found.' : 'No validated result could be retrieved.'}</p>
           </div>
         )}
-        {state.status === 'success' && (
+        {body && body.id !== 'sun' && state.status === 'success' && (
           <article className="analysis-result">
             <header className="analysis-result-header">
               <div>

@@ -73,4 +73,15 @@ describe('ResultPanel', () => {
     expect(screen.getByRole('heading', { name: 'Venus' })).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Mars' })).not.toBeInTheDocument()
   })
+
+  it('clears a completed result safely when the scene selection is removed', async () => {
+    getLightResult.mockResolvedValue(atmosphericPrediction)
+    const { rerender } = render(<ResultPanel body={mars} bodies={celestialBodies} />)
+    expect(await screen.findByRole('heading', { name: 'Mars' })).toBeInTheDocument()
+
+    rerender(<ResultPanel body={null} bodies={celestialBodies} />)
+
+    expect(screen.getByRole('heading', { name: 'Choose a destination' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Mars' })).not.toBeInTheDocument()
+  })
 })

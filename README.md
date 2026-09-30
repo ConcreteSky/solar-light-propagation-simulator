@@ -2,6 +2,8 @@
 
 Interactive Solar System visualization with deterministic and machine-learning solar-light interaction modeling.
 
+**Live Application:** https://solar-light-propagation-simulator.vercel.app
+
 ## Project overview
 
 The Solar Light Propagation Simulator is an undergraduate educational and research-oriented web application. A stylized three-dimensional Solar System acts as the destination selector. Selecting a planet, dwarf planet, or supported moon retrieves stored astronomical inputs, runs a transparent deterministic light model, obtains a validated machine-learning approximation where inputs permit, and renders one schematic SVG interaction diagram.
