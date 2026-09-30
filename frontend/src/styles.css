@@ -211,7 +211,7 @@ input { font: inherit; }
 }
 
 .body-label-wrapper {
-  pointer-events: none !important;
+  pointer-events: auto !important;
   user-select: none;
 }
 
@@ -227,6 +227,15 @@ input { font: inherit; }
   text-transform: uppercase;
   white-space: nowrap;
   box-shadow: 0 0 0 1px rgb(139 160 197 / 13%);
+  border: 0;
+  cursor: pointer;
+}
+
+.body-label:hover,
+.body-label:focus-visible {
+  color: #fff0c2;
+  outline: 1px solid rgb(255 204 105 / 58%);
+  outline-offset: 2px;
 }
 
 .body-label-selected {

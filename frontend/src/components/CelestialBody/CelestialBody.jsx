@@ -61,6 +61,9 @@ export default function CelestialBody({
   const textureUrl = resolveTexture(body.visual.texture)
   const bodyScale = body.id === 'haumea' ? [1.35, 0.74, 0.82] : [1, 1, 1]
   const highlighted = selected || hovered
+  const hitRadius = body.type === 'moon'
+    ? Math.max(radius * 1.5, 0.9)
+    : Math.max(radius * 1.35, 2.1)
 
   const handlePointerOver = (event) => {
     event.stopPropagation()
@@ -85,6 +88,11 @@ export default function CelestialBody({
       onPointerOut={handlePointerOut}
       userData={{ bodyId: body.id, destination: body.id !== 'sun' }}
     >
+      <mesh>
+        <sphereGeometry args={[hitRadius, 16, 10]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} colorWrite={false} />
+      </mesh>
+
       {textureUrl ? (
         <TexturedSurface radius={radius} textureUrl={textureUrl} bodyScale={bodyScale} />
       ) : (
@@ -102,7 +110,17 @@ export default function CelestialBody({
 
       {(showLabel || selected || hovered) && (
         <Html center position={[0, radius + 1.2, 0]} className="body-label-wrapper">
-          <span className={`body-label ${selected ? 'body-label-selected' : ''}`}>{body.name}</span>
+          <button
+            type="button"
+            className={`body-label ${selected ? 'body-label-selected' : ''}`}
+            aria-label={`Select ${body.name}`}
+            onClick={(event) => {
+              event.stopPropagation()
+              onSelect(body.id)
+            }}
+          >
+            {body.name}
+          </button>
         </Html>
       )}
     </group>
