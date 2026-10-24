@@ -1,0 +1,25 @@
+{
+  "sample_count": 4000,
+  "group_counts": {
+    "in_distribution": 1000,
+    "near_boundary": 1000,
+    "moderate_shift": 1000,
+    "severe_shift": 1000
+  },
+  "uncertainty_error_pearson": 0.25894307556704266,
+  "uncertainty_error_spearman": 0.4622436244320905,
+  "ood_error_pearson": 0.565700600461056,
+  "ood_error_spearman": 0.7229184035430675,
+  "chosen_policy": "ood_q99_uncertainty_q99",
+  "thresholds": {
+    "ood": 1.7651834703290747,
+    "uncertainty": 0.008112074168675003
+  },
+  "model_load_median_ms": 497.646,
+  "model_artifact_bytes": 5619774,
+  "notes": [
+    "physics outputs are the synthetic teacher, so physics-only error is zero by construction",
+    "ensemble spread is a ranking signal, not a calibrated confidence interval",
+    "tracemalloc does not include every native-library allocation"
+  ]
+}

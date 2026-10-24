@@ -1,0 +1,5 @@
+operation,bytes,measurement,value
+serialized_ensemble_artifact,5619774.0,file_size,
+physics_batch,1379160.0,tracemalloc_peak,
+ensemble_ai_batch,2200389.0,tracemalloc_peak,
+model_load_median,,milliseconds,497.646
