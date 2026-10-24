@@ -4,6 +4,7 @@ export function makePrediction(overrides = {}) {
     name: 'Mars',
     bodyType: 'planet',
     method: 'machine_learning',
+    resultSource: 'ML surrogate',
     modelName: 'hist_gradient_boosting',
     modelVersion: '1.0.0',
     hasAtmosphere: true,
@@ -30,7 +31,26 @@ export function makePrediction(overrides = {}) {
       energySum: 1,
       warnings: [],
     },
-    baselineComparison: null,
+    baselineComparison: {
+      transmittedAbsoluteError: 0.01,
+      scatteredAbsoluteError: 0.005,
+      absorbedAbsoluteError: 0.005,
+      relativeBrightnessAbsoluteError: 0.02,
+    },
+    aiResults: {
+      transmitted: 0.7, scattered: 0.2, absorbed: 0.1, relativeBrightness: 0.43,
+    },
+    deterministicResults: {
+      transmitted: 0.71, scattered: 0.195, absorbed: 0.095, relativeBrightness: 0.45,
+    },
+    reliability: {
+      classification: 'reliable',
+      decision: 'use_ai',
+      fallbackReason: null,
+      physicalViolations: [],
+      uncertainty: { score: 0.001, threshold: 0.008, perOutput: {}, method: 'ensemble spread' },
+      ood: { score: 0.9, q95: 1.47, q99: 1.76, classification: 'in_distribution', method: 'standardized distance' },
+    },
     sourceIds: ['test-source'],
     ...overrides,
   }
@@ -63,6 +83,7 @@ export const airlessPrediction = makePrediction({
 
 export const fallbackPrediction = makePrediction({
   method: 'deterministic_fallback',
+  resultSource: 'Deterministic fallback',
   modelName: null,
   validation: {
     valid: true,

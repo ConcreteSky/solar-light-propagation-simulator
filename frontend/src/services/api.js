@@ -90,7 +90,7 @@ export async function getScenarioLightResult(destinationId, scenario, { signal, 
   const cached = readCachedResult(cacheKey)
   if (cached) return cached
   const query = simulatedTime ? `?at=${encodeURIComponent(simulatedTime)}` : ''
-  const result = await requestJson(`/api/analyze/${destinationId}/scenario${query}`, signal, {
+  const result = await requestJson(`/api/predict/${destinationId}/scenario${query}`, signal, {
     method: 'POST',
     body: JSON.stringify(scenario),
   })

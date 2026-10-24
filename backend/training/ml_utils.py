@@ -66,24 +66,31 @@ def candidate_factories() -> dict[str, Callable[[], Pipeline]]:
                 ),
             ]
         ),
-        "hist_gradient_boosting": lambda: Pipeline(
-            [
-                ("preprocess", make_preprocessor()),
-                (
-                    "regressor",
-                    MultiOutputRegressor(
-                        HistGradientBoostingRegressor(
-                            learning_rate=0.08,
-                            max_iter=180,
-                            max_leaf_nodes=31,
-                            l2_regularization=0.05,
-                            random_state=TRAINING_SEED,
-                        )
-                    ),
-                ),
-            ]
+        "hist_gradient_boosting": lambda: make_hist_gradient_boosting_pipeline(
+            TRAINING_SEED
         ),
     }
+
+
+def make_hist_gradient_boosting_pipeline(seed: int) -> Pipeline:
+    """Build the versioned surrogate used by repeated-seed reliability experiments."""
+    return Pipeline(
+        [
+            ("preprocess", make_preprocessor()),
+            (
+                "regressor",
+                MultiOutputRegressor(
+                    HistGradientBoostingRegressor(
+                        learning_rate=0.08,
+                        max_iter=180,
+                        max_leaf_nodes=31,
+                        l2_regularization=0.05,
+                        random_state=seed,
+                    )
+                ),
+            ),
+        ]
+    )
 
 
 def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, object]:

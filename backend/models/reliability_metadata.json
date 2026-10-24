@@ -1,0 +1,68 @@
+{
+  "feature_columns": [
+    "distance_from_sun_km",
+    "incoming_solar_irradiance_w_m2",
+    "has_atmosphere",
+    "surface_pressure_pa",
+    "atmospheric_density_kg_m3",
+    "co2_fraction",
+    "n2_fraction",
+    "o2_fraction",
+    "ch4_fraction",
+    "h2_fraction",
+    "he_fraction"
+  ],
+  "target_columns": [
+    "transmitted_light_fraction",
+    "scattered_light_fraction",
+    "absorbed_light_fraction",
+    "relative_brightness"
+  ],
+  "model_name": "hist_gradient_boosting_ensemble",
+  "model_version": "1.0.0",
+  "reliability_version": "1.0.0",
+  "seeds": [
+    741,
+    742,
+    743,
+    744,
+    745
+  ],
+  "ood_q95": 1.4729614569039196,
+  "ood_q99": 1.7651834703290747,
+  "uncertainty_q95": 0.005107274738752459,
+  "uncertainty_q99": 0.008112074168675003,
+  "feature_mean": [
+    20.360411608442924,
+    4.353619923057262,
+    0.7155555555555555,
+    6.208963801071992,
+    0.4496564867060888,
+    0.19513997749882478,
+    0.23346273844051474,
+    0.056232263420801565,
+    0.04298099813451565,
+    0.13344877831669533,
+    0.05429079974421071
+  ],
+  "feature_std": [
+    1.5826355484349173,
+    2.8994189457948414,
+    0.4511494236604423,
+    5.4758581544372165,
+    0.9360560540197254,
+    0.3140426323410604,
+    0.32623179040861594,
+    0.11019613473001838,
+    0.08507679562830388,
+    0.26659779177395143,
+    0.10351875202282092
+  ],
+  "samples_per_seed": 10000,
+  "training_rows_per_model": 9000,
+  "reference_rows": 9000,
+  "artifact_size_bytes": 5619774,
+  "uncertainty_method": "mean target standard deviation across five independently generated-and-trained surrogates",
+  "ood_method": "RMS standardized feature distance after log1p transformation of distance, irradiance, pressure, and density",
+  "decision_policy": "defer when OOD or uncertainty exceeds the training-distribution q99 threshold, or when raw output has a serious physical violation"
+}

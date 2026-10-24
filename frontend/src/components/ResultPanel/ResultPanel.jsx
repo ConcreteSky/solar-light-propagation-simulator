@@ -11,6 +11,12 @@ import {
 } from '../../utils/lightAnalysis.js'
 
 const GASES = ['CO2', 'N2', 'O2', 'CH4', 'H2', 'He']
+const COMPARISON_FIELDS = [
+  ['Transmitted', 'transmitted', 'transmittedAbsoluteError'],
+  ['Scattered', 'scattered', 'scatteredAbsoluteError'],
+  ['Absorbed', 'absorbed', 'absorbedAbsoluteError'],
+  ['Brightness', 'relativeBrightness', 'relativeBrightnessAbsoluteError'],
+]
 
 function scenarioFromBody(body) {
   return {
@@ -53,7 +59,7 @@ function ScenarioControls({ body, activeScenario, busy, onApply, onReset }) {
           })
         }}
       >
-        <p>Change atmospheric inputs and recalculate with the deterministic physics model.</p>
+        <p>Change atmospheric inputs and evaluate them through the reliability-aware hybrid model.</p>
         <label className="scenario-checkbox">
           <input
             type="checkbox"
@@ -66,7 +72,7 @@ function ScenarioControls({ body, activeScenario, busy, onApply, onReset }) {
           <label>Pressure (Pa)<input type="number" min="0" step="any" value={form.surfacePressurePa} onChange={(event) => setForm((current) => ({ ...current, surfacePressurePa: event.target.value }))} /></label>
           <label>Density (kg/m³)<input type="number" min="0" step="any" value={form.atmosphericDensityKgM3} onChange={(event) => setForm((current) => ({ ...current, atmosphericDensityKgM3: event.target.value }))} /></label>
           {GASES.map((gas) => (
-            <label key={gas}>{gas} fraction<input aria-label={`${gas} fraction`} type="number" min="0" max="1" step="0.0001" value={form.composition[gas]} onChange={(event) => updateComposition(gas, event.target.value)} /></label>
+            <label key={gas}>{gas} fraction<input aria-label={`${gas} fraction`} type="number" min="0" max="1" step="any" value={form.composition[gas]} onChange={(event) => updateComposition(gas, event.target.value)} /></label>
           ))}
         </div>
         <div className="scenario-actions">
@@ -111,6 +117,51 @@ function ScientificValues({ body, bodies, analysis }) {
         </div>
       ))}
     </dl>
+  )
+}
+
+function ReliabilityDetails({ analysis }) {
+  const reliability = analysis.reliability
+  const source = analysis.resultSource
+    ?? (analysis.validation.fallbackUsed ? 'Deterministic fallback' : 'ML surrogate')
+  const delta = analysis.baselineComparison
+
+  return (
+    <div className="reliability-summary">
+      <p className="result-source"><span>Result source</span><strong>{source}</strong></p>
+      {reliability && (
+        <details className="reliability-details">
+          <summary>Reliability details</summary>
+          <dl>
+            <div><dt>Classification</dt><dd>{reliability.classification}</dd></div>
+            <div><dt>Decision</dt><dd>{reliability.decision === 'use_ai' ? 'Use AI' : 'Defer to physics'}</dd></div>
+            <div><dt>Uncertainty</dt><dd>{reliability.uncertainty ? `${reliability.uncertainty.score.toFixed(6)} / ${reliability.uncertainty.threshold.toFixed(6)}` : 'Unavailable'}</dd></div>
+            <div><dt>OOD score</dt><dd>{reliability.ood ? `${reliability.ood.score.toFixed(3)} · ${reliability.ood.classification.replace('_', ' ')}` : 'Unavailable'}</dd></div>
+            {delta && <div><dt>Mean physics–AI delta</dt><dd>{((delta.transmittedAbsoluteError + delta.scatteredAbsoluteError + delta.absorbedAbsoluteError + delta.relativeBrightnessAbsoluteError) / 4).toFixed(6)}</dd></div>}
+            <div><dt>Physical checks</dt><dd>{reliability.physicalViolations?.length ? reliability.physicalViolations.join(', ').replaceAll('_', ' ') : 'No raw violations'}</dd></div>
+          </dl>
+          {analysis.aiResults && analysis.deterministicResults && delta && (
+            <div className="reliability-comparison">
+              <p>AI vs deterministic result</p>
+              <table>
+                <thead><tr><th>Output</th><th>AI</th><th>Physics</th><th>Abs. delta</th></tr></thead>
+                <tbody>
+                  {COMPARISON_FIELDS.map(([label, resultKey, deltaKey]) => (
+                    <tr key={resultKey}>
+                      <th scope="row">{label}</th>
+                      <td>{analysis.aiResults[resultKey].toFixed(6)}</td>
+                      <td>{analysis.deterministicResults[resultKey].toFixed(6)}</td>
+                      <td>{delta[deltaKey].toFixed(6)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {reliability.fallbackReason && <p>Fallback reason: {reliability.fallbackReason.replaceAll('_', ' ')}</p>}
+        </details>
+      )}
+    </div>
   )
 }
 
@@ -191,9 +242,9 @@ export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
                 <h2 id="analysis-title">{body.name}</h2>
               </div>
               <span className={`method-badge ${state.analysis.validation.fallbackUsed ? 'method-fallback' : ''}`}>
-                {scenarioActive
-                  ? 'Deterministic scenario'
-                  : state.analysis.validation.fallbackUsed ? 'Deterministic fallback' : 'Validated ML prediction'}
+                {state.analysis.validation.fallbackUsed
+                  ? 'Deterministic fallback'
+                  : scenarioActive ? 'Reliable scenario · ML' : 'Validated ML prediction'}
               </span>
             </header>
             <ScenarioControls
@@ -207,6 +258,7 @@ export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
               <LightDiagram analysis={state.analysis} />
               <ScientificValues body={body} bodies={bodies} analysis={state.analysis} />
             </div>
+            <ReliabilityDetails analysis={state.analysis} />
             <p className="appearance-summary">{createAppearanceSummary(body, state.analysis)}</p>
             {state.analysis.astronomy && (
               <p className="analysis-timestamp">

@@ -42,7 +42,7 @@ The optimized values are repeat-key cache hits. A new destination, timestamp, mo
 
 Five-process startup-and-model-preload median changed from approximately 1,977.9 ms to 2,448.2 ms. The optimization did not change the model loader, and the later sample was slower, so no startup improvement is claimed. The saved model and metadata continue to load once per process through the existing single-entry cache.
 
-OOD processing and statistical uncertainty processing are not benchmarked because the current runtime does not implement those features. Global feature importance and local sensitivity are also not runtime features in this repository. The README deliberately does not claim them.
+The later reliability update adds a five-model ensemble, OOD processing, statistical uncertainty, and hybrid fallback. Its controlled 4,000-case benchmark found median batch costs of `0.08684 ms/sample` for physics, `0.09822 ms/sample` for ensemble AI, and `0.12806 ms/sample` for the q99 hybrid. These values use a separate interleaved benchmark and must not be compared directly with the repeat-key cache table above. Global feature importance and local sensitivity remain offline research artifacts. See [AI_PHYSICS_BENCHMARK.md](AI_PHYSICS_BENCHMARK.md).
 
 ## Bottlenecks found
 

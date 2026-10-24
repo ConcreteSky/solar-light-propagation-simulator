@@ -58,7 +58,7 @@ describe('light API service', () => {
     const scenario = { hasAtmosphere: true, composition: {} }
     await getScenarioLightResult('mars', scenario)
     expect(fetch).toHaveBeenCalledWith(
-      '/api/analyze/mars/scenario',
+      '/api/predict/mars/scenario',
       expect.objectContaining({ method: 'POST', body: JSON.stringify(scenario) }),
     )
   })

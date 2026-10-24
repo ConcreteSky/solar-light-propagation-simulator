@@ -647,6 +647,73 @@ input { font: inherit; }
   text-align: right;
 }
 
+.reliability-summary {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.55fr) minmax(0, 1.45fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.result-source,
+.reliability-details {
+  margin: 0;
+  border: 1px solid rgb(144 170 211 / 28%);
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgb(15 25 45 / 92%), rgb(8 14 27 / 92%));
+}
+
+.result-source {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  padding: 15px 17px;
+}
+
+.result-source span,
+.reliability-details dt {
+  color: #8fa0b8;
+  font-family: 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.result-source strong { color: #ffe0a0; font-size: 1rem; }
+
+.reliability-details summary {
+  padding: 15px 17px;
+  color: #b9c8dc;
+  cursor: pointer;
+  font-family: 'Cascadia Mono', 'Consolas', monospace;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.reliability-details dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  border-top: 1px solid rgb(144 170 211 / 18%);
+  background: rgb(144 170 211 / 12%);
+}
+
+.reliability-details dl div { padding: 13px 15px; background: #0a1324; }
+.reliability-details dd { margin: 6px 0 0; color: #e4ebf7; font-size: 0.78rem; }
+.reliability-details > p { margin: 0; padding: 13px 16px; color: #e9c98c; font-size: 0.76rem; }
+
+.reliability-comparison { overflow-x: auto; border-top: 1px solid rgb(144 170 211 / 18%); }
+.reliability-comparison > p { margin: 0; padding: 13px 15px 8px; color: #8fa0b8; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+.reliability-comparison table { width: 100%; border-collapse: collapse; font-family: 'Cascadia Mono', 'Consolas', monospace; font-size: 0.68rem; }
+.reliability-comparison th,
+.reliability-comparison td { padding: 9px 12px; border-top: 1px solid rgb(144 170 211 / 12%); text-align: right; white-space: nowrap; }
+.reliability-comparison th:first-child { color: #a9b8cc; text-align: left; }
+.reliability-comparison thead th { color: #7588a4; font-size: 0.58rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.reliability-comparison tbody td { color: #e4ebf7; }
+
 .analysis-note {
   margin: 20px 0 0;
   padding-left: 12px;
@@ -679,6 +746,8 @@ input { font: inherit; }
   .method-badge { display: inline-block; margin-top: 18px; }
   .analysis-grid { grid-template-columns: 1fr; }
   .scenario-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .reliability-summary { grid-template-columns: 1fr; }
+  .reliability-details dl { grid-template-columns: 1fr 1fr; }
   .light-diagram { min-height: 0; }
 }
 

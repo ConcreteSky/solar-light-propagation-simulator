@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Model version 1.0.0 is a local scikit-learn surrogate for the deterministic educational physics engine. It approximates four numerical outputs quickly; it does not replace the physics baseline, retrieve astronomical facts, establish observational accuracy, or generate text or images.
+Model version 1.0.0 is a local scikit-learn surrogate for the deterministic educational physics engine. Reliability version 1.0.0 wraps five independently seeded instances of that model with ensemble uncertainty, feature-distance OOD screening, physical validation, and automatic fallback. It does not replace the physics baseline, retrieve astronomical facts, establish observational accuracy, or generate text or images.
 
 The deterministic `/api/analyze/{destinationId}` endpoint remains authoritative. `/api/predict/{destinationId}` always compares the ML output with that baseline and falls back to it when model inference is unsafe.
 
@@ -61,7 +61,7 @@ Training compares:
 
 The fixed seed is 741. The selection rule chooses the lowest validation mean MAE; candidates within 2% are resolved in favor of the smaller serialized model. HistGradientBoosting was selected. The final pipeline was refit on the combined 9,000 training and validation rows, then evaluated once on the untouched test split.
 
-The saved artifact is `backend/models/light_model.joblib`. It contains the preprocessing pipeline, estimator, feature order, target order, model name, model version, seed, and generator version. Human-readable metadata is stored beside it.
+The original saved artifact is `backend/models/light_model.joblib`. The deployed reliability artifact is `backend/models/reliability_ensemble.joblib`, with thresholds and version information in `reliability_metadata.json`. Model load is cached once per process.
 
 ## Output validation and fallback
 
@@ -72,7 +72,7 @@ Raw ML predictions are never returned unchecked.
 - Smaller excursions are clamped to `[0, 1]`, and the three energy fractions are normalized to sum to one.
 - The response reports whether correction or fallback occurred.
 
-Fallback also occurs when the model file is absent or incompatible, atmosphere state is unknown, pressure/density is missing, or atmospheric composition is wholly unavailable. The response method becomes `deterministic_fallback`; deterministic output is never mislabeled as an ML prediction.
+Fallback also occurs when uncertainty or OOD score crosses its q99 threshold, when the model file is absent or incompatible, when atmosphere state is unknown, pressure/density is missing, or atmospheric composition is wholly unavailable. The response method becomes `deterministic_fallback`; deterministic output is never mislabeled as an ML prediction. Full policy details are in [RELIABLE_AI.md](RELIABLE_AI.md).
 
 ## API
 
@@ -82,7 +82,7 @@ Start the backend normally, then request:
 GET /api/predict/mars
 ```
 
-The response includes the destination, method, model identity, validated results, correction/fallback state, absolute differences from the deterministic baseline, and source IDs. Existing `/api/analyze/{destinationId}` behavior is unchanged. The model is preloaded during FastAPI startup and cached for subsequent requests.
+The response includes the destination, final source, AI and deterministic results when available, model identity, reliability classification, uncertainty, OOD score, physical checks, fallback reason, absolute differences, and source IDs. Scenario Mode uses the same decision path through `POST /api/predict/{destinationId}/scenario`. Existing deterministic analysis endpoints remain unchanged.
 
 ## Retraining
 

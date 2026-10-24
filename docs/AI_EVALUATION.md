@@ -2,6 +2,8 @@
 
 These are actual results from model version 1.0.0, trained locally with scikit-learn and seed 741. The complete machine-readable record is `data/evaluation/ai_model_evaluation.json`.
 
+This document preserves the original single-model evaluation. The deployed five-model reliability ensemble, OOD/error study, threshold trade-offs, failure cases, and efficiency results are reported separately in [AI_PHYSICS_BENCHMARK.md](AI_PHYSICS_BENCHMARK.md).
+
 ## Dataset audit
 
 The 10,000-row dataset contained no missing values, non-finite values, duplicate rows, or duplicate feature records. Maximum energy-conservation error was `2.22e-16`. Gas mixtures and airless-row constraints passed the Session 3 artifact tests, so regeneration was not necessary.

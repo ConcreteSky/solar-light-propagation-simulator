@@ -23,7 +23,7 @@ describe('ResultPanel', () => {
     expect(screen.getByText('blue · modeled')).toBeInTheDocument()
   })
 
-  it('recalculates Scenario Mode through the deterministic endpoint', async () => {
+  it('recalculates Scenario Mode through the hybrid reliability endpoint', async () => {
     getLightResult.mockResolvedValue(atmosphericPrediction)
     getScenarioLightResult.mockResolvedValue(makePrediction({
       method: undefined,
@@ -40,7 +40,7 @@ describe('ResultPanel', () => {
     screen.getByText('Scenario Mode').click()
     fireEvent.change(screen.getByLabelText('CH4 fraction'), { target: { value: '0.02' } })
     fireEvent.click(screen.getByText('Recalculate scenario'))
-    expect(await screen.findByText('Deterministic scenario')).toBeInTheDocument()
+    expect(await screen.findByText('Reliable scenario · ML')).toBeInTheDocument()
     expect(getScenarioLightResult).toHaveBeenCalledWith(
       'mars',
       expect.objectContaining({ composition: expect.objectContaining({ CH4: expect.any(Number) }) }),
@@ -48,10 +48,31 @@ describe('ResultPanel', () => {
     )
   })
 
+  it('accepts the catalog precision used by trace-gas defaults', async () => {
+    getLightResult.mockResolvedValue(atmosphericPrediction)
+    render(<ResultPanel body={mars} bodies={celestialBodies} />)
+    await screen.findByRole('heading', { name: 'Mars' })
+    screen.getByText('Scenario Mode').click()
+
+    expect(screen.getByLabelText('CO2 fraction')).toHaveAttribute('step', 'any')
+    expect(screen.getByLabelText('CH4 fraction')).toHaveAttribute('step', 'any')
+  })
+
+  it('shows the result source and reliability diagnostics on demand', async () => {
+    getLightResult.mockResolvedValue(atmosphericPrediction)
+    render(<ResultPanel body={mars} bodies={celestialBodies} />)
+    expect(await screen.findByText('ML surrogate')).toBeInTheDocument()
+    fireEvent.click(screen.getByText('Reliability details'))
+    expect(screen.getByText('Use AI')).toBeInTheDocument()
+    expect(screen.getByText(/0.900 · in distribution/)).toBeInTheDocument()
+    expect(screen.getByText('AI vs deterministic result')).toBeInTheDocument()
+    expect(screen.getByRole('columnheader', { name: 'Abs. delta' })).toBeInTheDocument()
+  })
+
   it('labels backend deterministic fallback explicitly', async () => {
     getLightResult.mockResolvedValue(fallbackPrediction)
     render(<ResultPanel body={mars} bodies={celestialBodies} />)
-    expect(await screen.findByText('Deterministic fallback')).toBeInTheDocument()
+    expect(await screen.findAllByText('Deterministic fallback')).toHaveLength(2)
     expect(screen.getByTestId('analysis-warning')).toHaveTextContent('missing pressure')
   })
 

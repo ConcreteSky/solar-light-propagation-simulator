@@ -12,6 +12,9 @@ MODEL_VERSION = "1.0.0"
 TRAINING_SEED = 741
 MODEL_PATH = Path(__file__).resolve().parents[2] / "models" / "light_model.joblib"
 MODEL_METADATA_PATH = Path(__file__).resolve().parents[2] / "models" / "light_model_metadata.json"
+RELIABILITY_MODEL_PATH = Path(__file__).resolve().parents[2] / "models" / "reliability_ensemble.joblib"
+RELIABILITY_METADATA_PATH = Path(__file__).resolve().parents[2] / "models" / "reliability_metadata.json"
+RELIABILITY_VERSION = "1.0.0"
 
 FEATURE_COLUMNS = [
     "distance_from_sun_km",
@@ -54,27 +57,49 @@ class MissingModelFeatureError(ValueError):
     pass
 
 
-def destination_feature_frame(body: CelestialBody, solar: SolarInput) -> pd.DataFrame:
-    if body.atmosphere.hasAtmosphere is None:
+def scientific_feature_frame(
+    *,
+    distance_from_sun_km: float,
+    solar_irradiance_w_m2: float,
+    has_atmosphere: bool | None,
+    surface_pressure_pa: float | None,
+    atmospheric_density_kg_m3: float | None,
+    composition: dict[str, float | None],
+) -> pd.DataFrame:
+    if has_atmosphere is None:
         raise MissingModelFeatureError("Atmosphere state is unknown.")
-
-    composition = body.atmosphere.composition.model_dump()
-    if body.atmosphere.hasAtmosphere and all(value is None for value in composition.values()):
+    if has_atmosphere and all(value is None for value in composition.values()):
         raise MissingModelFeatureError("Atmospheric composition is unavailable.")
+    gases = {
+        "CO2": max(float(composition["CO2"] or 0.0), 0.0),
+        "N2": max(float(composition["N2"] or 0.0), 0.0),
+        "O2": max(float(composition["O2"] or 0.0), 0.0),
+        "CH4": max(float(composition["CH4"] or 0.0), 0.0),
+        "H2": max(float(composition["H2"] or 0.0), 0.0),
+        "He": max(float(composition["He"] or 0.0), 0.0),
+    }
+    gas_total = sum(gases.values())
+    if has_atmosphere and gas_total <= 0:
+        raise MissingModelFeatureError("Atmospheric composition has no positive fractions.")
+    if has_atmosphere:
+        gases = {name: value / gas_total for name, value in gases.items()}
+    else:
+        gases = {name: 0.0 for name in gases}
+
     values: dict[str, float | bool | None] = {
-        "distance_from_sun_km": solar.distance_from_sun_km,
-        "incoming_solar_irradiance_w_m2": solar.irradiance_w_m2,
-        "has_atmosphere": body.atmosphere.hasAtmosphere,
-        "surface_pressure_pa": body.atmosphere.surface_pressure_pa,
-        "atmospheric_density_kg_m3": body.atmosphere.density_kg_m3,
-        # This matches the deterministic model's documented zero optical
-        # contribution for an unreported individual gas; it is not a measured zero.
-        "co2_fraction": composition["CO2"] or 0.0,
-        "n2_fraction": composition["N2"] or 0.0,
-        "o2_fraction": composition["O2"] or 0.0,
-        "ch4_fraction": composition["CH4"] or 0.0,
-        "h2_fraction": composition["H2"] or 0.0,
-        "he_fraction": composition["He"] or 0.0,
+        "distance_from_sun_km": distance_from_sun_km,
+        "incoming_solar_irradiance_w_m2": solar_irradiance_w_m2,
+        "has_atmosphere": has_atmosphere,
+        "surface_pressure_pa": surface_pressure_pa,
+        "atmospheric_density_kg_m3": atmospheric_density_kg_m3,
+        # The deterministic model normalizes the supported gas mixture before
+        # applying coefficients. Use that same scientific representation here.
+        "co2_fraction": gases["CO2"],
+        "n2_fraction": gases["N2"],
+        "o2_fraction": gases["O2"],
+        "ch4_fraction": gases["CH4"],
+        "h2_fraction": gases["H2"],
+        "he_fraction": gases["He"],
     }
 
     missing = [name for name in FEATURE_COLUMNS if values[name] is None]
@@ -90,3 +115,14 @@ def destination_feature_frame(body: CelestialBody, solar: SolarInput) -> pd.Data
             raise MissingModelFeatureError(f"Invalid model feature: {name}")
 
     return pd.DataFrame([values], columns=FEATURE_COLUMNS)
+
+
+def destination_feature_frame(body: CelestialBody, solar: SolarInput) -> pd.DataFrame:
+    return scientific_feature_frame(
+        distance_from_sun_km=solar.distance_from_sun_km,
+        solar_irradiance_w_m2=solar.irradiance_w_m2,
+        has_atmosphere=body.atmosphere.hasAtmosphere,
+        surface_pressure_pa=body.atmosphere.surface_pressure_pa,
+        atmospheric_density_kg_m3=body.atmosphere.density_kg_m3,
+        composition=body.atmosphere.composition.model_dump(),
+    )

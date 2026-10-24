@@ -10,7 +10,7 @@ from .schemas.light_analysis import AtmosphereScenario, LightAnalysis
 from .schemas.light_prediction import LightPrediction
 from .services.catalog import load_catalog
 from .services.light_calculation_service import analyze_destination
-from .services.ml_prediction_service import preload_model, predict_destination
+from .services.ml_prediction_service import preload_model, predict_destination, predict_scenario
 
 
 @asynccontextmanager
@@ -92,6 +92,21 @@ def predict(
 ) -> LightPrediction:
     try:
         return predict_destination(destination_id, at)
+    except KeyError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Unknown destination ID: {destination_id}",
+        ) from error
+
+
+@app.post("/api/predict/{destination_id}/scenario", response_model=LightPrediction)
+def predict_hypothetical_scenario(
+    destination_id: str,
+    scenario: AtmosphereScenario,
+    at: datetime | None = None,
+) -> LightPrediction:
+    try:
+        return predict_scenario(destination_id, scenario, at)
     except KeyError as error:
         raise HTTPException(
             status_code=404,
