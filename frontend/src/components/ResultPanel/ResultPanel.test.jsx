@@ -23,6 +23,10 @@ describe('ResultPanel', () => {
     expect(screen.getByText('blue')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /Magnetic interaction/ })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /Shielding & exposure/ })).toBeInTheDocument()
+    expect(screen.getByText('Light input')).toBeInTheDocument()
+    expect(screen.getByText('Particle input')).toBeInTheDocument()
+    expect(screen.getByText('Origin')).toBeInTheDocument()
+    expect(screen.getByText('magnetized crust')).toBeInTheDocument()
   })
 
   it('recalculates Scenario Mode through the hybrid reliability endpoint', async () => {

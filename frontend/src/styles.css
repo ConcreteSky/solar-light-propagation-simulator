@@ -777,14 +777,49 @@ input { font: inherit; }
 .interaction-panel h3 span { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 8px; border-radius: 50%; background: #173657; color: #8cd9ff; font: 700 .65rem/1 monospace; }
 .interaction-panel svg { display: block; width: 100%; max-height: 160px; margin: 10px 0; color: #62d8ff; overflow: visible; }
 .interaction-panel svg text { fill: #8ca0ba; font: 9px 'Cascadia Mono','Consolas',monospace; letter-spacing: .04em; }
+.incoming-panel svg { max-height: 245px; margin: 4px 0 8px; }
+.magnetic-panel svg { max-height: 235px; margin: 5px 0 8px; }
+.panel-intro { margin: 8px 0 4px; color: #91a5bf; font-size: .7rem; line-height: 1.5; }
 .profile-sun { fill: #ffc65c; filter: drop-shadow(0 0 9px #ffbd45); }
+.sun-corona { fill: rgb(255 194 82 / 8%); stroke: rgb(255 211 113 / 32%); stroke-width: 2; stroke-dasharray: 2 5; }
 .profile-body { fill: #172d46; stroke: #9ab6d5; stroke-width: 2; }
-.photon-stream { fill: none; stroke: #ffd667; stroke-width: 5; filter: drop-shadow(0 0 4px #ffc642); }
-.particle-stream { fill: none; stroke: #54e3de; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 10; }
+.detailed-body { fill: url(#body-shade); filter: drop-shadow(0 0 8px rgb(87 166 219 / 34%)); }
+.body-monogram { fill: #e8f2ff !important; font-size: 8px !important; font-weight: 800; text-anchor: middle; }
+.photon-beam { fill: url(#light-beam); }
+.photon-ray { fill: none; stroke: #ffe38a; stroke-width: 1.2; opacity: .72; filter: drop-shadow(0 0 3px #ffc642); }
+.particle-flow { fill: none; stroke: #52dcd7; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 3 7; opacity: .74; }
+.particle-dot { fill: #8cfff7; filter: drop-shadow(0 0 3px #4de3db); }
+.stream-title { font-size: 9px !important; font-weight: 800; }
+.stream-note { font-size: 7px !important; fill: #c4a95f !important; }
+.photon-title { fill: #ffdb76 !important; }
+.particle-title { fill: #79e9e1 !important; }
+.atmosphere-shell { fill: rgb(90 185 255 / 9%); stroke: #5eb8ef; stroke-width: 2; stroke-dasharray: 3 4; }
+.callout-line { fill: none; stroke: #607b9d; stroke-width: 1; stroke-dasharray: 2 3; }
+.callout-label { fill: #9db0c8 !important; font-size: 7px !important; font-weight: 700; }
+.diagram-key { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 9px; }
+.diagram-key > div { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; padding: 8px 9px; border: 1px solid rgb(111 148 194 / 16%); background: rgb(18 41 67 / 48%); color: #91a5bd; font-size: .64rem; line-height: 1.45; }
+.diagram-key strong { color: #dce8f6; }
+.diagram-key i { display: block; width: 17px; margin-top: 5px; }
+.key-photon { height: 3px; background: #ffd667; box-shadow: 0 0 5px #ffc642; }
+.key-particle { height: 0; border-top: 3px dotted #54e3de; }
 .profile-readouts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
 .profile-readouts > * { padding: 8px; background: rgb(34 65 99 / 34%); color: #acbdd2; font-size: .68rem; line-height: 1.35; }
 .profile-readouts strong { color: #ffe2a1; }
-.magnetic-panel p, .shielding-panel p { margin: 10px 0 0; color: #9fb0c7; font-size: .74rem; line-height: 1.55; }
+.magnetic-panel p, .shielding-panel p { color: #9fb0c7; font-size: .74rem; line-height: 1.55; }
+.magnetic-panel .field-lines { color: #62d8ff; }
+.magnetic-panel .induced-lines { color: #62e0d1; }
+.magnetic-panel .crustal-lines { color: #efa2ff; }
+.magnetic-panel .parent-plasma-lines { color: #ef84bd; opacity: .82; }
+.magnetic-panel .magnetopause-line { stroke: #9cecff; stroke-width: 2.8; stroke-dasharray: 4 4; }
+.magnetic-panel .unknown-field { color: #8c81a5; }
+.upstream-wind { fill: none; stroke: #64ddd7; stroke-width: 1.4; stroke-dasharray: 2 5; opacity: .78; }
+.upstream-wind marker path, #wind-arrow path, #particle-arrow path { fill: #64ddd7; }
+.wind-label { fill: #78e4dc !important; font-size: 7px !important; font-weight: 700; }
+.tail-label { fill: #80cbee !important; font-size: 7px !important; font-weight: 700; text-anchor: middle; }
+.field-explainer { display: grid; grid-template-columns: .8fr 1fr 1.65fr; gap: 1px; background: rgb(113 147 190 / 13%); }
+.field-explainer > div { min-width: 0; padding: 8px 9px; background: #0a1525; }
+.field-explainer span { display: block; color: #71859f; font: 600 .54rem monospace; letter-spacing: .05em; text-transform: uppercase; }
+.field-explainer strong { display: block; margin-top: 5px; color: #d5e1f0; font-size: .64rem; font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; }
 .shielding-stack { display: grid; gap: 5px; margin-top: 16px; }
 .shielding-stack > div { display: flex; justify-content: space-between; align-items: center; padding: 9px 11px; background: rgb(23 48 76 / 68%); color: #9dafc5; font-size: .72rem; }
 .shielding-stack strong { color: #d6e4f5; font: 700 .68rem monospace; }
@@ -806,5 +841,6 @@ input { font: inherit; }
 @media (max-width: 780px) {
   .interaction-grid, .light-interaction { grid-template-columns: 1fr; }
   .profile-readouts { grid-template-columns: 1fr; }
+  .diagram-key, .field-explainer { grid-template-columns: 1fr; }
   .profile-heading { align-items: start; flex-direction: column; }
 }
