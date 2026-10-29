@@ -2,7 +2,7 @@
 
 Interactive scientific-computing project for visible light, magnetic interaction, charged particles, radiation context, and shielding across the Solar System.
 
-**Live Application:** https://solar-light-propagation-simulator.vercel.app *(existing deployment hostname)*
+**Live Application:** https://solar-radiation-simulator.vercel.app
 
 ## Project overview
 
