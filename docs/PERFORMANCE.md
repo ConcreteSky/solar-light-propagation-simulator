@@ -1,6 +1,6 @@
 # Performance
 
-This document records the final performance pass for the Solar Light Propagation Simulator. Measurements were taken on the local Windows development machine on 2026-10-01. They are comparative engineering measurements, not universal hardware guarantees.
+This document records the measured light-subsystem performance baseline retained by the Solar Radiation Simulator. Measurements were taken on the local Windows development machine on 2026-10-01, before the selected-only magnetic overlay expansion. They are comparative engineering measurements, not universal hardware guarantees.
 
 ## Method
 
