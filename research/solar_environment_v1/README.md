@@ -1,6 +1,6 @@
 # Solar environment research extension v1
 
-This additive research layer documents the transition from the Solar Light Propagation Simulator to the Solar Environment Simulator. It does not overwrite the light-model datasets, trained artifacts, evaluation results, paper files, or reliability study.
+This additive research layer documents the transition from the Solar Light Propagation Simulator to the Solar Radiation Simulator. It does not overwrite the light-model datasets, trained artifacts, evaluation results, paper files, or reliability study.
 
 ## Research decision
 

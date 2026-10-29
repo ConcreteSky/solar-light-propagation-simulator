@@ -50,8 +50,8 @@ export default function App() {
     <main className="app-shell" data-selected-body-id={selectedBodyId ?? ''}>
       <section className="map-section">
         <header className="app-header">
-          <p className="eyebrow">Solar environment map</p>
-          <h1>Solar Environment<br />Simulator</h1>
+          <p className="eyebrow">Radiation environment map</p>
+          <h1>Solar Radiation<br />Simulator</h1>
           <p className="instructions">Click a world to focus · Scroll to zoom · Drag to orbit</p>
           <button
             className="reset-view-button"

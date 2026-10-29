@@ -1,6 +1,6 @@
 # Solar environment model
 
-Version 1.0.0 expands the application from a light-only simulator into a layered Solar Environment Simulator. It preserves the original light engine and adds a reference-based magnetic, charged-particle, radiation-context, and shielding layer for all 32 destinations.
+Version 1.0.0 expands the application from a light-only simulator into the layered Solar Radiation Simulator. It preserves the original light engine and adds a reference-based magnetic, charged-particle, radiation-context, and shielding layer for all 32 destinations.
 
 ## Layer boundaries
 

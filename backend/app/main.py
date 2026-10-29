@@ -25,7 +25,7 @@ async def lifespan(_: FastAPI):
     yield
 
 app = FastAPI(
-    title="Solar Environment Simulator API",
+    title="Solar Radiation Simulator API",
     version="0.5.0",
     description="Solar light, magnetic-field, particle-environment, and shielding analysis API.",
     lifespan=lifespan,

@@ -1,4 +1,4 @@
-# Solar Environment Simulator
+# Solar Radiation Simulator
 
 Interactive scientific-computing project for visible light, magnetic interaction, charged particles, radiation context, and shielding across the Solar System.
 
@@ -6,7 +6,7 @@ Interactive scientific-computing project for visible light, magnetic interaction
 
 ## Project overview
 
-The Solar Environment Simulator expands the original Solar Light Propagation Simulator without replacing it. Selecting a destination freezes one shared simulation time and resolves three clearly separated layers: visible light, charged-particle/radiation context, and magnetic interaction. The light subsystem retains its measured reliability architecture: **Efficiency**, **Reliability**, and automatic deterministic **Fallback**.
+The Solar Radiation Simulator expands the original Solar Light Propagation Simulator without replacing it. Here, “radiation” is used broadly for energy and particles arriving from the Sun while the interface keeps visible photons and charged particles scientifically separate. Selecting a destination freezes one shared simulation time and resolves three layers: visible light, charged-particle/radiation context, and magnetic interaction. The light subsystem retains its measured reliability architecture: **Efficiency**, **Reliability**, and automatic deterministic **Fallback**.
 
 The Sun is the only light source. The application requires no manual scientific input and makes no live astronomical-data requests during normal operation.
 

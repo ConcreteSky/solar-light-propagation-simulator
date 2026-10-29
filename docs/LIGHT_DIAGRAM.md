@@ -1,6 +1,6 @@
 # Dynamic light-interaction diagram (legacy component)
 
-Solar Environment version 1 supersedes this large selected-body diagram with the four-panel Solar Interaction Profile. The compact visible-light subsection preserves the validated transmitted, scattered, and absorbed results. This document remains for historical reproducibility of the original light-only interface.
+Solar Radiation version 1 supersedes this large selected-body diagram with the four-panel Solar Interaction Profile. The compact visible-light subsection preserves the validated transmitted, scattered, and absorbed results. This document remains for historical reproducibility of the original light-only interface.
 
 ## Component structure
 
