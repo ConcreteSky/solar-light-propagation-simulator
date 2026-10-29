@@ -2,6 +2,7 @@ import { Html, useTexture } from '@react-three/drei'
 import { memo, useEffect, useState } from 'react'
 import { RepeatWrapping, SRGBColorSpace } from 'three'
 import { resolveTexture } from '../../data/textureRegistry.js'
+import MagneticFieldOverlay from '../MagneticField/MagneticFieldOverlay.jsx'
 
 function TexturedSurface({ radius, textureUrl, bodyScale }) {
   const texture = useTexture(textureUrl)
@@ -112,6 +113,10 @@ function CelestialBody({
       )}
 
       {body.id === 'saturn' && <SaturnRings radius={radius} />}
+
+      {selected && body.solarEnvironment && (
+        <MagneticFieldOverlay environment={body.solarEnvironment} radius={radius} />
+      )}
 
       {highlighted && (
         <mesh scale={bodyScale}>

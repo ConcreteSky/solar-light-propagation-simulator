@@ -1,0 +1,314 @@
+{
+  "schema_version": "1.0.0",
+  "access_date": "2026-10-30",
+  "classification_notice": "Radiation and shielding levels are qualitative scientific-context categories, not dosimetry or operational space-weather forecasts.",
+  "records": [
+    {
+      "id": "mercury", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": true, "family": "intrinsic_dipole", "type": "weak intrinsic dynamo",
+        "origin": "active internal dynamo", "surfaceStrengthMicrotesla": { "min": 0.25, "max": 0.7, "basis": "NASA NSSDCA surface range" },
+        "tiltDeg": 0.0, "offsetBodyRadii": 0.17, "geometry": "weak north-offset dipole",
+        "magnetospherePresence": "present", "extentBodyRadii": null, "shape": "compact and strongly solar-wind-compressed",
+        "shielding": "limited", "notes": "The compact magnetosphere deflects some plasma but solar-wind reconnection can channel particles toward the surface."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "deflected", "radiationLevel": "high", "trappedRadiation": "limited",
+        "interactionType": "compact intrinsic magnetosphere with direct surface precipitation", "surfaceExposure": "high",
+        "notes": "Close solar distance, negligible atmosphere, and a small magnetosphere leave the surface strongly exposed."
+      },
+      "summary": "A weak intrinsic field creates a compact magnetosphere, but intense nearby solar wind can still reach much of Mercury's surface.",
+      "sourceIds": ["nasa-mercury-magnetosphere", "nasa-planetary-fact-sheet"]
+    },
+    {
+      "id": "venus", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": false, "family": "induced", "type": "induced magnetosphere",
+        "origin": "solar-wind interaction with the ionosphere", "surfaceStrengthMicrotesla": null,
+        "tiltDeg": null, "offsetBodyRadii": null, "geometry": "draped interplanetary field",
+        "magnetospherePresence": "induced", "extentBodyRadii": null, "shape": "bow shock, magnetic draping, and comet-like tail",
+        "shielding": "limited", "notes": "Venus has no strong internally generated dipole; the ionosphere forms an induced obstacle."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "induced", "radiationLevel": "high", "trappedRadiation": "none",
+        "interactionType": "direct solar-wind coupling to the ionosphere", "surfaceExposure": "low",
+        "notes": "The dense atmosphere is the main surface shield even though the upper atmosphere directly interacts with solar wind."
+      },
+      "summary": "Venus lacks an intrinsic dipole; solar wind drapes around its ionosphere while the dense atmosphere supplies most surface shielding.",
+      "sourceIds": ["nasa-venus-magnetosphere"]
+    },
+    {
+      "id": "earth", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": true, "family": "intrinsic_dipole", "type": "intrinsic dynamo",
+        "origin": "convection in the liquid outer core", "surfaceStrengthMicrotesla": { "min": 24, "max": 66, "basis": "NASA NSSDCA surface range" },
+        "tiltDeg": 11.0, "offsetBodyRadii": 0.076, "geometry": "tilted dipole-like field",
+        "magnetospherePresence": "present", "extentBodyRadii": { "daysideMin": 6, "daysideMax": 10, "basis": "typical NASA dayside range" },
+        "shape": "compressed dayside with an elongated magnetotail", "shielding": "substantial",
+        "notes": "The magnetosphere redirects much solar plasma; trapped belts remain hazardous above the atmosphere."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "deflected", "radiationLevel": "moderate", "trappedRadiation": "intense",
+        "interactionType": "bow shock, magnetopause, polar precipitation, and magnetotail", "surfaceExposure": "low",
+        "notes": "Atmosphere and magnetosphere together strongly reduce ordinary surface exposure."
+      },
+      "summary": "Earth's intrinsic magnetosphere and dense atmosphere provide substantial shielding while storing energetic particles in radiation belts.",
+      "sourceIds": ["nasa-earth-magnetosphere", "nasa-earth-fact-sheet"]
+    },
+    {
+      "id": "mars", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": false, "family": "crustal_remnant", "type": "localized crustal remanence",
+        "origin": "magnetized ancient crust", "surfaceStrengthMicrotesla": null,
+        "tiltDeg": null, "offsetBodyRadii": null, "geometry": "patchy regional magnetic umbrellas",
+        "magnetospherePresence": "hybrid", "extentBodyRadii": null, "shape": "fragmented crustal fields plus an induced solar-wind obstacle",
+        "shielding": "limited", "notes": "Strong anomalies are concentrated mainly in parts of the southern hemisphere; there is no global dipole."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "variable", "radiationLevel": "high", "trappedRadiation": "none",
+        "interactionType": "induced bow shock with localized crustal deflection", "surfaceExposure": "high",
+        "notes": "Thin atmosphere and absent global field provide only modest protection from energetic particles."
+      },
+      "summary": "Mars has no global dipole. Local crustal fields create fragmented regional protection within an otherwise exposed environment.",
+      "sourceIds": ["nasa-mars-magnetism", "nasa-mars-radiation"]
+    },
+    {
+      "id": "jupiter", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": true, "family": "intrinsic_dipole", "type": "powerful intrinsic dynamo",
+        "origin": "electrically conducting metallic hydrogen interior", "surfaceStrengthMicrotesla": { "min": 400, "max": 1300, "basis": "NASA NSSDCA surface range" },
+        "tiltDeg": 9.4, "offsetBodyRadii": 0.119, "geometry": "strong tilted dipole with higher multipoles",
+        "magnetospherePresence": "present", "extentBodyRadii": { "daysideMin": 14, "daysideMax": 42, "basis": "converted from NASA diameter range" },
+        "shape": "enormous compressed dayside and tail extending toward Saturn's orbit", "shielding": "extreme",
+        "notes": "The field blocks direct solar wind but creates an exceptionally hazardous trapped-particle system."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "deflected", "radiationLevel": "extreme", "trappedRadiation": "extreme",
+        "interactionType": "rotation-driven magnetosphere, Io plasma torus, and intense radiation belts", "surfaceExposure": "not_applicable",
+        "notes": "Charged particles are accelerated to energies that endanger spacecraft and bombard inner moons."
+      },
+      "summary": "Jupiter's vast intrinsic magnetosphere deflects solar wind but produces the Solar System's most intense planetary radiation environment.",
+      "sourceIds": ["nasa-jupiter-magnetosphere", "nasa-jupiter-radiation", "nasa-jupiter-fact-sheet"]
+    },
+    {
+      "id": "saturn", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": true, "family": "intrinsic_aligned", "type": "intrinsic dynamo",
+        "origin": "conducting fluid interior", "surfaceStrengthMicrotesla": { "min": 18, "max": 84, "basis": "NASA NSSDCA surface range" },
+        "tiltDeg": 0.0, "offsetBodyRadii": 0.038, "geometry": "nearly rotation-aligned field",
+        "magnetospherePresence": "present", "extentBodyRadii": { "daysideMin": 20, "daysideMax": 35, "basis": "NASA bow-shock range" },
+        "shape": "large rotation-influenced cavity with a solar-wind-shaped tail", "shielding": "substantial",
+        "notes": "Rings and moons supply material that modifies the magnetospheric plasma."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "deflected", "radiationLevel": "high", "trappedRadiation": "intense",
+        "interactionType": "rotation-driven inner plasma with solar-wind-driven outer regions", "surfaceExposure": "not_applicable",
+        "notes": "Less intense than Jupiter but still a large, energetic magnetospheric system."
+      },
+      "summary": "Saturn has a strong, unusually axis-aligned magnetic field and a large plasma environment shaped by its rings and moons.",
+      "sourceIds": ["nasa-saturn-magnetosphere", "nasa-saturn-fact-sheet"]
+    },
+    {
+      "id": "uranus", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": true, "family": "intrinsic_tilted_offset", "type": "intrinsic multipolar dynamo",
+        "origin": "conducting interior, not well constrained", "surfaceStrengthMicrotesla": { "min": 10, "max": 100, "basis": "NASA NSSDCA surface range" },
+        "tiltDeg": 58.6, "offsetBodyRadii": 0.352, "geometry": "strongly tilted and off-center",
+        "magnetospherePresence": "present", "extentBodyRadii": null, "shape": "asymmetric cavity with a rotating corkscrew tail",
+        "shielding": "substantial", "notes": "The magnetic axis is highly tilted and offset, producing strong rotational variation."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "deflected", "radiationLevel": "high", "trappedRadiation": "intense",
+        "interactionType": "time-variable tilted magnetosphere", "surfaceExposure": "not_applicable",
+        "notes": "Only one spacecraft flyby limits detailed knowledge of the current environment."
+      },
+      "summary": "Uranus has a strongly tilted, offset field whose corkscrew magnetotail changes orientation as the planet rotates.",
+      "sourceIds": ["nasa-uranus-magnetosphere", "nasa-uranus-fact-sheet"]
+    },
+    {
+      "id": "neptune", "dataQuality": "supported", "approximate": true,
+      "magnetic": {
+        "globalField": true, "family": "intrinsic_tilted_offset", "type": "intrinsic multipolar dynamo",
+        "origin": "conducting interior, not well constrained", "surfaceStrengthMicrotesla": { "min": 10, "max": 90, "basis": "NASA NSSDCA surface range" },
+        "tiltDeg": 46.9, "offsetBodyRadii": 0.485, "geometry": "highly tilted, offset, and non-axisymmetric",
+        "magnetospherePresence": "present", "extentBodyRadii": null, "shape": "complex time-variable asymmetric magnetosphere",
+        "shielding": "substantial", "notes": "Voyager 2 remains the only close spacecraft survey, so detailed geometry is limited."
+      },
+      "particleEnvironment": {
+        "solarWindExposure": "deflected", "radiationLevel": "high", "trappedRadiation": "intense",
+        "interactionType": "tilted multipolar magnetosphere", "surfaceExposure": "not_applicable",
+        "notes": "Radiation categories are qualitative because in-situ coverage is sparse."
+      },
+      "summary": "Neptune's strongly tilted and offset magnetic field creates a complex, asymmetric charged-particle environment.",
+      "sourceIds": ["nasa-neptune-magnetosphere", "nasa-neptune-fact-sheet"]
+    },
+    {
+      "id": "ceres", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": false, "family": "negligible", "type": "no established global field", "origin": "none established", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "no resolved global structure", "magnetospherePresence": "absent", "extentBodyRadii": null, "shape": "no global magnetosphere represented", "shielding": "none", "notes": "No global magnetic shielding is assumed; localized remanence is not modeled." },
+      "particleEnvironment": { "solarWindExposure": "direct", "radiationLevel": "moderate", "trappedRadiation": "none", "interactionType": "direct interaction with an airless surface", "surfaceExposure": "high", "notes": "Category is inferred from the absence of a substantial atmosphere and established magnetosphere." },
+      "summary": "Ceres is represented as an airless, unmagnetized body directly exposed to the heliospheric particle environment.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "pluto", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": null, "family": "unknown", "type": "not measured", "origin": "unknown", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "not constrained", "magnetospherePresence": "unknown", "extentBodyRadii": null, "shape": "no global structure displayed", "shielding": "unknown", "notes": "NASA reports that Pluto's field is unknown and likely small or absent." },
+      "particleEnvironment": { "solarWindExposure": "direct", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "solar-wind interaction with a tenuous, seasonally variable atmosphere", "surfaceExposure": "high", "notes": "The category is contextual, not a measured surface dose." },
+      "summary": "Pluto's magnetic field is not known; the model therefore shows no global magnetosphere and labels the interaction as weakly constrained.",
+      "sourceIds": ["nasa-pluto-magnetosphere"]
+    },
+    {
+      "id": "eris", "dataQuality": "unknown", "approximate": true,
+      "magnetic": { "globalField": null, "family": "unknown", "type": "unknown", "origin": "unknown", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "unknown", "magnetospherePresence": "unknown", "extentBodyRadii": null, "shape": "not displayed", "shielding": "unknown", "notes": "No reliable global-field geometry is available for this visualization." },
+      "particleEnvironment": { "solarWindExposure": "direct", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "poorly constrained outer-heliosphere interaction", "surfaceExposure": "unknown", "notes": "No dosimetric claim is made." },
+      "summary": "Eris has insufficient magnetic and local particle measurements for a body-specific field model.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "haumea", "dataQuality": "unknown", "approximate": true,
+      "magnetic": { "globalField": null, "family": "unknown", "type": "unknown", "origin": "unknown", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "unknown", "magnetospherePresence": "unknown", "extentBodyRadii": null, "shape": "not displayed", "shielding": "unknown", "notes": "No reliable field geometry is available." },
+      "particleEnvironment": { "solarWindExposure": "direct", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "poorly constrained outer-heliosphere interaction", "surfaceExposure": "unknown", "notes": "No dosimetric claim is made." },
+      "summary": "Haumea's local magnetic and radiation environment remains too poorly measured for a global-field visual.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "makemake", "dataQuality": "unknown", "approximate": true,
+      "magnetic": { "globalField": null, "family": "unknown", "type": "unknown", "origin": "unknown", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "unknown", "magnetospherePresence": "unknown", "extentBodyRadii": null, "shape": "not displayed", "shielding": "unknown", "notes": "No reliable field geometry is available." },
+      "particleEnvironment": { "solarWindExposure": "direct", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "poorly constrained outer-heliosphere interaction", "surfaceExposure": "unknown", "notes": "No dosimetric claim is made." },
+      "summary": "Makemake's magnetic and charged-particle environment is explicitly represented as unknown.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "moon", "dataQuality": "supported", "approximate": true,
+      "magnetic": { "globalField": false, "family": "crustal_remnant", "type": "localized crustal anomalies", "origin": "remanent magnetized crust", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "small regional mini-magnetospheres", "magnetospherePresence": "absent", "extentBodyRadii": null, "shape": "localized surface patches only", "shielding": "limited", "notes": "There is no global field; small anomalies can locally deflect solar wind but do not protect people globally." },
+      "particleEnvironment": { "solarWindExposure": "variable", "radiationLevel": "high", "trappedRadiation": "none", "interactionType": "mostly direct solar wind with occasional Earth-magnetotail passage", "surfaceExposure": "high", "notes": "The exosphere provides essentially no radiation shielding." },
+      "summary": "The Moon has no global magnetosphere. Local crustal anomalies create small patches of deflection within a largely exposed surface.",
+      "sourceIds": ["nasa-moon-solar-wind"]
+    },
+    {
+      "id": "phobos", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": false, "family": "negligible", "type": "no established global field", "origin": "none established", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "none", "magnetospherePresence": "absent", "extentBodyRadii": null, "shape": "not displayed", "shielding": "none", "notes": "No planetary-scale magnetic structure is represented." },
+      "particleEnvironment": { "solarWindExposure": "variable", "radiationLevel": "high", "trappedRadiation": "none", "interactionType": "small airless moon within Mars' induced environment", "surfaceExposure": "high", "notes": "Radiation category is inferred, not a measured dose map." },
+      "summary": "Phobos is an unshielded airless moon moving through Mars' variable induced plasma environment.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "deimos", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": false, "family": "negligible", "type": "no established global field", "origin": "none established", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "none", "magnetospherePresence": "absent", "extentBodyRadii": null, "shape": "not displayed", "shielding": "none", "notes": "No planetary-scale magnetic structure is represented." },
+      "particleEnvironment": { "solarWindExposure": "variable", "radiationLevel": "high", "trappedRadiation": "none", "interactionType": "small airless moon near Mars' plasma wake", "surfaceExposure": "high", "notes": "Radiation category is inferred, not a measured dose map." },
+      "summary": "Deimos has no established global field and little material shielding from the surrounding particle environment.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "io", "dataQuality": "supported", "approximate": true,
+      "magnetic": { "globalField": false, "family": "parent_plasma", "type": "Jovian-field interaction", "origin": "conductive interaction and volcanic plasma loading", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "Alfvén-wing and plasma-torus interaction", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic dipole displayed", "shielding": "none", "notes": "Io feeds the Jovian plasma torus and does not receive Earth-like shielding from Jupiter's field." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "extreme", "trappedRadiation": "extreme", "interactionType": "Io plasma torus and Jovian co-rotating plasma", "surfaceExposure": "extreme", "notes": "Jupiter's magnetosphere replaces direct solar wind with an even harsher local plasma environment." },
+      "summary": "Io is embedded in Jupiter's extreme radiation belts and actively supplies plasma to the surrounding magnetosphere.",
+      "sourceIds": ["nasa-jupiter-radiation"]
+    },
+    {
+      "id": "europa", "dataQuality": "supported", "approximate": true,
+      "magnetic": { "globalField": false, "family": "induced", "type": "induced ocean response", "origin": "electrical currents induced in a conductive subsurface ocean", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "time-varying induced field within Jupiter's field", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "small induced obstacle, not an intrinsic dipole", "shielding": "limited", "notes": "Europa does not independently generate a global magnetic field." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "extreme", "trappedRadiation": "extreme", "interactionType": "Jovian plasma river and induced magnetic response", "surfaceExposure": "extreme", "notes": "Europa orbits in an intense charged-particle region that strongly processes its surface." },
+      "summary": "Europa has an induced response, not an intrinsic dipole, and sits in one of Jupiter's most intense radiation regions.",
+      "sourceIds": ["nasa-europa-induction", "nasa-jupiter-radiation"]
+    },
+    {
+      "id": "ganymede", "dataQuality": "supported", "approximate": true,
+      "magnetic": { "globalField": true, "family": "intrinsic_mini", "type": "intrinsic moon dynamo", "origin": "metallic iron core", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "small intrinsic dipole inside Jupiter's field", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "miniature magnetosphere constrained by Jovian plasma", "shielding": "moderate", "notes": "Ganymede is the only moon known to have an intrinsic magnetic field, but it remains embedded in Jupiter's magnetosphere." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "high", "trappedRadiation": "intense", "interactionType": "magnetosphere-within-a-magnetosphere", "surfaceExposure": "high", "notes": "Its mini-magnetosphere modifies local plasma but does not remove the broader Jovian radiation environment." },
+      "summary": "Ganymede's intrinsic mini-magnetosphere is nested inside Jupiter's much larger and energetic magnetic environment.",
+      "sourceIds": ["nasa-ganymede-magnetosphere"]
+    },
+    {
+      "id": "callisto", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": false, "family": "induced", "type": "induced response", "origin": "conductive interior response to Jupiter's changing field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "weak induced obstacle", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic dipole displayed", "shielding": "limited", "notes": "The visualization treats Callisto as induced/embedded rather than intrinsically magnetized." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "intense", "interactionType": "outer Jovian magnetospheric plasma", "surfaceExposure": "high", "notes": "Callisto is generally less irradiated than the inner Galilean moons but remains unshielded at the surface." },
+      "summary": "Callisto has no established intrinsic dipole and experiences the outer Jovian plasma environment with limited induced shielding.",
+      "sourceIds": ["derived-environment-classification", "nasa-jupiter-radiation"]
+    },
+    {
+      "id": "titan", "dataQuality": "supported", "approximate": true,
+      "magnetic": { "globalField": false, "family": "induced", "type": "induced atmospheric interaction", "origin": "Saturnian plasma or solar-wind interaction with the ionosphere", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "draped external field around an unmagnetized atmosphere", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "induced wake that changes with Saturn-magnetosphere compression", "shielding": "limited", "notes": "Titan spends about 95% of its time inside Saturn's magnetosphere but can be exposed directly during strong compression." },
+      "particleEnvironment": { "solarWindExposure": "variable", "radiationLevel": "moderate", "trappedRadiation": "moderate", "interactionType": "Saturnian plasma interaction with occasional direct solar wind", "surfaceExposure": "low", "notes": "Titan's dense atmosphere provides substantial surface shielding despite its lack of an intrinsic field." },
+      "summary": "Titan is unmagnetized but usually embedded in Saturn's magnetosphere; its dense atmosphere is the dominant surface shield.",
+      "sourceIds": ["nasa-titan-magnetosphere"]
+    },
+    {
+      "id": "rhea", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": false, "family": "parent_plasma", "type": "Saturnian-field interaction", "origin": "external Saturn magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "plasma wake", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic global field displayed", "shielding": "none", "notes": "Reference data do not support an intrinsic dipole visual." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "moderate", "interactionType": "Saturnian co-rotating plasma", "surfaceExposure": "high", "notes": "Airless surface remains exposed to local magnetospheric particles." },
+      "summary": "Rhea is modeled as an airless moon embedded in Saturn's plasma rather than as a body with its own magnetosphere.",
+      "sourceIds": ["nasa-saturn-magnetosphere"]
+    },
+    {
+      "id": "iapetus", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": false, "family": "negligible", "type": "no established global field", "origin": "none established", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "none", "magnetospherePresence": "variable", "extentBodyRadii": null, "shape": "no global field displayed", "shielding": "none", "notes": "Iapetus' distant orbit samples a more variable boundary environment." },
+      "particleEnvironment": { "solarWindExposure": "variable", "radiationLevel": "moderate", "trappedRadiation": "limited", "interactionType": "outer Saturnian or solar-wind environment", "surfaceExposure": "high", "notes": "Classification is qualitative due to limited local measurements." },
+      "summary": "Iapetus lacks a known global field and moves through Saturn's variable outer magnetic environment.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "dione", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": false, "family": "parent_plasma", "type": "Saturnian-field interaction", "origin": "external Saturn magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "plasma wake", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic global field displayed", "shielding": "none", "notes": "Reference data do not support an intrinsic dipole visual." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "moderate", "interactionType": "Saturnian co-rotating plasma", "surfaceExposure": "high", "notes": "Airless surface remains exposed to local particles." },
+      "summary": "Dione is embedded in Saturn's magnetosphere but has no modeled intrinsic global field of its own.",
+      "sourceIds": ["nasa-saturn-magnetosphere"]
+    },
+    {
+      "id": "titania", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": null, "family": "parent_plasma", "type": "Uranian-field interaction", "origin": "external Uranus magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "poorly constrained plasma wake", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic global field displayed", "shielding": "unknown", "notes": "Voyager 2 flyby coverage is insufficient for a detailed moon-specific field." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "tilted Uranian magnetospheric plasma", "surfaceExposure": "unknown", "notes": "Qualitative category only." },
+      "summary": "Titania is shown within Uranus' tilted plasma environment; no unsupported intrinsic field is drawn.",
+      "sourceIds": ["derived-environment-classification", "nasa-uranus-magnetosphere"]
+    },
+    {
+      "id": "oberon", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": null, "family": "parent_plasma", "type": "outer Uranian-field interaction", "origin": "external Uranus magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "poorly constrained", "magnetospherePresence": "variable", "extentBodyRadii": null, "shape": "no intrinsic global field displayed", "shielding": "unknown", "notes": "Oberon can sample the variable outer magnetosphere." },
+      "particleEnvironment": { "solarWindExposure": "variable", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "outer Uranian magnetosphere", "surfaceExposure": "unknown", "notes": "Qualitative category only." },
+      "summary": "Oberon's magnetic environment is weakly constrained and represented without a fabricated global field.",
+      "sourceIds": ["derived-environment-classification", "nasa-uranus-magnetosphere"]
+    },
+    {
+      "id": "umbriel", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": null, "family": "parent_plasma", "type": "Uranian-field interaction", "origin": "external Uranus magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "poorly constrained", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic global field displayed", "shielding": "unknown", "notes": "No moon-scale dipole is asserted." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "tilted Uranian magnetospheric plasma", "surfaceExposure": "unknown", "notes": "Qualitative category only." },
+      "summary": "Umbriel is represented as an airless moon within Uranus' unusually tilted magnetosphere.",
+      "sourceIds": ["derived-environment-classification", "nasa-uranus-magnetosphere"]
+    },
+    {
+      "id": "ariel", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": null, "family": "parent_plasma", "type": "Uranian-field interaction", "origin": "external Uranus magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "poorly constrained", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic global field displayed", "shielding": "unknown", "notes": "No moon-scale dipole is asserted." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "tilted Uranian magnetospheric plasma", "surfaceExposure": "unknown", "notes": "Qualitative category only." },
+      "summary": "Ariel experiences Uranian magnetospheric plasma, but its own global magnetic field is not established.",
+      "sourceIds": ["derived-environment-classification", "nasa-uranus-magnetosphere"]
+    },
+    {
+      "id": "triton", "dataQuality": "limited", "approximate": true,
+      "magnetic": { "globalField": null, "family": "parent_plasma", "type": "Neptunian-field interaction", "origin": "external Neptune magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "plasma interaction with a tenuous atmosphere", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic global dipole displayed", "shielding": "unknown", "notes": "The single Voyager 2 encounter does not justify a detailed intrinsic-field model." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "Neptunian plasma interaction with a tenuous ionosphere", "surfaceExposure": "high", "notes": "Atmospheric shielding is slight; category is qualitative." },
+      "summary": "Triton interacts with Neptune's complex magnetosphere, while its own global magnetic field remains unconstrained.",
+      "sourceIds": ["derived-environment-classification", "nasa-neptune-magnetosphere"]
+    },
+    {
+      "id": "proteus", "dataQuality": "unknown", "approximate": true,
+      "magnetic": { "globalField": null, "family": "parent_plasma", "type": "Neptunian-field interaction", "origin": "external Neptune magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "unknown local wake", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic field displayed", "shielding": "unknown", "notes": "Local field measurements are insufficient." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "Neptunian magnetospheric plasma", "surfaceExposure": "unknown", "notes": "Qualitative category only." },
+      "summary": "Proteus is shown inside Neptune's magnetosphere without an invented intrinsic field.",
+      "sourceIds": ["derived-environment-classification", "nasa-neptune-magnetosphere"]
+    },
+    {
+      "id": "nereid", "dataQuality": "unknown", "approximate": true,
+      "magnetic": { "globalField": null, "family": "unknown", "type": "unknown", "origin": "unknown", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "unknown", "magnetospherePresence": "variable", "extentBodyRadii": null, "shape": "not displayed", "shielding": "unknown", "notes": "Nereid's eccentric orbit creates a variable and poorly sampled environment." },
+      "particleEnvironment": { "solarWindExposure": "variable", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "outer Neptunian magnetosphere or solar wind", "surfaceExposure": "unknown", "notes": "Qualitative category only." },
+      "summary": "Nereid's local magnetic environment is too poorly measured for a body-specific field visual.",
+      "sourceIds": ["derived-environment-classification"]
+    },
+    {
+      "id": "larissa", "dataQuality": "unknown", "approximate": true,
+      "magnetic": { "globalField": null, "family": "parent_plasma", "type": "Neptunian-field interaction", "origin": "external Neptune magnetic field", "surfaceStrengthMicrotesla": null, "tiltDeg": null, "offsetBodyRadii": null, "geometry": "unknown local wake", "magnetospherePresence": "parent_embedded", "extentBodyRadii": null, "shape": "no intrinsic field displayed", "shielding": "unknown", "notes": "Local field measurements are insufficient." },
+      "particleEnvironment": { "solarWindExposure": "parent_magnetosphere", "radiationLevel": "moderate", "trappedRadiation": "unknown", "interactionType": "inner Neptunian magnetospheric plasma", "surfaceExposure": "unknown", "notes": "Qualitative category only." },
+      "summary": "Larissa is represented as a small moon embedded in Neptune's plasma environment, with no asserted intrinsic field.",
+      "sourceIds": ["derived-environment-classification", "nasa-neptune-magnetosphere"]
+    }
+  ]
+}

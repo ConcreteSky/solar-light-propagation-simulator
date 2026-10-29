@@ -760,3 +760,51 @@ input { font: inherit; }
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Solar Interaction Profile: photons and charged particles intentionally use separate encodings. */
+.solar-interaction-profile { margin-top: 22px; }
+.profile-heading { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+.profile-heading h2 { margin-top: 4px; }
+.quality-badge { padding: 7px 10px; border: 1px solid #6e829f; border-radius: 999px; color: #c7d5e8; font: 700 .62rem/1 'Cascadia Mono','Consolas',monospace; letter-spacing: .05em; text-transform: uppercase; }
+.quality-supported { border-color: #45c5a4; color: #8ce8d0; }
+.quality-limited { border-color: #d5a04c; color: #ffd18a; }
+.quality-unknown { border-color: #9a7caf; color: #d2b9e3; }
+.environment-summary { max-width: 850px; margin: 10px 0 20px; color: #a9b8cc; line-height: 1.6; }
+.interaction-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; }
+.interaction-panel, .light-interaction { border: 1px solid rgb(117 150 197 / 27%); border-radius: 10px; background: radial-gradient(circle at 20% 0%, rgb(31 62 98 / 34%), transparent 52%), #091321; box-shadow: inset 0 1px rgb(255 255 255 / 4%); }
+.interaction-panel { min-width: 0; padding: 17px; }
+.interaction-panel h3, .light-interaction h3 { margin: 0; color: #eaf2ff; font-size: .84rem; letter-spacing: .03em; }
+.interaction-panel h3 span { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 8px; border-radius: 50%; background: #173657; color: #8cd9ff; font: 700 .65rem/1 monospace; }
+.interaction-panel svg { display: block; width: 100%; max-height: 160px; margin: 10px 0; color: #62d8ff; overflow: visible; }
+.interaction-panel svg text { fill: #8ca0ba; font: 9px 'Cascadia Mono','Consolas',monospace; letter-spacing: .04em; }
+.profile-sun { fill: #ffc65c; filter: drop-shadow(0 0 9px #ffbd45); }
+.profile-body { fill: #172d46; stroke: #9ab6d5; stroke-width: 2; }
+.photon-stream { fill: none; stroke: #ffd667; stroke-width: 5; filter: drop-shadow(0 0 4px #ffc642); }
+.particle-stream { fill: none; stroke: #54e3de; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 10; }
+.profile-readouts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+.profile-readouts > * { padding: 8px; background: rgb(34 65 99 / 34%); color: #acbdd2; font-size: .68rem; line-height: 1.35; }
+.profile-readouts strong { color: #ffe2a1; }
+.magnetic-panel p, .shielding-panel p { margin: 10px 0 0; color: #9fb0c7; font-size: .74rem; line-height: 1.55; }
+.shielding-stack { display: grid; gap: 5px; margin-top: 16px; }
+.shielding-stack > div { display: flex; justify-content: space-between; align-items: center; padding: 9px 11px; background: rgb(23 48 76 / 68%); color: #9dafc5; font-size: .72rem; }
+.shielding-stack strong { color: #d6e4f5; font: 700 .68rem monospace; }
+.shielding-stack strong[data-level="high"], .shielding-stack strong[data-level="extreme"] { color: #ff9e8b; }
+.shielding-stack strong[data-level="substantial"], .shielding-stack strong[data-level="moderate"] { color: #8ce8d0; }
+.shielding-stack .exposure-row { margin-top: 3px; border-left: 2px solid #ee855f; }
+.metrics-panel dl, .light-interaction dl { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 14px 0 0; background: rgb(119 151 192 / 14%); }
+.metrics-panel dl div, .light-interaction dl div { min-width: 0; padding: 9px 11px; background: #0a1525; }
+.metrics-panel dt, .light-interaction dt { color: #71859f; font: 600 .57rem monospace; letter-spacing: .04em; text-transform: uppercase; }
+.metrics-panel dd, .light-interaction dd { margin: 5px 0 0; color: #d8e3f2; font-size: .72rem; overflow-wrap: anywhere; }
+.light-interaction { display: grid; grid-template-columns: .65fr 1.5fr 1fr; gap: 18px; margin-top: 12px; padding: 17px; align-items: center; }
+.subsystem-label { margin: 0 0 5px; color: #eabf68; font: 600 .56rem monospace; letter-spacing: .06em; text-transform: uppercase; }
+.light-bars { display: grid; gap: 8px; }
+.light-bars > div { display: grid; grid-template-columns: 80px 1fr 48px; gap: 8px; align-items: center; color: #9dafc5; font-size: .67rem; }
+.light-bars meter { width: 100%; accent-color: #f1c55f; }
+.light-bars strong { color: #e4ebf7; text-align: right; font: 700 .65rem monospace; }
+.light-interaction dl { margin: 0; }
+.classification-notice { margin: 12px 0 0; color: #72839a; font-size: .65rem; line-height: 1.5; }
+@media (max-width: 780px) {
+  .interaction-grid, .light-interaction { grid-template-columns: 1fr; }
+  .profile-readouts { grid-template-columns: 1fr; }
+  .profile-heading { align-items: start; flex-direction: column; }
+}

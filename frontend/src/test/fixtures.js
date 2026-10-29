@@ -52,6 +52,29 @@ export function makePrediction(overrides = {}) {
       ood: { score: 0.9, q95: 1.47, q99: 1.76, classification: 'in_distribution', method: 'standardized distance' },
     },
     sourceIds: ['test-source'],
+    solarEnvironment: {
+      schemaVersion: '1.0.0',
+      classificationNotice: 'Qualitative categories; not dosimetry or a space-weather forecast.',
+      destination: 'mars', dataQuality: 'supported', approximate: true,
+      magnetic: {
+        globalField: false, family: 'crustal_remnant', type: 'crustal remanent fields',
+        origin: 'magnetized crust', surfaceStrengthMicrotesla: null, tiltDeg: null,
+        offsetBodyRadii: null, geometry: 'localized patches', magnetospherePresence: 'hybrid',
+        extentBodyRadii: null, shape: 'patchy', shielding: 'limited', notes: 'test',
+      },
+      particleEnvironment: {
+        solarWindExposure: 'direct', radiationLevel: 'high', trappedRadiation: 'limited',
+        interactionType: 'induced and crustal', surfaceExposure: 'high', notes: 'test',
+      },
+      dynamic: {
+        solarIrradianceWm2: 588.6, steadyStateSolarWindFluxProxy: 0.432,
+        fluxProxyBasis: 'test proxy', uvContext: 'reduced steady solar input',
+        atmosphericShielding: 'limited', magneticShielding: 'limited', combinedShielding: 'limited',
+        scenarioAdjustedSurfaceExposure: 'high', consequence: 'Qualitative test consequence.',
+      },
+      summary: 'Mars has no global dynamo; local crustal fields create patchy interactions.',
+      sourceIds: ['test-source'],
+    },
     ...overrides,
   }
 }

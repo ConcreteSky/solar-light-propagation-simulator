@@ -1,13 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import LightDiagram from '../LightDiagram/LightDiagram.jsx'
+import SolarInteractionProfile from '../SolarInteractionProfile/SolarInteractionProfile.jsx'
 import { getLightResult, getScenarioLightResult } from '../../services/api.js'
 import {
   createAppearanceSummary,
-  formatDistance,
-  formatIrradiance,
-  formatPercent,
-  formatTravelTime,
-  getAverageSolarDistanceKm,
 } from '../../utils/lightAnalysis.js'
 
 const GASES = ['CO2', 'N2', 'O2', 'CH4', 'H2', 'He']
@@ -31,10 +26,20 @@ function optionalNumber(value) {
   return value === '' ? null : Number(value)
 }
 
-function ScenarioControls({ body, activeScenario, busy, onApply, onReset }) {
-  const [form, setForm] = useState(() => activeScenario ?? scenarioFromBody(body))
+function editableScenario(body, activeScenario) {
+  const source = activeScenario ?? scenarioFromBody(body)
+  return {
+    ...source,
+    surfacePressurePa: source.surfacePressurePa ?? '',
+    atmosphericDensityKgM3: source.atmosphericDensityKgM3 ?? '',
+    composition: Object.fromEntries(GASES.map((gas) => [gas, source.composition?.[gas] ?? ''])),
+  }
+}
 
-  useEffect(() => setForm(activeScenario ?? scenarioFromBody(body)), [body, activeScenario])
+function ScenarioControls({ body, activeScenario, busy, onApply, onReset }) {
+  const [form, setForm] = useState(() => editableScenario(body, activeScenario))
+
+  useEffect(() => setForm(editableScenario(body, activeScenario)), [body, activeScenario])
 
   const updateComposition = (gas, value) => {
     setForm((current) => ({
@@ -81,42 +86,6 @@ function ScenarioControls({ body, activeScenario, busy, onApply, onReset }) {
         </div>
       </form>
     </details>
-  )
-}
-
-function ScientificValues({ body, bodies, analysis }) {
-  const atmospheric = analysis.hasAtmosphere === true
-  const results = analysis.results
-  const astronomy = analysis.astronomy
-  const distance = astronomy?.distanceFromSunKm ?? getAverageSolarDistanceKm(body, bodies)
-  const astronomicalValues = astronomy ? [
-    ['Approx. current Sun distance', formatDistance(distance)],
-    ['Approx. orbital position', `${astronomy.orbitalAngleDeg.toFixed(2)}° from periapsis`],
-    ['Current light-travel time', formatTravelTime(astronomy.lightTravelTimeSeconds)],
-    ['Current solar irradiance', formatIrradiance(astronomy.solarIrradianceWm2)],
-    ['Apparent solar diameter', `${astronomy.apparentSolarAngularDiameterDeg.toFixed(4)}°`],
-  ] : [
-    ['Average Sun distance', formatDistance(distance)],
-    ['Reference light-travel time', formatTravelTime(body.light_reference?.light_travel_time_seconds)],
-    ['Reference solar irradiance', formatIrradiance(body.light_reference?.solar_irradiance_w_m2)],
-  ]
-  const values = [
-    ...astronomicalValues,
-    [atmospheric ? 'Transmitted' : 'Reaches surface', formatPercent(results.transmitted)],
-    [atmospheric ? 'Scattered' : 'Reflected / scattered', formatPercent(results.scattered)],
-    ['Absorbed', formatPercent(results.absorbed)],
-    ['Scattered-light color', `${results.scatteredLightColor?.label ?? 'neutral'} · ${results.scatteredLightColor?.confidence ?? 'fallback'}`],
-  ]
-
-  return (
-    <dl className="science-values">
-      {values.map(([label, value]) => (
-        <div key={label} className="science-value">
-          <dt>{label}</dt>
-          <dd>{value}</dd>
-        </div>
-      ))}
-    </dl>
   )
 }
 
@@ -210,7 +179,7 @@ export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
   return (
     <section id="light-analysis" className="analysis-section" aria-labelledby="analysis-title">
       <div className="analysis-inner">
-        <p className="panel-kicker">Light analysis</p>
+        <p className="panel-kicker">Solar environment analysis</p>
         {!body && (
           <div className="analysis-empty">
             <h2 id="analysis-title">Choose a destination</h2>
@@ -226,7 +195,7 @@ export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
         {body && body.id !== 'sun' && state.status === 'loading' && (
           <div className="analysis-loading" role="status">
             <h2 id="analysis-title">Analyzing {body.name}</h2>
-            <p>Retrieving validated light results…</p>
+            <p>Resolving light, particles, magnetic interaction, and shielding…</p>
           </div>
         )}
         {body && body.id !== 'sun' && state.status === 'error' && (
@@ -254,10 +223,7 @@ export default function ResultPanel({ body, bodies, simulationTimestampMs }) {
               onApply={(payload) => setScenario({ destinationId: body.id, payload })}
               onReset={() => setScenario(null)}
             />
-            <div className="analysis-grid">
-              <LightDiagram analysis={state.analysis} />
-              <ScientificValues body={body} bodies={bodies} analysis={state.analysis} />
-            </div>
+            <SolarInteractionProfile body={body} bodies={bodies} analysis={state.analysis} />
             <ReliabilityDetails analysis={state.analysis} />
             <p className="appearance-summary">{createAppearanceSummary(body, state.analysis)}</p>
             {state.analysis.astronomy && (

@@ -3,6 +3,7 @@ from typing import Literal
 from pydantic import BaseModel
 
 from .light_analysis import AnalysisResults, AstronomicalState
+from .solar_environment import SolarEnvironmentAnalysis
 
 
 class UncertaintyEstimate(BaseModel):
@@ -62,3 +63,4 @@ class LightPrediction(BaseModel):
     reliability: ReliabilityAssessment
     sourceIds: list[str]
     astronomy: AstronomicalState | None = None
+    solarEnvironment: SolarEnvironmentAnalysis

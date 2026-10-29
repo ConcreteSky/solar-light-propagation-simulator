@@ -46,6 +46,7 @@ from .reliability_service import (
     uncertainty_by_output,
 )
 from .spectral_color_service import derive_transmitted_light_color
+from .solar_environment_service import analyze_solar_environment
 from .validation import clamp01, conserve_fractions, fractions_are_valid
 
 
@@ -264,6 +265,7 @@ def _fallback_response(
         reliability=reliability or _missing_reliability(reason),
         sourceIds=baseline.sourceIds,
         astronomy=baseline.astronomy,
+        solarEnvironment=analyze_solar_environment(baseline),
     )
 
 
@@ -324,6 +326,7 @@ def _hybrid_prediction(
         reliability=reliability,
         sourceIds=baseline.sourceIds,
         astronomy=baseline.astronomy,
+        solarEnvironment=analyze_solar_environment(baseline),
     )
 
 

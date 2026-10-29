@@ -1,12 +1,12 @@
-# Solar Light Propagation Simulator
+# Solar Environment Simulator
 
-Interactive scientific-computing research project for reliable, uncertainty-aware machine learning in a Solar System light-propagation simulation.
+Interactive scientific-computing project for visible light, magnetic interaction, charged particles, radiation context, and shielding across the Solar System.
 
 **Live Application:** https://solar-light-propagation-simulator.vercel.app
 
 ## Project overview
 
-The Solar Light Propagation Simulator combines scientific modeling, applied machine learning, reproducible experimentation, and an interactive three-dimensional destination map. Its hybrid runtime is organized around three pillars: **Efficiency** (measured rather than assumed), **Reliability** (ensemble uncertainty, out-of-distribution detection, and physical checks), and **Fallback** (automatic use of deterministic physics when AI is unsafe). Selecting a destination freezes the shared simulation time and renders the resulting light behavior and diagnostics.
+The Solar Environment Simulator expands the original Solar Light Propagation Simulator without replacing it. Selecting a destination freezes one shared simulation time and resolves three clearly separated layers: visible light, charged-particle/radiation context, and magnetic interaction. The light subsystem retains its measured reliability architecture: **Efficiency**, **Reliability**, and automatic deterministic **Fallback**.
 
 The Sun is the only light source. The application requires no manual scientific input and makes no live astronomical-data requests during normal operation.
 
@@ -19,7 +19,9 @@ The Sun is the only light source. The application requires no manual scientific 
 - Locally cached scientific catalog with units, source IDs, deliberate nulls, and ASTM E-490 spectrum data.
 - Explainable atmospheric and airless deterministic physics baseline with energy conservation.
 - Five-model HistGradientBoosting ensemble with uncertainty, OOD scoring, physical validation, and centralized deterministic fallback.
-- Dynamic atmospheric/airless SVG light-interaction diagram controlled by validated numerical results.
+- Versioned 32-body magnetic, particle, radiation-context, and shielding catalog with explicit evidence quality and unknowns.
+- Selected-body field-family overlays for intrinsic, aligned, tilted/offset, induced, crustal, mini-magnetosphere, and parent-plasma interactions.
+- Four-panel Solar Interaction Profile with distinct photon and charged-particle encodings.
 - Timestamped physical distance, light-travel time, irradiance, apparent solar diameter, interaction percentages, and one short deterministic appearance sentence.
 - Reproducible synthetic dataset, real-body benchmarks, candidate-model comparison, and preserved evaluation output.
 - Hybrid Scenario Mode for request-local atmosphere pressure, density, and composition changes.
@@ -48,7 +50,7 @@ GET /api/predict/{destinationId}?at={simulatedUtcTimestamp}
         └─ one reliability decision ─────────► AI result or physics fallback
         │
         ▼
-Result panel + one schematic SVG diagram
+Solar Interaction Profile + preserved light diagnostics
 ```
 
 `GET /api/analyze/{destinationId}` remains the deterministic scientific baseline. Prediction responses disclose the selected source, both AI and deterministic values when inference is available, their deltas, uncertainty, OOD classification, physical checks, and any fallback reason. Both destination endpoints accept an optional ISO-8601 `at` query parameter.
@@ -66,6 +68,8 @@ Timestamped analysis derives heliocentric distance from the shared-clock Kepleri
 Scientific distances and derived values are separate from compressed visual coordinates. Light-travel time uses the speed of light, solar irradiance follows the inverse-square relation, and apparent solar diameter is derived from the modeled Sun distance. The displayed scattered-light color maps broad spectral classes from the stored solar spectrum and aggregate atmosphere behavior; it is not a full colorimetric or line-by-line radiative-transfer solution.
 
 This is an educational model, not full radiative transfer, ray tracing, Mie scattering, spectroscopy, or an observationally validated atmosphere simulator. Detailed equations and assumptions are documented in [PHYSICS_MODEL.md](docs/PHYSICS_MODEL.md).
+
+The environment layer is also educational: radiation and shielding levels are qualitative, magnetic extents are schematic, and the steady solar-wind value is an inverse-square proxy rather than real-time space weather or dosimetry. See [SOLAR_ENVIRONMENT_MODEL.md](docs/SOLAR_ENVIRONMENT_MODEL.md).
 
 ## AI methodology
 
@@ -153,6 +157,7 @@ Local interactive OpenAPI documentation is available at <http://127.0.0.1:8000/d
 | `GET /api/health` | Service and catalog health |
 | `GET /api/bodies` | Complete stored destination catalog |
 | `GET /api/analyze/{destinationId}[?at=ISO-8601]` | Deterministic baseline, optionally timestamped |
+| `GET /api/environment/{destinationId}[?at=ISO-8601]` | Reference magnetic/particle environment plus dynamic steady-input and shielding context |
 | `POST /api/analyze/{destinationId}/scenario[?at=ISO-8601]` | Deterministic recalculation with user-supplied atmospheric pressure, density, and composition |
 | `GET /api/predict/{destinationId}[?at=ISO-8601]` | Validated ML result or disclosed deterministic fallback, optionally timestamped |
 | `POST /api/predict/{destinationId}/scenario[?at=ISO-8601]` | Hybrid scenario prediction with reliability diagnostics and automatic fallback |
@@ -189,6 +194,8 @@ Catalog values are based primarily on NASA, JPL, and the ASTM E-490 reference di
 - Feature importance and local sensitivity are offline research diagnostics, not causal explanations or per-request UI features.
 - The interface exposes AI/deterministic deltas in expandable details, but does not render two full result diagrams side by side.
 - Serverless cold starts and client GPU capability can affect initial load time.
+- Magnetic and radiation categories are qualitative; no event forecast, dose calculation, or trajectory integration is performed.
+- Unknown small-body fields remain unknown, and selected-body magnetic geometry is illustrative rather than to scale.
 
 ## Deployment
 
@@ -206,6 +213,11 @@ The deployment excludes the private research backup, virtual environment, depend
 - [AI/physics reliability and efficiency benchmark](docs/AI_PHYSICS_BENCHMARK.md)
 - [Academic relevance](docs/ACADEMIC_RELEVANCE.md)
 - [Light diagram](docs/LIGHT_DIAGRAM.md)
+- [Solar environment model](docs/SOLAR_ENVIRONMENT_MODEL.md)
+- [Magnetic fields](docs/MAGNETIC_FIELDS.md)
+- [Radiation environment](docs/RADIATION_ENVIRONMENT.md)
+- [Scenario Mode](docs/SCENARIO_MODE.md)
+- [Visualization model](docs/VISUALIZATION_MODEL.md)
 - [Research reproducibility](docs/RESEARCH_REPRODUCIBILITY.md)
 - [Performance](docs/PERFORMANCE.md)
 

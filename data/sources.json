@@ -1,5 +1,5 @@
 {
-  "access_date": "2026-09-30",
+  "access_date": "2026-10-30",
   "sources": [
     { "id": "nasa-planet-table", "organization": "NASA NSSDCA", "title": "Planetary Fact Sheet - Metric Units", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", "properties": ["planet mass", "diameter", "gravity", "mean distance", "perihelion", "aphelion", "eccentricity"] },
     { "id": "nasa-mercury", "organization": "NASA NSSDCA", "title": "Mercury Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html", "properties": ["physical", "orbit", "atmosphere"] },
@@ -26,7 +26,29 @@
     { "id": "jpl-satellite-elements", "organization": "NASA/JPL Solar System Dynamics", "title": "Planetary Satellite Mean Elements", "url": "https://ssd.jpl.nasa.gov/sats/elem/", "properties": ["parent-centered semimajor axis", "eccentricity"] },
     { "id": "jpl-small-bodies", "organization": "NASA/JPL Solar System Dynamics", "title": "JPL Horizons / Small-Body Database", "url": "https://ssd.jpl.nasa.gov/horizons/", "properties": ["dwarf-planet semimajor axis", "eccentricity", "perihelion", "aphelion"] },
     { "id": "nlr-e490", "organization": "National Laboratory of the Rockies (formerly NREL)", "title": "2000 ASTM Standard Extraterrestrial Spectrum Reference E-490-00", "url": "https://www.nlr.gov/grid/solar-resource/spectra-astm-e490", "properties": ["air-mass-zero spectral irradiance", "planet mean irradiance"] },
-    { "id": "derived-light-reference", "organization": "Project calculation from cited constants", "title": "Inverse-square and light-time reference", "url": null, "properties": ["dwarf-planet reference irradiance", "light travel time"], "method": "Uses cached heliocentric semimajor axis, 1366.1 W/m^2 at 1 AU for the E-490 reference, and c = 299792.458 km/s." }
+    { "id": "derived-light-reference", "organization": "Project calculation from cited constants", "title": "Inverse-square and light-time reference", "url": null, "properties": ["dwarf-planet reference irradiance", "light travel time"], "method": "Uses cached heliocentric semimajor axis, 1366.1 W/m^2 at 1 AU for the E-490 reference, and c = 299792.458 km/s." },
+    { "id": "nasa-planetary-fact-sheet", "organization": "NASA NSSDCA", "title": "Planetary Fact Sheets", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", "properties": ["surface magnetic-field ranges", "dipole tilt", "dipole offset"] },
+    { "id": "nasa-mercury-magnetosphere", "organization": "NASA Science", "title": "Mercury Facts", "url": "https://science.nasa.gov/mercury/facts/", "properties": ["weak intrinsic field", "solar-wind interaction"] },
+    { "id": "nasa-venus-magnetosphere", "organization": "NASA Science", "title": "Venus Facts", "url": "https://science.nasa.gov/venus/venus-facts/", "properties": ["induced magnetosphere", "ionosphere"] },
+    { "id": "nasa-earth-magnetosphere", "organization": "NASA Science", "title": "Magnetosphere and Ionosphere", "url": "https://science.nasa.gov/heliophysics/focus-areas/magnetosphere-ionosphere/", "properties": ["magnetosphere geometry", "shielding", "dayside extent"] },
+    { "id": "nasa-earth-fact-sheet", "organization": "NASA NSSDCA", "title": "Earth Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html", "properties": ["surface magnetic field", "dipole tilt"] },
+    { "id": "nasa-mars-magnetism", "organization": "NASA Science", "title": "Mars Global Surveyor Science Highlights", "url": "https://science.nasa.gov/mission/mars-global-surveyor/science-highlights/", "properties": ["crustal remanent magnetism", "absence of global field"] },
+    { "id": "nasa-mars-radiation", "organization": "NASA Science", "title": "Mars Radiation Environment", "url": "https://science.nasa.gov/mars/", "properties": ["thin-atmosphere radiation context"] },
+    { "id": "nasa-jupiter-magnetosphere", "organization": "NASA Science", "title": "Jupiter Facts", "url": "https://science.nasa.gov/jupiter/jupiter-facts/", "properties": ["magnetic-field strength", "magnetosphere extent"] },
+    { "id": "nasa-jupiter-radiation", "organization": "NASA Science", "title": "Europa Clipper Radiation Monitoring", "url": "https://science.nasa.gov/mission/europa-clipper/spacecraft-instruments-radiation-monitoring-study/", "properties": ["Jovian radiation environment"] },
+    { "id": "nasa-jupiter-fact-sheet", "organization": "NASA NSSDCA", "title": "Jupiter Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html", "properties": ["surface magnetic field", "dipole tilt"] },
+    { "id": "nasa-saturn-magnetosphere", "organization": "NASA Science", "title": "Cassini Magnetosphere Science", "url": "https://science.nasa.gov/mission/cassini/science/magnetosphere/", "properties": ["magnetosphere", "plasma environment"] },
+    { "id": "nasa-saturn-fact-sheet", "organization": "NASA NSSDCA", "title": "Saturn Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturnfact.html", "properties": ["surface magnetic field", "dipole alignment"] },
+    { "id": "nasa-uranus-magnetosphere", "organization": "NASA Science", "title": "Uranus Facts", "url": "https://science.nasa.gov/uranus/facts/", "properties": ["tilted offset field", "corkscrew magnetotail"] },
+    { "id": "nasa-uranus-fact-sheet", "organization": "NASA NSSDCA", "title": "Uranus Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html", "properties": ["surface magnetic field", "dipole tilt", "offset"] },
+    { "id": "nasa-neptune-magnetosphere", "organization": "NASA Science", "title": "Voyager Fact Sheet", "url": "https://science.nasa.gov/mission/voyager/fact-sheet/", "properties": ["tilted offset Neptunian field"] },
+    { "id": "nasa-neptune-fact-sheet", "organization": "NASA NSSDCA", "title": "Neptune Fact Sheet", "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html", "properties": ["surface magnetic field", "dipole tilt", "offset"] },
+    { "id": "nasa-pluto-magnetosphere", "organization": "NASA Science", "title": "Pluto Facts", "url": "https://science.nasa.gov/dwarf-planets/pluto/facts/", "properties": ["unknown intrinsic field"] },
+    { "id": "nasa-moon-solar-wind", "organization": "NASA Science", "title": "The Moon and the Solar Wind", "url": "https://science.nasa.gov/moon/solar-wind/", "properties": ["local magnetic anomalies", "direct solar-wind exposure"] },
+    { "id": "nasa-europa-induction", "organization": "NASA Science", "title": "Europa Clipper PIMS", "url": "https://science.nasa.gov/mission/europa-clipper/spacecraft-instruments-pims/", "properties": ["induced magnetic response", "Jovian plasma"] },
+    { "id": "nasa-ganymede-magnetosphere", "organization": "NASA Science", "title": "Ganymede Facts", "url": "https://science.nasa.gov/jupiter/jupiter-moons/ganymede/facts/", "properties": ["intrinsic moon magnetosphere", "Jovian embedding"] },
+    { "id": "nasa-titan-magnetosphere", "organization": "NASA Science", "title": "Cassini Magnetosphere Science", "url": "https://science.nasa.gov/mission/cassini/science/magnetosphere/", "properties": ["Titan plasma interaction", "variable Saturn embedding"] },
+    { "id": "derived-environment-classification", "organization": "Project synthesis from cited NASA sources", "title": "Qualitative environment classification", "url": null, "properties": ["field-family mapping", "qualitative shielding", "qualitative exposure"], "method": "Conservative category mapping; not dosimetry or an event forecast." }
   ]
 }
 

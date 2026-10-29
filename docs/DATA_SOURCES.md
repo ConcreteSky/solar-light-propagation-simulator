@@ -1,6 +1,6 @@
 # Scientific data sources
 
-Accessed **2026-09-30**. The machine-readable mapping is in `data/sources.json`; each body records the source IDs used. Values are cached locally so normal app use does not call NASA, JPL, or NLR.
+Light/orbital sources accessed **2026-09-30**; solar-environment sources reviewed **2026-10-30**. The machine-readable mapping is in `data/sources.json`; each body records the source IDs used. Values are cached locally so normal app use does not call NASA, JPL, or NLR.
 
 ## Source policy
 
@@ -10,6 +10,7 @@ Accessed **2026-09-30**. The machine-readable mapping is in `data/sources.json`;
 - Dwarf-planet orbits: NASA/JPL Horizons / Small-Body Database reference values.
 - Spectrum and mean planet irradiance: ASTM E-490-00 workbook distributed by the National Laboratory of the Rockies (formerly NREL).
 - Fractions are volume fractions. A `null` means the selected authoritative source did not provide a stable, useful numeric value; qualitative claims were not converted into invented numbers.
+- Magnetic and particle-environment categories use NASA Science and NSSDCA mission/fact pages. Qualitative evidence is kept qualitative; `unknown` and `null` are preserved rather than converted into numeric field strengths or doses.
 
 ## Important value groups
 

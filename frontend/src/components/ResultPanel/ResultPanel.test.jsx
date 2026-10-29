@@ -20,7 +20,9 @@ describe('ResultPanel', () => {
     expect(screen.getByText('760.2 s')).toBeInTheDocument()
     expect(screen.getByText('588.6 W/m²')).toBeInTheDocument()
     expect(screen.getByText('70.0%')).toBeInTheDocument()
-    expect(screen.getByText('blue · modeled')).toBeInTheDocument()
+    expect(screen.getByText('blue')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Magnetic interaction/ })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Shielding & exposure/ })).toBeInTheDocument()
   })
 
   it('recalculates Scenario Mode through the hybrid reliability endpoint', async () => {
@@ -90,7 +92,7 @@ describe('ResultPanel', () => {
     getLightResult.mockResolvedValue(makePrediction({ destination: 'incomplete', name: 'Incomplete' }))
     render(<ResultPanel body={incompleteBody} bodies={celestialBodies} />)
     expect(await screen.findByRole('heading', { name: 'Incomplete' })).toBeInTheDocument()
-    expect(screen.getAllByText('Data unavailable')).toHaveLength(2)
+    expect(screen.getAllByText('Data unavailable')).toHaveLength(1)
   })
 
   it('shows a clean invalid-destination error', async () => {

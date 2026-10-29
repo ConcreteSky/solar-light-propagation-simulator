@@ -96,6 +96,10 @@ From `backend/`:
 
 Regenerate the Session 3 dataset first only when the deterministic physics model or generator version changes. Never tune candidates using the test split. Commit the regenerated model, metadata, and evaluation JSON together.
 
+## Solar-environment expansion audit
+
+The version 1.0.0 ML system remains a light-only surrogate. Magnetic topology, radiation context, charged-particle exposure, and shielding categories were not appended as targets or inferred from the old feature space. The available evidence is too sparse and qualitative to support an honest trained model. Those outputs therefore come from the separately versioned reference catalog and deterministic rules in `solar_environment_service.py`. The light model's uncertainty, OOD screening, physical checks, and fallback behavior remain unchanged and apply only to the light outputs.
+
 ## Scientific limitations
 
 The synthetic labels inherit every limitation documented in `PHYSICS_MODEL.md`. Excellent surrogate metrics mean that the ML model reproduces that code; they do not show that either system matches real atmospheric observations. The local catalog has no independent measurements matching the aggregate transmitted/scattered/absorbed convention, so no observational validation was performed.
