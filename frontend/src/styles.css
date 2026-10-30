@@ -790,7 +790,8 @@ input { font: inherit; }
 .particle-flow { fill: none; stroke: #52dcd7; stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 3 7; opacity: .74; }
 .particle-dot { fill: #8cfff7; filter: drop-shadow(0 0 3px #4de3db); }
 .stream-title { font-size: 9px !important; font-weight: 800; }
-.stream-note { font-size: 7px !important; fill: #c4a95f !important; }
+.stream-label-plate { fill: rgb(6 17 31 / 78%); stroke: rgb(255 218 111 / 18%); stroke-width: 1; }
+.stream-note { fill: #d7bd74 !important; stroke: #081321; stroke-width: 2px; paint-order: stroke fill; font-size: 7px !important; }
 .photon-title { fill: #ffdb76 !important; }
 .particle-title { fill: #79e9e1 !important; }
 .atmosphere-shell { fill: rgb(90 185 255 / 9%); stroke: #5eb8ef; stroke-width: 2; stroke-dasharray: 3 4; }

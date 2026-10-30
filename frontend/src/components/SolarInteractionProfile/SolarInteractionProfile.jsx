@@ -25,7 +25,8 @@ function IncomingPanel({ environment, analysis, body }) {
       <circle cx="58" cy="112" r="42" className="sun-corona"/><circle cx="58" cy="112" r="29" className="profile-sun"/><text x="40" y="176">SUN</text>
       <path d="M94 76 L432 91 L432 126 L94 146 Z" className="photon-beam"/>
       {[88,103,118,133].map((y) => <path key={y} d={`M96 ${y} L421 ${y + (y - 110) * 0.18}`} className="photon-ray"/>)}
-      <text x="175" y="68" className="stream-title photon-title">VISIBLE LIGHT / PHOTONS</text><text x="198" y="84" className="stream-note">radiant energy · travels directly</text>
+      <rect x="164" y="35" width="214" height="38" rx="5" className="stream-label-plate"/>
+      <text x="175" y="51" className="stream-title photon-title">VISIBLE LIGHT / PHOTONS</text><text x="175" y="66" className="stream-note">radiant energy · travels directly</text>
       {[164,184,204].map((y, index) => <path key={y} d={`M92 ${y} C180 ${y - 22} 280 ${y + 20} 414 ${y - index * 3}`} className="particle-flow" markerEnd="url(#particle-arrow)"/>)}
       {[135,190,250,318,375].map((x, index) => <circle key={x} cx={x} cy={180 + Math.sin(index * 1.8) * 17} r="3" className="particle-dot"/>)}
       <text x="172" y="224" className="stream-title particle-title">SOLAR WIND / CHARGED PARTICLES</text>
